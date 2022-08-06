@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    scroll-behavior: smooth;
+    @apply bg-white dark:bg-gray-900;
+  }
+
+  /* ------------------- extends base tailwind/forms plugins ------------------ */
+  [type='text'],
+  [type='email'],
+  [type='url'],
+  [type='password'],
+  [type='number'],
+  [type='date'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='week'],
+  [multiple],
+  textarea,
+  select {
+    @apply w-full rounded border-gray-300 text-gray-700 shadow placeholder:italic placeholder:text-slate-500 hover:shadow-lg focus:border-violet-800 focus:ring-4 focus:ring-violet-800 focus:ring-opacity-50;
+  }
+
+  [type='checkbox'],
+  [type='radio'] {
+    @apply rounded border-gray-300 text-violet-800 shadow hover:shadow-lg focus:ring-violet-500;
+  }
+}
