@@ -1,7 +1,5 @@
 import type { JSX } from 'solid-js';
 
-// -------------------------------------------
-
 export type FormOnSubmitEvent = Event & {
   submitter: HTMLElement;
 } & {
@@ -32,7 +30,7 @@ export type InputOnChange =
   | undefined;
 
 export type InputOnKeyUp =
-  | JSX.EventHandlerUnion<HTMLInputElement, KeyboardEvent>
+  | JSX.EventHandlerUnion<HTMLInputElement | HTMLTextAreaElement, KeyboardEvent>
   | undefined;
 
 export type ButtonOnClick =

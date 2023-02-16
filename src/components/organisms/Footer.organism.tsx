@@ -395,7 +395,7 @@ const Footer: Component = () => {
             </p>
 
             <p class="mt-4 text-sm text-gray-500 sm:order-first sm:mt-0">
-              &copy; 2022 Company Name
+              &copy; {new Date().getFullYear()} Company Name
             </p>
           </div>
         </div>

@@ -1,14 +1,12 @@
 import { Component } from 'solid-js';
 import { Todo } from '../../models/Todo.model';
-import {
-  onChangeTodoItemCheckbox,
-  onDeleteTodoItem,
-} from '../../pages/todo/Todo.vm';
 import { Button } from '../atoms';
 
 // #region INTERFACES
 export type TodoItemProps = {
   todo: Todo;
+  onChangeTodoItemCheckbox: (_todo: Todo) => void;
+  onDeleteTodoItem: (_todoId: number) => void;
 };
 // #endregion
 
@@ -20,7 +18,7 @@ const TodoItem: Component<TodoItemProps> = (props) => {
         name={`todo-${props.todo.id}`}
         id={`todo-${props.todo.id}`}
         checked={props.todo.completed}
-        onChange={() => onChangeTodoItemCheckbox(props.todo)}
+        onChange={() => props.onChangeTodoItemCheckbox(props.todo)}
       />
 
       <p
@@ -32,7 +30,7 @@ const TodoItem: Component<TodoItemProps> = (props) => {
 
       <Button.Outlined
         size="sm"
-        onClick={() => onDeleteTodoItem(props.todo.id)}
+        onClick={() => props.onDeleteTodoItem(props.todo.id)}
       >
         Remove
       </Button.Outlined>

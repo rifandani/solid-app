@@ -5,79 +5,103 @@ import { User } from '../../models/User.model';
 import { axiosInstance } from '../../services/http';
 import { FormOnSubmitEvent, InputOnKeyUp } from '../../types';
 
-// #region FORM
-export const [todoText, setTodoText] = createSignal('');
-export const [todoTextError, setTodoTextError] = createSignal('');
-
-export const [todos, { refetch: refetchTodos }] = createResource<Todo[], User>(
-  appStore.user,
-  (_user) =>
-    axiosInstance
-      .get('/todos', { params: { userId: _user.id } })
-      .then((res) => res.data),
-  { initialValue: [] },
-);
-
-export const onKeyUpTodoText: InputOnKeyUp = (ev) => {
-  setTodoText(ev.currentTarget.value);
+type UseTodoFormParams = {
+  refetchTodos: ReturnType<typeof useTodoList>[1]['refetch'];
 };
 
-export const onChangeTodoItemCheckbox = async (todo: Todo) => {
-  // PATCH todo
-  const resp = await axiosInstance.patch<Todo>(`/todos/${todo.id}`, {
-    completed: !todo.completed,
-  });
+const useTodoList = () => {
+  const todoListResource = createResource<Todo[], User>(
+    appStore.user,
+    (_user) =>
+      axiosInstance
+        .get('/todos', { params: { userId: _user.id } })
+        .then((res) => res.data),
+    { initialValue: [] },
+  );
 
-  // on failed
-  if (resp.status !== 200) {
-    setTodoTextError('Error editing todo!');
-    return;
-  }
-
-  // on success
-  setTodoTextError('');
-  refetchTodos();
+  return todoListResource;
 };
 
-export const onDeleteTodoItem = async (todoId: number) => {
-  // PATCH todo
-  const resp = await axiosInstance.delete<Todo>(`/todos/${todoId}`);
+const useTodoForm = ({ refetchTodos }: UseTodoFormParams) => {
+  const [todoText, setTodoText] = createSignal('');
+  const [todoTextError, setTodoTextError] = createSignal('');
 
-  // on failed
-  if (resp.status !== 200) {
-    setTodoTextError('Error deleting todo!');
-    return;
-  }
+  const onKeyUpTodoText: InputOnKeyUp = (ev) => {
+    setTodoText(ev.currentTarget.value);
+  };
 
-  // on success
-  setTodoTextError('');
-  refetchTodos();
-};
+  const onChangeTodoItemCheckbox = async (todo: Todo) => {
+    // PATCH todo
+    const resp = await axiosInstance.patch<Todo>(`/todos/${todo.id}`, {
+      completed: !todo.completed,
+    });
 
-export const onSubmitTodo = async (ev: FormOnSubmitEvent) => {
-  ev.preventDefault();
+    // on failed
+    if (resp.status !== 200) {
+      setTodoTextError('Error editing todo!');
+      return;
+    }
 
-  // POST todo
-  const resp = await axiosInstance.post<Todo>('/todos', {
-    userId: appStore.user?.id,
-    title: todoText(),
-    completed: false,
-  });
+    // on success
+    setTodoTextError('');
+    refetchTodos();
+  };
 
-  // on failed
-  if (resp.status !== 201) {
+  const onDeleteTodoItem = async (todoId: number) => {
+    // PATCH todo
+    const resp = await axiosInstance.delete<Todo>(`/todos/${todoId}`);
+
+    // on failed
+    if (resp.status !== 200) {
+      setTodoTextError('Error deleting todo!');
+      return;
+    }
+
+    // on success
+    setTodoTextError('');
+    refetchTodos();
+  };
+
+  const onSubmitTodo = async (ev: FormOnSubmitEvent) => {
+    ev.preventDefault();
+
+    // POST todo
+    const resp = await axiosInstance.post<Todo>('/todos', {
+      userId: appStore.user?.id,
+      title: todoText(),
+      completed: false,
+    });
+
+    // on failed
+    if (resp.status !== 201) {
+      batch(() => {
+        setTodoText('');
+        setTodoTextError('Error adding new todo!');
+      });
+      return;
+    }
+
+    // on success
     batch(() => {
       setTodoText('');
-      setTodoTextError('Error adding new todo!');
+      setTodoTextError('');
     });
-    return;
-  }
+    refetchTodos();
+  };
 
-  // on success
-  batch(() => {
-    setTodoText('');
-    setTodoTextError('');
-  });
-  refetchTodos();
+  return {
+    todoText,
+    todoTextError,
+    onKeyUpTodoText,
+    onChangeTodoItemCheckbox,
+    onDeleteTodoItem,
+    onSubmitTodo,
+  };
 };
-// #endregion
+
+export const useTodoPageVM = () => {
+  const [todos, { refetch: refetchTodos }] = useTodoList();
+  const todoForm = useTodoForm({ refetchTodos });
+
+  return { todos, todoForm };
+};

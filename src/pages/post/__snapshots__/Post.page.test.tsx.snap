@@ -1,0 +1,54 @@
+// Vitest Snapshot v1
+
+exports[`PostPage > should render correctly 1`] = `
+<main
+  class="py-20 px-10 md:px-24 lg:px-40 xl:px-52 flex flex-col justify-center"
+>
+  <section
+    class="w-full flex justify-between"
+  >
+    <a
+      class="w-32 border rounded p-3 hover:italic hover:text-violet-500 hover:border-violet-500 inactive"
+      href="/posts"
+      link=""
+    >
+      ⬅ Go Back
+    </a>
+    <button
+      class="font-semibold items-center justify-center inline-flex space-x-2 select-none cursor-pointer duration-200 text-violet-500 box-border border border-solid border-violet-500 bg-transparent hover:bg-violet-50 active:border-violet-500 rounded text-sm py-1 px-4"
+      size="sm"
+    >
+      Delete Post
+    </button>
+  </section>
+  <h1
+    class="text-2xl mb-10 font-semibold tracking-wider text-center text-violet-500"
+  >
+    Post Detail
+  </h1>
+  <section
+    class="w-full"
+  >
+    <h3
+      class="font-semibold text-lg"
+    />
+    <h6
+      class="text-slate-700"
+    />
+  </section>
+  <h2
+    class="text-2xl text-center my-10 font-semibold tracking-wider text-violet-500"
+  >
+    Comments
+  </h2>
+  <section
+    class="w-full gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+  >
+    <div
+      class="flex py-5 justify-center items-center"
+    >
+      No Data
+    </div>
+  </section>
+</main>
+`;

@@ -1,0 +1,49 @@
+// Vitest Snapshot v1
+
+exports[`PostAddPage > should render correctly 1`] = `
+<main
+  class="py-20 px-10 md:px-24 lg:px-40 xl:px-52 flex flex-col items-center justify-center"
+>
+  <h1
+    class="text-2xl font-semibold tracking-wider text-violet-500"
+  >
+    Add Post
+  </h1>
+  <form
+    class="flex flex-col gap-3 w-full"
+  >
+    <label
+      for="title"
+    >
+      Title
+    </label>
+    <input
+      autofocus=""
+      class="mt-1"
+      name="title"
+      placeholder="Title..."
+      required=""
+      type="text"
+    />
+    <label
+      for="body"
+    >
+      Body
+    </label>
+    <textarea
+      class="mt-1"
+      name="body"
+      placeholder="Body..."
+      required=""
+      rows="3"
+    />
+    
+    <button
+      class="my-5"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</main>
+`;

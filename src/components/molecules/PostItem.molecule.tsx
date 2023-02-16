@@ -3,9 +3,9 @@ import { Component } from 'solid-js';
 import { PostExpandUser } from '../../models/Post.model';
 
 // #region INTERFACES
-export type PostItemProps = {
+export interface PostItemProps {
   post: PostExpandUser;
-};
+}
 // #endregion
 
 const PostItem: Component<PostItemProps> = (props) => {

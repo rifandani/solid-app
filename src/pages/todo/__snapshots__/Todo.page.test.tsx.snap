@@ -1,0 +1,39 @@
+// Vitest Snapshot v1
+
+exports[`TodoPage > should render correctly 1`] = `
+<main
+  class="py-20 px-10 md:px-24 lg:px-40 xl:px-52 flex flex-col items-center justify-center duration-300"
+>
+  <h1
+    class="text-2xl mb-10 font-semibold tracking-wider text-violet-500"
+  >
+    Todo List
+  </h1>
+  <section
+    class="block w-full border rounded p-5 shadow-md border-slate-300"
+  >
+    <form
+      class="flex flex-col w-full mb-5 duration-300 md:flex-row"
+    >
+      <input
+        autofocus=""
+        class="p-2 w-10/12 mr-2 duration-300"
+        id="todoText"
+        name="todoText"
+        placeholder="What should you do next..."
+        required=""
+        type="text"
+      />
+      <button
+        class="w-2/12 mt-2 px-0.5 md:mt-0"
+        type="submit"
+      >
+        Add Todo
+      </button>
+    </form>
+    
+    
+    
+  </section>
+</main>
+`;

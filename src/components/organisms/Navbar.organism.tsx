@@ -2,12 +2,11 @@ import { Link, NavLink, useNavigate } from '@solidjs/router';
 import clsx from 'clsx';
 import { Component, createSignal, onMount, Show } from 'solid-js';
 import { appStore, setAppStore } from '../../app/AppStore';
-import watermelon from '../../assets/watermelon.png';
+import solidLogo from '../../assets/solid.svg';
 import { Button } from '../atoms';
 
-const [toggle, setToggle] = createSignal(false);
-
 const useNavbarVM = () => {
+  const [toggle, setToggle] = createSignal(false);
   const navigate = useNavigate();
 
   const onClickLogout = () => {
@@ -21,7 +20,7 @@ const useNavbarVM = () => {
     const user = localStorage.getItem('user');
 
     if (!user) {
-      navigate('/login');
+      navigate('/login', { replace: true });
     }
 
     if (user && !appStore.user) {
@@ -29,11 +28,11 @@ const useNavbarVM = () => {
     }
   });
 
-  return { onClickLogout };
+  return { toggle, setToggle, onClickLogout };
 };
 
 const Navbar: Component = () => {
-  const { onClickLogout } = useNavbarVM();
+  const { toggle, setToggle, onClickLogout } = useNavbarVM();
 
   const className = () =>
     clsx([
@@ -46,12 +45,12 @@ const Navbar: Component = () => {
       <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6 fixed w-full z-10 top-0">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
           <Link
-            href="/todos"
+            href="/"
             class="text-violet-500 no-underline hover:text-white hover:no-underline"
           >
             <span class="flex items-center text-2xl pl-2 space-x-2">
-              <img src={watermelon} alt="watermelon logo" class="w-12 h-12" />
-              <p class="font-semibold">Solid App</p>
+              <img src={solidLogo} alt="solidLogo logo" class="w-8 h-8" />
+              <p class="font-semibold">Solid Template</p>
             </span>
           </Link>
         </div>
@@ -98,7 +97,7 @@ const Navbar: Component = () => {
             <Show when={!!appStore.user}>
               <li class="mr-3">
                 <Button.Outlined onClick={onClickLogout}>
-                  Logout
+                  Logout ({appStore.user?.name})
                 </Button.Outlined>
               </li>
             </Show>

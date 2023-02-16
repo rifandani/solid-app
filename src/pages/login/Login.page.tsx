@@ -1,17 +1,10 @@
 import { Link } from '@solidjs/router';
 import { Component, Show } from 'solid-js';
 import { Button, Icon } from '../../components/atoms';
-import {
-  loginForm,
-  loginFormErrors,
-  onKeyUpEmail,
-  onKeyUpPassword,
-  onSubmitForm,
-  useLoginPageVM,
-} from './Login.vm';
+import { useLoginPageVM } from './Login.vm';
 
 const LoginPage: Component = () => {
-  const { navigate } = useLoginPageVM();
+  const { loginForm } = useLoginPageVM();
 
   return (
     <main class="h-screen bg-white">
@@ -32,7 +25,7 @@ const LoginPage: Component = () => {
             {/* <!-- Start FORM --> */}
             <form
               class="flex flex-col pt-3 md:pt-8"
-              onSubmit={onSubmitForm(navigate)}
+              onSubmit={loginForm.onSubmitForm}
             >
               {/* <!-- email --> */}
               <div class="flex flex-col pt-4">
@@ -47,8 +40,8 @@ const LoginPage: Component = () => {
                   type="email"
                   required
                   autofocus
-                  onKeyUp={onKeyUpEmail}
-                  value={loginForm().email}
+                  onKeyUp={loginForm.onKeyUpEmail}
+                  value={loginForm.form().email}
                 />
               </div>
 
@@ -65,15 +58,15 @@ const LoginPage: Component = () => {
                   name="password"
                   minlength="8"
                   required
-                  onKeyUp={onKeyUpPassword}
-                  value={loginForm().password}
+                  onKeyUp={loginForm.onKeyUpPassword}
+                  value={loginForm.form().password}
                 />
               </div>
 
-              <Show when={!!loginFormErrors()}>
+              <Show when={!!loginForm.formErrors()}>
                 <div class="block pt-4">
                   <h2 class="font-semibold p-2 border rounded border-red-500 text-red-500 bg-red-50">
-                    {loginFormErrors()}
+                    {loginForm.formErrors()}
                   </h2>
                 </div>
               </Show>

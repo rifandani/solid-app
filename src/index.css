@@ -9,6 +9,29 @@
     @apply bg-white dark:bg-gray-900;
   }
 
+  h1 > code,
+  p > code,
+  li > code,
+  dd > code,
+  td > code {
+    background: #ffeff0;
+    word-wrap: break-word;
+    box-decoration-break: clone;
+    padding: 0.1rem 0.3rem 0.2rem;
+    border-radius: 0.2rem;
+  }
+
+  pre code {
+    display: block;
+    background: none;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    max-width: 100%;
+    min-width: 100px;
+    padding: 0;
+  }
+
   /* ------------------- extends base tailwind/forms plugins ------------------ */
   [type='text'],
   [type='email'],
