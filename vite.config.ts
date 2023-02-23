@@ -49,6 +49,34 @@ export default defineConfig(({ mode }) => {
       // or both out to improve performance:
       // threads: false,
       // isolate: false,
+      coverage: {
+        provider: 'c8', // 'istanbul' / 'c8'
+        reporter: ['text', 'json', 'html'],
+        statements: 80,
+        branches: 80,
+        functions: 65,
+        lines: 80,
+        exclude: [
+          'coverage/**',
+          'dist/**',
+          'packages/*/test{,s}/**',
+          '**/*.d.ts',
+          'cypress/**',
+          'test{,s}/**',
+          'test{,-*}.{js,cjs,mjs,ts,tsx,jsx}',
+          '**/*{.,-}test.{js,cjs,mjs,ts,tsx,jsx}',
+          '**/*{.,-}spec.{js,cjs,mjs,ts,tsx,jsx}',
+          '**/__tests__/**',
+          '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
+          '**/.{eslint,mocha,prettier}rc.{js,cjs,yml}',
+          // above is default
+          'src/setupTests.ts',
+          'src/index.tsx',
+          'src/mocks/**',
+          'src/assets/**',
+          'src/models/**',
+        ],
+      },
     },
     build: {
       target: 'esnext',
