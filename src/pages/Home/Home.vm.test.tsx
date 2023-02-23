@@ -1,7 +1,7 @@
-import { useHomePageVM } from './Home.vm';
+import useHomePageVM from './Home.vm';
 
 describe('HomePageVM', () => {
-  it('should be defined', async () => {
+  it('should be defined', () => {
     // ASSERT
     expect(useHomePageVM).toBeDefined();
   });

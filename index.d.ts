@@ -1,3 +1,5 @@
+import { SetupWorkerApi } from 'msw';
+
 // declare module 'solid-js' {
 //   namespace JSX {
 //     interface Directives {
@@ -6,3 +8,11 @@
 //     }
 //   }
 // }
+
+declare global {
+  interface Window {
+    msw: {
+      worker: SetupWorkerApi;
+    };
+  }
+}

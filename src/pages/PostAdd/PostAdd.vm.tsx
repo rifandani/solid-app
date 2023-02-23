@@ -1,15 +1,10 @@
 import { useBeforeLeave, useNavigate } from '@solidjs/router';
 import { batch, createSignal, onCleanup } from 'solid-js';
-import { appStore } from '../../app/AppStore';
-import { User } from '../../models/User.model';
-import { axiosInstance } from '../../services/http';
+import { http } from '../../services/http';
 import { FormOnSubmitEvent, InputOnKeyUp } from '../../types';
 
-type UsePostAddFormParams = {
-  navigate: ReturnType<typeof useNavigate>;
-};
-
-const usePostAddForm = ({ navigate }: UsePostAddFormParams) => {
+const usePostAddForm = () => {
+  const navigate = useNavigate();
   const [postForm, setPostForm] = createSignal({
     title: '',
     body: '',
@@ -27,18 +22,13 @@ const usePostAddForm = ({ navigate }: UsePostAddFormParams) => {
   const onSubmitForm = async (ev: FormOnSubmitEvent) => {
     ev.preventDefault();
 
-    // get user id
-    const { id } = appStore.user as User;
-
     // add post
-    const resp = await axiosInstance.post(`/posts`, {
-      userId: id,
+    const resp = await http.post(`/posts`, {
       title: postForm().title,
       body: postForm().body,
     });
 
     if (resp.status === 201) {
-      // refetchPosts();
       setPostForm({
         title: '',
         body: '',
@@ -62,6 +52,7 @@ const usePostAddForm = ({ navigate }: UsePostAddFormParams) => {
       e.preventDefault();
 
       timeoutId = setTimeout(() => {
+        // eslint-disable-next-line no-alert
         if (window.confirm('Discard unsaved changes - are you sure?')) {
           // user wants to proceed anyway so retry with force=true
           e.retry(true);
@@ -75,9 +66,10 @@ const usePostAddForm = ({ navigate }: UsePostAddFormParams) => {
   return { postForm, postFormErrors, onKeyUpPostForm, onSubmitForm };
 };
 
-export const usePostAddPageVM = () => {
-  const navigate = useNavigate();
-  const postAddForm = usePostAddForm({ navigate });
+const usePostAddPageVM = () => {
+  const postAddForm = usePostAddForm();
 
   return { postAddForm };
 };
+
+export default usePostAddPageVM;

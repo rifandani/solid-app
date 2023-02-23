@@ -1,10 +1,10 @@
 import { mockedCreateResource } from '../../mocks/module.mock';
-import { routeDataPost } from './Post.data';
+import routeDataPost from './Post.data';
 
 describe('routeDataPost', () => {
-  it('should work correctly', async () => {
+  it('should work correctly', () => {
     // ARRANGE
-    mockedCreateResource.mockReturnValue('post');
+    mockedCreateResource.mockReturnValue([]);
 
     // ACT
     mockedCreateResource();
@@ -12,6 +12,6 @@ describe('routeDataPost', () => {
     // ASSERT
     expect(routeDataPost).toBeDefined();
     expect(mockedCreateResource).toHaveBeenCalled();
-    expect(mockedCreateResource()).toEqual('post');
+    expect(mockedCreateResource()).toEqual([]);
   });
 });

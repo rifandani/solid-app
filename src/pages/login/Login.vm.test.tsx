@@ -1,7 +1,7 @@
-import { useLoginPageVM } from './Login.vm';
+import useLoginPageVM from './Login.vm';
 
 describe('LoginPageVM', () => {
-  it('should be defined', async () => {
+  it('should be defined', () => {
     // ASSERT
     expect(useLoginPageVM).toBeDefined();
   });

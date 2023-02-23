@@ -10,15 +10,18 @@ exports[`PostsPage > should render correctly 1`] = `
     Post List
   </h1>
   <button
-    class="my-5"
+    class="font-semibold items-center justify-center inline-flex space-x-2 select-none cursor-pointer duration-200 text-white bg-violet-800 border-0 ring-violet-800 hover:bg-violet-500 active:bg-violet-200 focus:ring-4 disabled:opacity-50 rounded text-md py-4 px-4 my-5"
   >
     Add Post
   </button>
   <section
     class="w-full gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >
-    
-    
+    <div
+      class="w-full flex py-5 justify-center items-center"
+    >
+      No Data
+    </div>
   </section>
 </main>
 `;

@@ -1,2 +1,2 @@
-export { default as Footer } from './Footer.organism';
+// eslint-disable-next-line import/prefer-default-export
 export { default as Navbar } from './Navbar.organism';

@@ -1,53 +1,33 @@
 import { Link, NavLink, useNavigate } from '@solidjs/router';
-import clsx from 'clsx';
-import { Component, createSignal, onMount, Show } from 'solid-js';
-import { appStore, setAppStore } from '../../app/AppStore';
+import { Component, createSignal, Show } from 'solid-js';
+import { appStore, setAppStore } from '../../app/Store.app';
 import solidLogo from '../../assets/solid.svg';
+import useAuth from '../../hooks/useAuth/useAuth.hook';
+import { cn } from '../../utils/helper/helper.util';
 import { Button } from '../atoms';
 
 const useNavbarVM = () => {
-  const [toggle, setToggle] = createSignal(false);
+  useAuth();
   const navigate = useNavigate();
+  const [toggle, setToggle] = createSignal(false);
 
   const onClickLogout = () => {
     localStorage.removeItem('user');
     setAppStore('user', null);
-
     navigate('/login');
   };
-
-  onMount(() => {
-    const user = localStorage.getItem('user');
-
-    if (!user) {
-      navigate('/login', { replace: true });
-    }
-
-    if (user && !appStore.user) {
-      setAppStore('user', JSON.parse(user));
-    }
-  });
 
   return { toggle, setToggle, onClickLogout };
 };
 
 const Navbar: Component = () => {
-  const { toggle, setToggle, onClickLogout } = useNavbarVM();
-
-  const className = () =>
-    clsx([
-      'w-full flex-grow pt-6 lg:items-center lg:w-auto lg:block lg:pt-0',
-      toggle() ? 'block' : 'hidden',
-    ]);
+  const vm = useNavbarVM();
 
   return (
     <section class="bg-gray-400 font-sans leading-normal tracking-normal">
-      <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6 fixed w-full z-10 top-0">
+      <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6 fixed w-full z-10 top-0 duration-300">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
-          <Link
-            href="/"
-            class="text-violet-500 no-underline hover:text-white hover:no-underline"
-          >
+          <Link href="/" class="text-violet-500 no-underline hover:text-white hover:no-underline">
             <span class="flex items-center text-2xl pl-2 space-x-2">
               <img src={solidLogo} alt="solidLogo logo" class="w-8 h-8" />
               <p class="font-semibold">Solid Template</p>
@@ -56,10 +36,10 @@ const Navbar: Component = () => {
         </div>
 
         {/* hamburger menu */}
-        <div class="block lg:hidden">
+        <div class="block lg:hidden duration-300">
           <button
             class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white"
-            onClick={() => setToggle((prev) => !prev)}
+            onClick={() => vm.setToggle((prev) => !prev)}
           >
             <svg
               class="fill-current h-3 w-3"
@@ -72,8 +52,13 @@ const Navbar: Component = () => {
           </button>
         </div>
 
-        <div class={className()}>
-          <ul class="list-reset lg:flex justify-end flex-1 items-center">
+        <div
+          class={cn(
+            'w-full flex-grow pt-6 lg:items-center lg:w-auto lg:block lg:pt-0 duration-300',
+            vm.toggle() ? 'block' : 'hidden',
+          )}
+        >
+          <ul class="list-reset lg:flex justify-end flex-1 items-center duration-300">
             <li class="mr-3">
               <NavLink
                 href="/todos"
@@ -94,10 +79,11 @@ const Navbar: Component = () => {
                 Posts
               </NavLink>
             </li>
+
             <Show when={!!appStore.user}>
               <li class="mr-3">
-                <Button.Outlined onClick={onClickLogout}>
-                  Logout ({appStore.user?.name})
+                <Button.Outlined onClick={() => vm.onClickLogout()}>
+                  Logout ({appStore.user?.email})
                 </Button.Outlined>
               </li>
             </Show>
@@ -106,7 +92,7 @@ const Navbar: Component = () => {
       </nav>
 
       {/* <!--Container--> */}
-      <div class="container shadow-lg mx-auto bg-red mt-24 md:mt-18"></div>
+      <div class="container shadow-lg mx-auto bg-red mt-24 md:mt-18 duration-300" />
     </section>
   );
 };

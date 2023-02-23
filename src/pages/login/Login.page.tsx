@@ -1,10 +1,10 @@
 import { Link } from '@solidjs/router';
 import { Component, Show } from 'solid-js';
 import { Button, Icon } from '../../components/atoms';
-import { useLoginPageVM } from './Login.vm';
+import useLoginPageVM from './Login.vm';
 
 const LoginPage: Component = () => {
-  const { loginForm } = useLoginPageVM();
+  const vm = useLoginPageVM();
 
   return (
     <main class="h-screen bg-white">
@@ -25,7 +25,7 @@ const LoginPage: Component = () => {
             {/* <!-- Start FORM --> */}
             <form
               class="flex flex-col pt-3 md:pt-8"
-              onSubmit={loginForm.onSubmitForm}
+              onSubmit={(ev) => void vm.form.onSubmitForm(ev)}
             >
               {/* <!-- email --> */}
               <div class="flex flex-col pt-4">
@@ -40,8 +40,8 @@ const LoginPage: Component = () => {
                   type="email"
                   required
                   autofocus
-                  onKeyUp={loginForm.onKeyUpEmail}
-                  value={loginForm.form().email}
+                  onKeyUp={vm.form.onKeyUpEmail}
+                  value={vm.form.form().email}
                 />
               </div>
 
@@ -58,15 +58,15 @@ const LoginPage: Component = () => {
                   name="password"
                   minlength="8"
                   required
-                  onKeyUp={loginForm.onKeyUpPassword}
-                  value={loginForm.form().password}
+                  onKeyUp={vm.form.onKeyUpPassword}
+                  value={vm.form.form().password}
                 />
               </div>
 
-              <Show when={!!loginForm.formErrors()}>
+              <Show when={!!vm.form.formErrors()}>
                 <div class="block pt-4">
                   <h2 class="font-semibold p-2 border rounded border-red-500 text-red-500 bg-red-50">
-                    {loginForm.formErrors()}
+                    {vm.form.formErrors()}
                   </h2>
                 </div>
               </Show>
@@ -81,9 +81,7 @@ const LoginPage: Component = () => {
               <p>
                 Don&apos;t have an account?{' '}
                 <Link href="/register">
-                  <a class="cursor-pointer font-semibold hover:text-violet-800">
-                    Register here.
-                  </a>
+                  <a class="cursor-pointer font-semibold hover:text-violet-800">Register here.</a>
                 </Link>
               </p>
             </div>

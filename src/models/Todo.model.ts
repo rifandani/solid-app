@@ -1,5 +1,6 @@
+import { ApiResponse, ApiSuccessResponse } from '../constants/types.constant';
+
 export interface Todo {
-  userId: number;
   id: number;
   title: string;
   completed: boolean;
@@ -7,7 +8,6 @@ export interface Todo {
 
 // #region API
 export interface PostTodoRequest {
-  userId: number;
   title: string;
   completed: boolean;
 }
@@ -16,4 +16,7 @@ export interface PatchTodoRequest {
   title: string;
   completed: boolean;
 }
+
+export type GetTodosResponse = ApiResponse<{ todos: Todo[] }>;
+export type GetTodosSuccessResponse = ApiSuccessResponse<{ todos: Todo[] }>;
 // #endregion

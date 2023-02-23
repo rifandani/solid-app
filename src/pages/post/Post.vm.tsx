@@ -1,24 +1,27 @@
 import { useNavigate, useRouteData } from '@solidjs/router';
-import { Resource } from 'solid-js';
-import { PostEmbedComments } from '../../models/Post.model';
-import { axiosInstance } from '../../services/http';
+import { createSignal } from 'solid-js';
+import { GetPostSuccessResponse } from '../../models/Post.model';
+import { http } from '../../services/http';
+import routeDataPost from './Post.data';
 
-export const usePostPageVM = () => {
-  const post = useRouteData() as unknown as Resource<PostEmbedComments>;
+const usePostPageVM = () => {
   const navigate = useNavigate();
+  const [post] = useRouteData<ReturnType<typeof routeDataPost>>();
+  const [error, setError] = createSignal('');
 
   const onDeletePost = async () => {
     // delete post
-    const resp = await axiosInstance.delete(`/posts/${post()?.id}`);
+    const resp = await http.delete(`/posts/${(post() as GetPostSuccessResponse).post.id ?? ''}`);
 
-    if (resp.status === 200) {
-      // refetchPosts();
-      navigate('/posts');
+    if (resp.status !== 200) {
+      setError('delete post error');
       return;
     }
 
-    console.error('delete post error', resp.data);
+    navigate('/posts');
   };
 
-  return { post, onDeletePost };
+  return { post, error, onDeletePost };
 };
+
+export default usePostPageVM;

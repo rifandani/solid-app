@@ -1,7 +1,7 @@
-import { usePostAddPageVM } from './PostAdd.vm';
+import usePostAddPageVM from './PostAdd.vm';
 
 describe('PostAddPageVM', () => {
-  it('should be defined', async () => {
+  it('should be defined', () => {
     // ASSERT
     expect(usePostAddPageVM).toBeDefined();
   });

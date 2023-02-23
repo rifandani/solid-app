@@ -1,3 +1,8 @@
+export interface UserStore {
+  email: string;
+  token: string;
+}
+
 export interface User {
   id: number;
   name: string;

@@ -1,2 +1,5 @@
 node_modules
 dist
+
+# MSW browser mocking init file
+public/mockServiceWorker.js

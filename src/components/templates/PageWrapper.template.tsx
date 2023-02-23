@@ -1,17 +1,13 @@
 import { Outlet } from '@solidjs/router';
 import { Component } from 'solid-js';
-import { Footer, Navbar } from '../organisms';
+import { Navbar } from '../organisms';
 
-const PageWrapper: Component = () => {
-  return (
-    <>
-      <Navbar />
+const PageWrapper: Component = () => (
+  <>
+    <Navbar />
 
-      <Outlet />
-
-      <Footer />
-    </>
-  );
-};
+    <Outlet />
+  </>
+);
 
 export default PageWrapper;

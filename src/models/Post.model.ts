@@ -1,5 +1,4 @@
-import { Comment } from './Comment.model';
-import { User } from './User.model';
+import { ApiResponse, ApiSuccessResponse } from '../constants/types.constant';
 
 export interface Post {
   userId: number;
@@ -8,18 +7,9 @@ export interface Post {
   body: string;
 }
 
-export interface PostExpandUser {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-  user: User;
-}
-
-export interface PostEmbedComments {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-  comments: Comment[];
-}
+// #region API
+export type GetPostsResponse = ApiResponse<{ posts: Post[] }>;
+export type GetPostsSuccessResponse = ApiSuccessResponse<{ posts: Post[] }>;
+export type GetPostResponse = ApiResponse<{ post: Post }>;
+export type GetPostSuccessResponse = ApiSuccessResponse<{ post: Post }>;
+// #endregion

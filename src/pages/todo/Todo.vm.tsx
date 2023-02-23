@@ -1,28 +1,38 @@
-import { batch, createResource, createSignal } from 'solid-js';
-import { appStore } from '../../app/AppStore';
-import { Todo } from '../../models/Todo.model';
-import { User } from '../../models/User.model';
-import { axiosInstance } from '../../services/http';
+import { batch, createEffect, createResource, createSignal } from 'solid-js';
+import { useAppContext } from '../../app/Store.app';
+import { GetTodosResponse, Todo } from '../../models/Todo.model';
+import { http } from '../../services/http';
 import { FormOnSubmitEvent, InputOnKeyUp } from '../../types';
 
+// #region INTERFACES
 type UseTodoFormParams = {
-  refetchTodos: ReturnType<typeof useTodoList>[1]['refetch'];
+  refetchTodos: ReturnType<typeof useTodosResource>[1]['refetch'];
 };
+// #endregion
 
-const useTodoList = () => {
-  const todoListResource = createResource<Todo[], User>(
-    appStore.user,
-    (_user) =>
-      axiosInstance
-        .get('/todos', { params: { userId: _user.id } })
-        .then((res) => res.data),
-    { initialValue: [] },
+// const todoListResource = createResource<Todo[], User>(
+//   appStore.user,
+//   () => axiosInstance.get('/todos').then((res) => res.data),
+//   { initialValue: [] },
+// );
+
+// createEffect(() => {
+//   console.log('🚀 ~ file: Todo.page.tsx:8 ~ todos', {
+//     loading: todoListResource[0].loading,
+//     error: todoListResource[0].error,
+//     todos: todoListResource[0](),
+//   });
+// });
+
+const useTodosResource = () => {
+  const todoListResource = createResource(() =>
+    http.get('/todos').then((res) => res.data as GetTodosResponse),
   );
 
   return todoListResource;
 };
 
-const useTodoForm = ({ refetchTodos }: UseTodoFormParams) => {
+const useForm = ({ refetchTodos }: UseTodoFormParams) => {
   const [todoText, setTodoText] = createSignal('');
   const [todoTextError, setTodoTextError] = createSignal('');
 
@@ -31,25 +41,25 @@ const useTodoForm = ({ refetchTodos }: UseTodoFormParams) => {
   };
 
   const onChangeTodoItemCheckbox = async (todo: Todo) => {
-    // PATCH todo
-    const resp = await axiosInstance.patch<Todo>(`/todos/${todo.id}`, {
+    // update todo
+    const resp = await http.patch<Todo>(`/todos/${todo.id}`, {
       completed: !todo.completed,
     });
 
     // on failed
-    if (resp.status !== 200) {
+    if (resp.status !== 201) {
       setTodoTextError('Error editing todo!');
       return;
     }
 
     // on success
     setTodoTextError('');
-    refetchTodos();
+    await refetchTodos();
   };
 
   const onDeleteTodoItem = async (todoId: number) => {
-    // PATCH todo
-    const resp = await axiosInstance.delete<Todo>(`/todos/${todoId}`);
+    // delete todo
+    const resp = await http.delete<Todo>(`/todos/${todoId}`);
 
     // on failed
     if (resp.status !== 200) {
@@ -59,17 +69,15 @@ const useTodoForm = ({ refetchTodos }: UseTodoFormParams) => {
 
     // on success
     setTodoTextError('');
-    refetchTodos();
+    await refetchTodos();
   };
 
   const onSubmitTodo = async (ev: FormOnSubmitEvent) => {
     ev.preventDefault();
 
-    // POST todo
-    const resp = await axiosInstance.post<Todo>('/todos', {
-      userId: appStore.user?.id,
+    // add todo
+    const resp = await http.post<Todo>('/todos', {
       title: todoText(),
-      completed: false,
     });
 
     // on failed
@@ -86,7 +94,7 @@ const useTodoForm = ({ refetchTodos }: UseTodoFormParams) => {
       setTodoText('');
       setTodoTextError('');
     });
-    refetchTodos();
+    await refetchTodos();
   };
 
   return {
@@ -99,9 +107,25 @@ const useTodoForm = ({ refetchTodos }: UseTodoFormParams) => {
   };
 };
 
-export const useTodoPageVM = () => {
-  const [todos, { refetch: refetchTodos }] = useTodoList();
-  const todoForm = useTodoForm({ refetchTodos });
+const useTodoPageVM = () => {
+  const [, storeAction] = useAppContext();
+  const [todos, { refetch: refetchTodos }] = useTodosResource();
+  const form = useForm({ refetchTodos });
 
-  return { todos, todoForm };
+  // The first execution of the effect function is not immediate; it's scheduled to run after the current rendering phase
+  createEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ file: Todo.page.tsx:8 ~ todos', {
+      loading: todos.loading,
+      error: todos.error as unknown,
+      todos: todos(),
+    });
+  });
+
+  // eslint-disable-next-line no-console
+  console.log('this should be displayed first, then the todos object.');
+
+  return { storeAction, todos, form };
 };
+
+export default useTodoPageVM;

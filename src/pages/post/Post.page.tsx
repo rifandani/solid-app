@@ -1,7 +1,8 @@
 import { Link } from '@solidjs/router';
-import { Component, For, Show } from 'solid-js';
+import { Component, Show } from 'solid-js';
 import { Button, LoadingSpinner } from '../../components/atoms';
-import { usePostPageVM } from './Post.vm';
+import { GetPostSuccessResponse } from '../../models/Post.model';
+import usePostPageVM from './Post.vm';
 
 const PostPage: Component = () => {
   const vm = usePostPageVM();
@@ -16,58 +17,39 @@ const PostPage: Component = () => {
           ⬅ Go Back
         </Link>
 
-        <Button.Outlined size="sm" onClick={vm.onDeletePost}>
+        <Button.Outlined size="sm" onClick={() => void vm.onDeletePost()}>
           Delete Post
         </Button.Outlined>
       </section>
 
+      <Show when={!!vm.error()}>
+        <div class="w-full flex py-5 justify-center items-center">
+          <p>Delete error: {vm.error()}</p>
+        </div>
+      </Show>
+
+      <Show when={vm.post.loading}>
+        <div class="w-full flex py-5 justify-center items-center">
+          <p>Loading post data...</p>
+        </div>
+      </Show>
+
       <Show
-        keyed
-        when={vm.post()}
+        when={vm.post.state === 'ready'}
         fallback={
           <div class="flex py-5 justify-center items-center">
             <LoadingSpinner />
           </div>
         }
       >
-        {(_post) => (
-          <>
-            <h1 class="text-2xl mb-10 font-semibold tracking-wider text-center text-violet-500">
-              Post Detail
-            </h1>
+        <h1 class="text-2xl mb-10 font-semibold tracking-wider text-center text-violet-500">
+          Post Detail
+        </h1>
 
-            <section class="w-full">
-              <h3 class="font-semibold text-lg">{_post.title}</h3>
-              <h6 class="text-slate-700">{_post.body}</h6>
-            </section>
-
-            <h2 class="text-2xl text-center my-10 font-semibold tracking-wider text-violet-500">
-              Comments
-            </h2>
-
-            <section class="w-full gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {/* loop thru posts */}
-              <For
-                each={_post.comments}
-                fallback={
-                  <div class="flex py-5 justify-center items-center">
-                    No Data
-                  </div>
-                }
-              >
-                {(comment) => (
-                  <div class="flex flex-col gap-2 p-3 border border-slate-300 shadow-md">
-                    <p class="font-semibold">{comment.name}</p>
-                    <p class="line-clamp-3">{comment.body}</p>
-                    <p class="text-slate-500 italic line-clamp-2">
-                      {comment.email}
-                    </p>
-                  </div>
-                )}
-              </For>
-            </section>
-          </>
-        )}
+        <section class="w-full">
+          <h3 class="font-semibold text-lg">{(vm.post() as GetPostSuccessResponse).post.title}</h3>
+          <h6 class="text-slate-700">{(vm.post() as GetPostSuccessResponse).post.body}</h6>
+        </section>
       </Show>
     </main>
   );

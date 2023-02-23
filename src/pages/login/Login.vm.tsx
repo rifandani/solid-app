@@ -1,15 +1,13 @@
 import { useNavigate } from '@solidjs/router';
 import { batch, createSignal, onMount } from 'solid-js';
-import { setAppStore } from '../../app/AppStore';
-import { User } from '../../models/User.model';
-import { axiosInstance } from '../../services/http';
+import { setAppStore } from '../../app/Store.app';
+import { ApiResponse } from '../../constants/types.constant';
+import { http } from '../../services/http';
 import { FormOnSubmitEvent, InputOnKeyUp } from '../../types';
+import { isApiSuccessResponse } from '../../utils/helper/helper.util';
 
-type UseLoginFormParams = {
-  navigate: ReturnType<typeof useNavigate>;
-};
-
-const useLoginForm = ({ navigate }: UseLoginFormParams) => {
+const useForm = () => {
+  const navigate = useNavigate();
   const [form, setForm] = createSignal({
     email: '',
     password: '',
@@ -33,25 +31,25 @@ const useLoginForm = ({ navigate }: UseLoginFormParams) => {
   const onSubmitForm = async (ev: FormOnSubmitEvent) => {
     ev.preventDefault();
 
-    // get all users
-    const resp = await axiosInstance.get(`/users`);
-    const users = resp.data as User[];
+    // setup form request
+    const reqData = { email: form().email, password: form().password };
+    const resp = await http.post(`/auth/login`, reqData);
+    const respData = resp.data as ApiResponse<{ token: string }>;
 
-    // find specific user
-    const user = users.find((_user) => _user.email === form().email);
-
-    // check if registered
-    if (user) {
+    if (isApiSuccessResponse(respData)) {
+      // set user data to local storage and global store
+      const user = { email: reqData.email, token: respData.token };
       localStorage.setItem('user', JSON.stringify(user));
       setAppStore('user', user);
-      navigate('/todos');
+      navigate('/');
     } else {
+      // clear form & display errors
       batch(() => {
         setForm({
           email: '',
           password: '',
         });
-        setFormErrors('User not found!');
+        setFormErrors(respData.error.code);
       });
     }
   };
@@ -59,14 +57,17 @@ const useLoginForm = ({ navigate }: UseLoginFormParams) => {
   return { form, formErrors, onKeyUpEmail, onKeyUpPassword, onSubmitForm };
 };
 
-export const useLoginPageVM = () => {
+const useLoginPageVM = () => {
   const navigate = useNavigate();
-  const loginForm = useLoginForm({ navigate });
+  const form = useForm();
 
   onMount(() => {
+    // redirect already logged in user to home
     const user = localStorage.getItem('user');
-    if (user) navigate('/todos');
+    if (user) navigate('/');
   });
 
-  return { loginForm };
+  return { form };
 };
+
+export default useLoginPageVM;

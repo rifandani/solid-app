@@ -177,3 +177,212 @@ exports[`HomePage > should render correctly 1`] = `
   </div>
 </section>
 `;
+
+exports[`HomePage > should render correctly 2`] = `
+<main
+  class="text-gray-600 body-font"
+>
+  <section
+    class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center duration-300"
+  >
+    <div
+      class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center duration-300"
+    >
+      <h1
+        class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900"
+      >
+        Solid App
+        <br
+          class="hidden lg:inline-block"
+        />
+        using 
+        <code>
+          @solidjs/router
+        </code>
+      </h1>
+      <p
+        class="mb-8 leading-relaxed"
+      >
+        With 
+        <code>
+          typescript
+        </code>
+        , 
+        <code>
+          vite
+        </code>
+        , 
+        <code>
+          vitest + @solidjs/testing-library
+        </code>
+        , 
+        <code>
+          @solidjs/router
+        </code>
+        , 
+        <code>
+          msw
+        </code>
+        , 
+        <code>
+          tailwindcss
+        </code>
+        .
+      </p>
+      <p
+        class="mb-8 leading-relaxed font-mono font-extrabold"
+      >
+        0
+         : 
+        0
+        <!---->
+         : 
+        0
+        <!---->
+         
+      </p>
+      <p
+        class="mb-8 leading-relaxed font-mono font-extrabold"
+      >
+        0
+         seconds since first render
+      </p>
+      <div
+        class="flex justify-center space-x-3"
+      >
+        <button
+          class="font-semibold items-center justify-center inline-flex space-x-2 select-none cursor-pointer duration-200 text-violet-500 box-border border border-solid border-violet-500 bg-transparent hover:bg-violet-50 active:border-violet-500 focus:ring-4 ring-violet-800 disabled:opacity-50 rounded text-md py-4 px-4"
+        >
+          Change Language
+        </button>
+        <button
+          class="font-semibold items-center justify-center inline-flex space-x-2 select-none cursor-pointer duration-200 text-white bg-violet-800 border-0 ring-violet-800 hover:bg-violet-500 active:bg-violet-200 focus:ring-4 disabled:opacity-50 rounded text-md py-4 px-4"
+        >
+          Get Started
+        </button>
+      </div>
+    </div>
+    <div
+      class="lg:max-w-lg lg:w-full md:w-1/2 duration-300"
+    >
+      <svg
+        height="200"
+        viewBox="0 0 200 200"
+        width="200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M163 35S110-4 69 5l-3 1c-6 2-11 5-14 9l-2 3-15 26 26 5c11 7 25 10 38 7l46 9 18-30z"
+          fill="#76b3e1"
+        />
+        <lineargradient
+          gradientUnits="userSpaceOnUse"
+          id="a"
+          x1="27.5"
+          x2="152"
+          y1="3"
+          y2="63.5"
+        >
+          <stop
+            offset="0.1"
+            stop-color="#76b3e1"
+          />
+          <stop
+            offset="0.3"
+            stop-color="#dcf2fd"
+          />
+          <stop
+            offset="1"
+            stop-color="#76b3e1"
+          />
+        </lineargradient>
+        <path
+          d="M163 35S110-4 69 5l-3 1c-6 2-11 5-14 9l-2 3-15 26 26 5c11 7 25 10 38 7l46 9 18-30z"
+          fill="url(#a)"
+          opacity="0.3"
+        />
+        <path
+          d="M52 35l-4 1c-17 5-22 21-13 35 10 13 31 20 48 15l62-21S92 26 52 35z"
+          fill="#518ac8"
+        />
+        <lineargradient
+          gradientUnits="userSpaceOnUse"
+          id="b"
+          x1="95.8"
+          x2="74"
+          y1="32.6"
+          y2="105.2"
+        >
+          <stop
+            offset="0"
+            stop-color="#76b3e1"
+          />
+          <stop
+            offset="0.5"
+            stop-color="#4377bb"
+          />
+          <stop
+            offset="1"
+            stop-color="#1f3b77"
+          />
+        </lineargradient>
+        <path
+          d="M52 35l-4 1c-17 5-22 21-13 35 10 13 31 20 48 15l62-21S92 26 52 35z"
+          fill="url(#b)"
+          opacity="0.3"
+        />
+        <lineargradient
+          gradientUnits="userSpaceOnUse"
+          id="c"
+          x1="18.4"
+          x2="144.3"
+          y1="64.2"
+          y2="149.8"
+        >
+          <stop
+            offset="0"
+            stop-color="#315aa9"
+          />
+          <stop
+            offset="0.5"
+            stop-color="#518ac8"
+          />
+          <stop
+            offset="1"
+            stop-color="#315aa9"
+          />
+        </lineargradient>
+        <path
+          d="M134 80a45 45 0 00-48-15L24 85 4 120l112 19 20-36c4-7 3-15-2-23z"
+          fill="url(#c)"
+        />
+        <lineargradient
+          gradientUnits="userSpaceOnUse"
+          id="d"
+          x1="75.2"
+          x2="24.4"
+          y1="74.5"
+          y2="260.8"
+        >
+          <stop
+            offset="0"
+            stop-color="#4377bb"
+          />
+          <stop
+            offset="0.5"
+            stop-color="#1a336b"
+          />
+          <stop
+            offset="1"
+            stop-color="#1a336b"
+          />
+        </lineargradient>
+        <path
+          d="M114 115a45 45 0 00-48-15L4 120s53 40 94 30l3-1c17-5 23-21 13-34z"
+          fill="url(#d)"
+        />
+      </svg>
+    </div>
+  </section>
+</main>
+`;

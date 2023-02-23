@@ -1,10 +1,9 @@
-import clsx from 'clsx';
 import { Component, JSX, splitProps } from 'solid-js';
+import { cn } from '../../utils/helper/helper.util';
 
 // #region INTERFACES
 export type IconButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: JSX.Element;
-
   roundedFull?: boolean;
 };
 // #endregion
@@ -15,16 +14,18 @@ const baseIconButton =
 const IconButton: Component<IconButtonProps> = (props) => {
   const [, rest] = splitProps(props, ['onClick']);
 
-  const className = () =>
-    clsx([
-      baseIconButton,
-      props.class,
-      props.disabled && 'opacity-50 hover:(cursor-default bg-opacity-0)',
-      props.roundedFull ? 'rounded-full' : 'rounded',
-    ]);
-
   return (
-    <button class={className()} onClick={props.onClick} {...rest}>
+    <button
+      class={cn(
+        baseIconButton,
+        props.disabled && 'opacity-50 hover:(cursor-default bg-opacity-0)',
+        props.roundedFull ? 'rounded-full' : 'rounded',
+        props.class,
+      )}
+      // eslint-disable-next-line solid/reactivity
+      onClick={props.onClick}
+      {...rest}
+    >
       {props.children}
     </button>
   );

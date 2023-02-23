@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* @refresh reload */
 import { render } from 'solid-js/web';
-import App from './app/App';
+import App from './app/App.app';
 import './index.css';
 
 const root = document.getElementById('root');
@@ -11,4 +12,16 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
-render(() => <App />, root!);
+// ONLY include browser worker on 'development' env
+if (import.meta.env.DEV) {
+  void import('./mocks/browser.mock')
+    .then(({ worker }) => {
+      // insert it into global window object, so we can debug the worker in runtime (e.g Chrome DevTools)
+      window.msw = { worker };
+      // start browser worker
+      return worker.start();
+    })
+    .then(() => render(() => <App />, root!));
+} else {
+  render(() => <App />, root!);
+}
