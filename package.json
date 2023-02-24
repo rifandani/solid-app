@@ -1,7 +1,7 @@
 {
   "name": "solid-template",
   "version": "0.0.0",
-  "description": "Solid template with Vite, Vitest, TailwindCSS",
+  "description": "Solid template with Vite, Vitest, TailwindCSS, MSW",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -10,8 +10,6 @@
     "start": "vite --mode development",
     "start:qa": "vite --mode qa",
     "start:prod": "vite --mode production",
-    "start:db": "concurrently \"vite\" \"npx json-server --watch db.json --port 5123\"",
-    "start:typi": "concurrently \"vite\" \"npx json-server http://jsonplaceholder.typicode.com/db --port 5123\"",
     "build": "pnpm msw:delete && vite build --mode development",
     "build:qa": "vite build --mode qa",
     "build:prod": "vite build --mode production",
@@ -30,7 +28,6 @@
     "@typescript-eslint/parser": "^5.53.0",
     "@vitest/coverage-c8": "^0.28.5",
     "autoprefixer": "^10.4.13",
-    "concurrently": "^7.6.0",
     "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -41,7 +38,6 @@
     "eslint-plugin-solid": "^0.10.0",
     "eslint-plugin-testing-library": "^5.10.2",
     "jsdom": "^21.1.0",
-    "json-server": "^0.17.1",
     "mq-polyfill": "^1.1.8",
     "msw": "^1.0.1",
     "postcss": "^8.4.21",
@@ -65,5 +61,6 @@
   },
   "msw": {
     "workerDirectory": "public"
-  }
+  },
+  "packageManager": "pnpm@7.25.0"
 }
