@@ -10,20 +10,6 @@ type UseTodoFormParams = {
 };
 // #endregion
 
-// const todoListResource = createResource<Todo[], User>(
-//   appStore.user,
-//   () => axiosInstance.get('/todos').then((res) => res.data),
-//   { initialValue: [] },
-// );
-
-// createEffect(() => {
-//   console.log('🚀 ~ file: Todo.page.tsx:8 ~ todos', {
-//     loading: todoListResource[0].loading,
-//     error: todoListResource[0].error,
-//     todos: todoListResource[0](),
-//   });
-// });
-
 const useTodosResource = () => {
   const todoListResource = createResource(() =>
     http.get('/todos').then((res) => res.data as GetTodosResponse),

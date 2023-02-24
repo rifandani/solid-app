@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Solid template with Vite, Vitest, TailwindCSS, MSW",
   "scripts": {
+    "prepare": "husky install",
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "msw:init": "msw init public/ --save",
@@ -19,6 +20,8 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
     "@solidjs/testing-library": "^0.6.1",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
@@ -37,6 +40,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-solid": "^0.10.0",
     "eslint-plugin-testing-library": "^5.10.2",
+    "husky": "^8.0.3",
     "jsdom": "^21.1.0",
     "mq-polyfill": "^1.1.8",
     "msw": "^1.0.1",
