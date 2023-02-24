@@ -6,6 +6,10 @@ export const localeConfig: Lang[] = [
     id: 'Ganti Bahasa',
   },
   {
+    en: 'Toggle Clock',
+    id: 'Toggle Jam',
+  },
+  {
     en: 'Get Started',
     id: 'Mulai Sekarang',
   },

@@ -1,5 +1,5 @@
-import { createContext, ParentComponent, useContext } from 'solid-js';
-import { createStore } from 'solid-js/store';
+import { createContext, createEffect, ParentComponent, useContext } from 'solid-js';
+import { createStore, SetStoreFunction, Store } from 'solid-js/store';
 import { localeConfig } from '../configs/locale/locale.config';
 import { Availability } from '../configs/locale/locale.type';
 import { Setting } from '../models/Setting.model';
@@ -58,3 +58,15 @@ export const AppProvider: ParentComponent = (props) => {
   return <AppContext.Provider value={[store, action]}>{props.children}</AppContext.Provider>;
 };
 // #endregion
+
+export function createLocalStore<T extends object>(
+  name: string,
+  init: T,
+): [Store<T>, SetStoreFunction<T>] {
+  const localState = localStorage.getItem(name);
+  const [state, setState] = createStore<T>(localState ? (JSON.parse(localState) as T) : init);
+
+  createEffect(() => localStorage.setItem(name, JSON.stringify(state)));
+
+  return [state, setState];
+}

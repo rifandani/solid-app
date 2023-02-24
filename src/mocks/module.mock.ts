@@ -1,7 +1,31 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import router from '@solidjs/router';
 import solid from 'solid-js';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { vi } from 'vitest';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import matchMediaPolyfill from 'mq-polyfill';
+
+// mock ResizeObserver
+global.ResizeObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+
+// mock matchMedia
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+matchMediaPolyfill(window);
+
+// implementation of window.resizeTo for dispatching event
+window.resizeTo = function resizeTo(width, height) {
+  Object.assign(this, {
+    innerWidth: width,
+    innerHeight: height,
+    outerWidth: width,
+    outerHeight: height,
+  }).dispatchEvent(new this.Event('resize'));
+};
 
 export const mockedNavigator = vi.fn(() => (path: string) => path);
 export const mockedLocation = vi.fn(() => ({ pathname: '/login' }));
