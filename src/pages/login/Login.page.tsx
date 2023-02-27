@@ -23,10 +23,7 @@ const LoginPage: Component = () => {
             <p class="text-center text-3xl">Welcome Back</p>
 
             {/* <!-- Start FORM --> */}
-            <form
-              class="flex flex-col pt-3 md:pt-8"
-              onSubmit={(ev) => void vm.form.onSubmitForm(ev)}
-            >
+            <form class="flex flex-col pt-3 md:pt-8" onSubmit={(ev) => vm.form.onSubmitForm(ev)}>
               {/* <!-- email --> */}
               <div class="flex flex-col pt-4">
                 <label for="email" class="text-lg">
@@ -63,16 +60,16 @@ const LoginPage: Component = () => {
                 />
               </div>
 
-              <Show when={!!vm.form.formErrors()}>
+              <Show when={vm.form.loginMutation.isError}>
                 <div class="block pt-4">
                   <h2 class="font-semibold p-2 border rounded border-red-500 text-red-500 bg-red-50">
-                    {vm.form.formErrors()}
+                    {String(vm.form.loginMutation.error)}
                   </h2>
                 </div>
               </Show>
 
-              <Button.Solid class="mt-8" type="submit">
-                Login
+              <Button.Solid class="mt-8" type="submit" disabled={vm.form.loginMutation.isLoading}>
+                {vm.form.loginMutation.isLoading ? 'Logging in...' : 'Login'}
               </Button.Solid>
             </form>
             {/* <!-- End FORM --> */}

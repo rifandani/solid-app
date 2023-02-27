@@ -50,6 +50,16 @@ export const postHandlers = [
     const { title, body } = await req.json<{ title: string; body: string }>();
     const postId = posts.at(-1)?.id;
 
+    if (title.includes('xxx') || body.includes('xxx')) {
+      return res(
+        ctx.status(400),
+        ctx.json({
+          ok: false,
+          error: { code: `do not input malicious words` },
+        }),
+      );
+    }
+
     if (postId) {
       const newPost: Post = {
         title,
@@ -85,9 +95,7 @@ export const postHandlers = [
     const post = posts.find((_post) => _post.id === paramsPostId);
 
     if (post) {
-      posts = posts.map((_post) =>
-        _post.id === post.id ? { ..._post, title, body } : _post,
-      );
+      posts = posts.map((_post) => (_post.id === post.id ? { ..._post, title, body } : _post));
 
       return res(
         ctx.status(201),

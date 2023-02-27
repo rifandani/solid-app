@@ -17,21 +17,21 @@ const PostsPage: Component = () => {
 
       <section class="w-full gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <Switch>
-          <Match when={vm.posts.loading}>
+          <Match when={vm.postsQuery.isLoading}>
             <div class="w-full flex py-5 justify-center items-center">
               <LoadingSpinner />
             </div>
           </Match>
 
-          <Match when={vm.posts.error as unknown}>
+          <Match when={vm.postsQuery.isError}>
             <div class="w-full flex py-5 justify-center items-center">
               <p>Error posts</p>
             </div>
           </Match>
 
-          <Match when={!vm.posts.error && !vm.posts.loading}>
+          <Match when={vm.postsQuery.isSuccess}>
             <For
-              each={(vm.posts() as GetPostsSuccessResponse).posts}
+              each={(vm.postsQuery.data as GetPostsSuccessResponse).posts}
               fallback={<div class="w-full flex py-5 justify-center items-center">No Data</div>}
             >
               {(post) => <PostItem post={post} />}

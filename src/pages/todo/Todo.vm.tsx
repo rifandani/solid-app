@@ -1,7 +1,7 @@
 import { batch, createEffect, createResource, createSignal } from 'solid-js';
 import { useAppContext } from '../../app/Store.app';
 import { GetTodosResponse, Todo } from '../../models/Todo.model';
-import { http } from '../../services/http';
+import { http } from '../../services/api/http';
 import { FormOnSubmitEvent, InputOnKeyUp } from '../../types';
 
 // #region INTERFACES

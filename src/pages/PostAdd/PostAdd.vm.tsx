@@ -1,16 +1,39 @@
 import { useBeforeLeave, useNavigate } from '@solidjs/router';
-import { batch, createSignal, onCleanup } from 'solid-js';
-import { http } from '../../services/http';
-import { FormOnSubmitEvent, InputOnKeyUp } from '../../types';
+import { createMutation, useQueryClient } from '@tanstack/solid-query';
+import { createSignal, onCleanup } from 'solid-js';
+import { ApiErrorResponse } from '../../models/Api.model';
+import { queryKeys } from '../../services/api';
+import { addPost } from '../../services/api/posts';
+import { FormOnSubmit, InputOnKeyUp } from '../../types';
+
+const formInitialValue = {
+  title: '',
+  body: '',
+};
 
 const usePostAddForm = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [postForm, setPostForm] = createSignal({
-    title: '',
-    body: '',
-  });
-  const [postFormErrors, setPostFormErrors] = createSignal('');
+  const [postForm, setPostForm] = createSignal(formInitialValue);
   let timeoutId: NodeJS.Timeout;
+
+  const postAddMutation = createMutation({
+    mutationFn: () => addPost(postForm()),
+    onSuccess: async (resp) => {
+      setPostForm(formInitialValue);
+
+      if (!resp.ok) {
+        throw new Error((resp as ApiErrorResponse).error.code);
+      } else {
+        // NOTE: the order of function call MATTERS
+        navigate('/posts');
+        await queryClient.invalidateQueries({ queryKey: queryKeys.posts.list.queryKey });
+      }
+    },
+    onError: () => {
+      setPostForm(formInitialValue);
+    },
+  });
 
   const onKeyUpPostForm: InputOnKeyUp = (ev) => {
     setPostForm((prev) => ({
@@ -19,31 +42,9 @@ const usePostAddForm = () => {
     }));
   };
 
-  const onSubmitForm = async (ev: FormOnSubmitEvent) => {
+  const onSubmitForm: FormOnSubmit = (ev) => {
     ev.preventDefault();
-
-    // add post
-    const resp = await http.post(`/posts`, {
-      title: postForm().title,
-      body: postForm().body,
-    });
-
-    if (resp.status === 201) {
-      setPostForm({
-        title: '',
-        body: '',
-      });
-      navigate('/posts');
-      return;
-    }
-
-    batch(() => {
-      setPostForm({
-        title: '',
-        body: '',
-      });
-      setPostFormErrors(resp.data);
-    });
+    postAddMutation.mutate();
   };
 
   useBeforeLeave((e) => {
@@ -63,7 +64,7 @@ const usePostAddForm = () => {
 
   onCleanup(() => clearTimeout(timeoutId));
 
-  return { postForm, postFormErrors, onKeyUpPostForm, onSubmitForm };
+  return { postForm, postAddMutation, onKeyUpPostForm, onSubmitForm };
 };
 
 const usePostAddPageVM = () => {

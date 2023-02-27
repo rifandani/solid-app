@@ -36,16 +36,20 @@ const PostAddPage: Component = () => {
           value={vm.postAddForm.postForm().body}
         />
 
-        <Show when={!!vm.postAddForm.postFormErrors()}>
+        <Show when={vm.postAddForm.postAddMutation.isError}>
           <div class="block pt-4">
             <h2 class="font-semibold p-2 border rounded border-red-500 text-red-500 bg-red-50">
-              {vm.postAddForm.postFormErrors()}
+              {String(vm.postAddForm.postAddMutation.error)}
             </h2>
           </div>
         </Show>
 
-        <Button.Solid class="my-5" type="submit">
-          Submit
+        <Button.Solid
+          class="my-5"
+          type="submit"
+          disabled={vm.postAddForm.postAddMutation.isLoading}
+        >
+          {vm.postAddForm.postAddMutation.isLoading ? 'Submitting...' : 'Submit'}
         </Button.Solid>
       </form>
     </main>

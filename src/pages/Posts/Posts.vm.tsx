@@ -1,25 +1,27 @@
 import { useNavigate } from '@solidjs/router';
-import { createResource } from 'solid-js';
-import { GetPostsResponse } from '../../models/Post.model';
-import { http } from '../../services/http';
+import { createQuery } from '@tanstack/solid-query';
+import { queryKeys } from '../../services/api';
+import { fetchPostsList } from '../../services/api/posts';
 
 const usePostsResource = () => {
-  const postsResource = createResource(() =>
-    http.get('posts').then((res) => res.data as GetPostsResponse),
-  );
+  const postsQuery = createQuery({
+    queryKey: () => queryKeys.posts.list.queryKey,
+    queryFn: () => fetchPostsList(),
+  });
 
-  return postsResource;
+  return postsQuery;
 };
 
 const usePostsPageVM = () => {
   const navigate = useNavigate();
+
+  const postsQuery = usePostsResource();
+
   const onNavigateToPostAdd = () => {
     navigate('add');
   };
 
-  const [posts] = usePostsResource();
-
-  return { onNavigateToPostAdd, posts };
+  return { onNavigateToPostAdd, postsQuery };
 };
 
 export default usePostsPageVM;

@@ -2,6 +2,8 @@
   "name": "solid-template",
   "version": "0.0.0",
   "description": "Solid template with Vite, Vitest, TailwindCSS, MSW",
+  "license": "MIT",
+  "author": "Tri Rizeki Rifandani",
   "scripts": {
     "prepare": "husky install",
     "format": "prettier --write .",
@@ -18,13 +20,13 @@
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
-  "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
     "@solidjs/testing-library": "^0.6.1",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
+    "@tanstack/eslint-plugin-query": "^4.24.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
@@ -56,12 +58,14 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "1.0.0-beta.6",
+    "@lukemorales/query-key-factory": "^1.1.0",
     "@solidjs/router": "^0.7.0",
     "@tanstack/solid-query": "^4.24.9",
     "axios": "^1.3.3",
     "clsx": "^1.2.1",
     "solid-js": "^1.6.11",
-    "tailwind-merge": "^1.9.1"
+    "tailwind-merge": "^1.9.1",
+    "zod": "^3.20.6"
   },
   "msw": {
     "workerDirectory": "public"

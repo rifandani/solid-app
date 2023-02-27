@@ -1,10 +1,10 @@
 import { Route, Router, Routes } from '@solidjs/router';
-import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
 import { Component, lazy, Suspense } from 'solid-js';
 import { LoadingSpinner } from '../components/atoms';
 import { PageWrapper } from '../components/templates';
 import routeDataPost from '../pages/Post/Post.data';
 import AppErrorBoundary from './ErrorBoundary.app';
+import QueryProvider, { queryClient } from './QueryClient.app';
 import { AppProvider } from './Store.app';
 
 const HomePage = lazy(() => import('../pages/Home/Home.page'));
@@ -15,12 +15,10 @@ const TodoPage = lazy(() => import('../pages/Todo/Todo.page'));
 const LoginPage = lazy(() => import('../pages/Login/Login.page'));
 const NotFoundPage = lazy(() => import('../pages/NotFound/NotFound.page'));
 
-const queryClient = new QueryClient();
-
 const App: Component = () => (
   <AppErrorBoundary>
     <AppProvider>
-      <QueryClientProvider client={queryClient}>
+      <QueryProvider>
         <Router>
           <Routes>
             <Route path="/" component={PageWrapper}>
@@ -104,7 +102,7 @@ const App: Component = () => (
               {/* render-as-you-fetch for dynamic routes */}
               <Route
                 path="/:id"
-                data={routeDataPost}
+                data={routeDataPost(queryClient)}
                 element={
                   <Suspense
                     fallback={
@@ -131,7 +129,7 @@ const App: Component = () => (
             /> */}
           </Routes>
         </Router>
-      </QueryClientProvider>
+      </QueryProvider>
     </AppProvider>
   </AppErrorBoundary>
 );

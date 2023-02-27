@@ -1,18 +1,44 @@
 import { useNavigate } from '@solidjs/router';
-import { batch, createSignal, onMount } from 'solid-js';
+import { createMutation } from '@tanstack/solid-query';
+import { createSignal, onMount } from 'solid-js';
 import { setAppStore } from '../../app/Store.app';
-import { ApiResponse } from '../../constants/types.constant';
-import { http } from '../../services/http';
-import { FormOnSubmitEvent, InputOnKeyUp } from '../../types';
-import { isApiSuccessResponse } from '../../utils/helper/helper.util';
+import { ApiSuccessResponse } from '../../constants/types.constant';
+import { ApiErrorResponse } from '../../models/Api.model';
+import { Login, Token } from '../../models/Auth.model';
+import { UserStore } from '../../models/User.model';
+import { login } from '../../services/api/auth';
+import { FormOnSubmit, InputOnKeyUp } from '../../types';
+
+const formInitialValue: Login = {
+  email: '',
+  password: '',
+};
 
 const useForm = () => {
   const navigate = useNavigate();
-  const [form, setForm] = createSignal({
-    email: '',
-    password: '',
+  const [form, setForm] = createSignal(formInitialValue);
+
+  const loginMutation = createMutation({
+    mutationFn: () => login(form()),
+    onSuccess: (resp) => {
+      if (!resp.ok) {
+        throw new Error((resp as ApiErrorResponse).error.code);
+      } else {
+        // set user data to local storage and global store
+        const user: UserStore = {
+          email: form().email,
+          token: (resp as ApiSuccessResponse<Token>).login.token,
+        };
+
+        localStorage.setItem('user', JSON.stringify(user));
+        setAppStore('user', user);
+        navigate('/');
+      }
+    },
+    onError: () => {
+      setForm(formInitialValue);
+    },
   });
-  const [formErrors, setFormErrors] = createSignal('');
 
   const onKeyUpEmail: InputOnKeyUp = (ev) => {
     setForm((prev) => ({
@@ -28,33 +54,12 @@ const useForm = () => {
     }));
   };
 
-  const onSubmitForm = async (ev: FormOnSubmitEvent) => {
+  const onSubmitForm: FormOnSubmit = (ev) => {
     ev.preventDefault();
-
-    // setup form request
-    const reqData = { email: form().email, password: form().password };
-    const resp = await http.post(`/auth/login`, reqData);
-    const respData = resp.data as ApiResponse<{ token: string }>;
-
-    if (isApiSuccessResponse(respData)) {
-      // set user data to local storage and global store
-      const user = { email: reqData.email, token: respData.token };
-      localStorage.setItem('user', JSON.stringify(user));
-      setAppStore('user', user);
-      navigate('/');
-    } else {
-      // clear form & display errors
-      batch(() => {
-        setForm({
-          email: '',
-          password: '',
-        });
-        setFormErrors(respData.error.code);
-      });
-    }
+    loginMutation.mutate();
   };
 
-  return { form, formErrors, onKeyUpEmail, onKeyUpPassword, onSubmitForm };
+  return { form, loginMutation, onKeyUpEmail, onKeyUpPassword, onSubmitForm };
 };
 
 const useLoginPageVM = () => {
