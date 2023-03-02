@@ -7,7 +7,6 @@ const useClock = () => {
   // Crucial to automatic dependency tracking, calling the getter within a tracking scope causes the calling function to depend on this Signal, so that function will rerun if the Signal gets updated.
   // toggle clock
   const [toggle, setToggle] = createSignal(true);
-  const [id, setId] = createSignal<NodeJS.Timer>();
 
   // time
   const [seconds, setSeconds] = createSignal(0);
@@ -21,19 +20,18 @@ const useClock = () => {
   );
 
   createEffect(() => {
+    let id: NodeJS.Timer;
+
     if (toggle()) {
-      setId(
-        setInterval(() => {
-          setSeconds((prev) => +(prev + 0.1).toFixed(2));
-        }, 100),
-      );
+      id = setInterval(() => {
+        setSeconds((prev) => +(prev + 0.1).toFixed(2));
+      }, 100);
     } else {
-      clearInterval(id());
       setSeconds(0);
     }
 
     onCleanup(() => {
-      clearInterval(id());
+      clearInterval(id);
     });
   });
 
