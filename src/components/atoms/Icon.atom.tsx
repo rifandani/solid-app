@@ -10,7 +10,7 @@ export const Home: Component<SVGProps> = (props) => {
       class={props.class}
       width={props.width || 24}
       height={props.height || 24}
-      viewBox={`0 0 ${props.width || 24} ${props.height || 24}`}
+      viewBox={props.viewBox || `0 0 ${props.width || 24} ${props.height || 24}`}
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
@@ -30,7 +30,7 @@ export const SolidLogo: Component<SVGProps> = (props) => {
       class={props.class}
       width={props.width || 24}
       height={props.height || 24}
-      viewBox={`0 0 ${props.width || 24} ${props.height || 24}`}
+      viewBox={props.viewBox || `0 0 ${props.width || 24} ${props.height || 24}`}
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
@@ -97,7 +97,7 @@ export const HamburgerMenu: Component<SVGProps> = (props) => {
       class={props.class}
       width={props.width || 24}
       height={props.height || 24}
-      viewBox={`0 0 ${props.width || 24} ${props.height || 24}`}
+      viewBox={props.viewBox || `0 0 ${props.width || 24} ${props.height || 24}`}
       fill={props.fill || 'currentColor'}
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
@@ -120,13 +120,37 @@ export const HamburgerMenu2: Component<SVGProps> = (props) => {
       class={props.class}
       width={props.width || 16}
       height={props.height || 16}
-      viewBox={`0 0 ${props.width || 16} ${props.height || 16}`}
+      viewBox={props.viewBox || `0 0 ${props.width || 16} ${props.height || 16}`}
       fill={props.fill || 'currentColor'}
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
       <title>Hamburger Menu</title>
       <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+    </svg>
+  );
+};
+
+export const Error: Component<SVGProps> = (props) => {
+  const [, rest] = splitProps(props, ['class', 'width', 'height']);
+
+  return (
+    <svg
+      class={props.class}
+      width={props.width || 16}
+      height={props.height || 16}
+      viewBox={props.viewBox || `0 0 ${props.width || 16} ${props.height || 16}`}
+      fill={props.fill || 'currentColor'}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <title>Error</title>
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
     </svg>
   );
 };

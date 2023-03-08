@@ -19,8 +19,12 @@ const useClock = () => {
     0,
   );
 
+  // The first execution of the effect function is not immediate; it's scheduled to run after the current rendering phase
   createEffect(() => {
     let id: NodeJS.Timer;
+
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ file: Home.vm.tsx:27 ~ createEffect ~ toggle():', toggle());
 
     if (toggle()) {
       id = setInterval(() => {
@@ -36,6 +40,9 @@ const useClock = () => {
   });
 
   const toggleClock = () => setToggle((prev) => !prev);
+
+  // eslint-disable-next-line no-console
+  console.log('this should be displayed first, then the toggle() signal.');
 
   return {
     seconds,

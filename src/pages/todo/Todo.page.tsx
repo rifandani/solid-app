@@ -1,5 +1,5 @@
 import { Component, For, Match, Show, Switch } from 'solid-js';
-import { Button, LoadingSpinner } from '../../components/atoms';
+import { LoadingSpinner } from '../../components/atoms';
 import { TodoItem } from '../../components/molecules';
 import { GetTodosSuccessResponse } from '../../models/Todo.model';
 import useTodoPageVM from './Todo.vm';
@@ -9,17 +9,17 @@ const TodoPage: Component = () => {
 
   return (
     <main class="flex flex-col items-center justify-center py-20 px-10 duration-300 md:px-24 lg:px-40 xl:px-52">
-      <h1 class="mb-10 text-2xl font-semibold tracking-wider text-violet-500">
+      <h1 class="mb-10 text-2xl font-semibold tracking-wider text-primary-content">
         {vm.storeAction.translate?.('Todo List')}
       </h1>
 
-      <section class="block w-full rounded border border-slate-300 p-5 shadow-md">
+      <section class="card w-full rounded-lg border bg-secondary p-5 text-secondary-content shadow-lg">
         <form
-          class="mb-5 flex w-full flex-col duration-300 md:flex-row"
+          class="mb-3 flex w-full flex-col duration-300 lg:flex-row"
           onSubmit={(ev) => void vm.form.onSubmitTodo(ev)}
         >
           <input
-            class="mr-2 w-10/12 p-2 duration-300"
+            class="input-bordered input-accent input w-full text-accent-content lg:w-10/12"
             placeholder="What should you do next..."
             name="todoText"
             id="todoText"
@@ -30,29 +30,36 @@ const TodoPage: Component = () => {
             value={vm.form.todoText()}
           />
 
-          <Button.Solid class="mt-2 w-2/12 px-0.5 md:mt-0" type="submit">
-            Add Todo
-          </Button.Solid>
+          <button
+            class="btn-accent btn mt-2 ml-0 w-full normal-case lg:mt-0 lg:ml-2 lg:w-2/12"
+            type="submit"
+          >
+            Add
+          </button>
         </form>
 
         <Show when={!!vm.form.todoTextError()}>
-          <div class="block pt-4">
-            <h2 class="rounded border border-red-500 bg-red-50 p-2 font-semibold text-red-500">
-              {vm.form.todoTextError()}
-            </h2>
+          <div class="alert alert-error mt-2 shadow-lg">
+            <div class="flex items-center">
+              <span>❌</span>
+              <span>{vm.form.todoTextError()}</span>
+            </div>
           </div>
         </Show>
 
         <Switch>
           <Match when={vm.todos.loading}>
             <div class="flex items-center justify-center py-5">
-              <LoadingSpinner />
+              <LoadingSpinner color="currentColor" />
             </div>
           </Match>
 
-          <Match when={vm.todos.error as unknown}>
-            <div class="flex items-center justify-center py-5">
-              <p>Error todos</p>
+          <Match when={!!vm.todos.error}>
+            <div class="alert alert-error mt-2 shadow-lg">
+              <div class="flex items-center">
+                <span>❌</span>
+                <pre>{JSON.stringify(vm.todos.error, null, 2)}</pre>
+              </div>
             </div>
           </Match>
 

@@ -1,6 +1,5 @@
 import { Component, createEffect } from 'solid-js';
 import { Todo } from '../../models/Todo.model';
-import { Button } from '../atoms';
 
 // #region INTERFACES
 export type TodoItemProps = {
@@ -13,6 +12,7 @@ export type TodoItemProps = {
 const TodoItem: Component<TodoItemProps> = (props) => (
   <div class="mb-2 flex items-center justify-between">
     <input
+      class="checkbox-accent checkbox"
       type="checkbox"
       name={`todo-${props.todo.id}`}
       id={`todo-${props.todo.id}`}
@@ -20,16 +20,20 @@ const TodoItem: Component<TodoItemProps> = (props) => (
       onChange={() => void props.onChangeTodoItemCheckbox(props.todo)}
     />
 
-    <p class="ml-5 w-full text-left text-lg" classList={{ 'line-through': props.todo.completed }}>
+    <p
+      class="ml-5 w-full text-left text-lg text-secondary-content"
+      classList={{ 'line-through': props.todo.completed }}
+    >
       {props.todo.title}
     </p>
 
-    <Button.Outlined
-      size="sm"
+    <button
+      class="btn-accent btn-sm btn normal-case"
+      type="button"
       onClick={() => createEffect(() => props.onDeleteTodoItem(props.todo.id))}
     >
       Remove
-    </Button.Outlined>
+    </button>
   </div>
 );
 

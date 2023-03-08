@@ -131,7 +131,6 @@ const App: Component = () => (
         </Router>
       </QueryProvider>
     </AppProvider>
-    );
   </AppErrorBoundary>
 );
 

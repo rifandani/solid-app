@@ -1,4 +1,4 @@
-import { batch, createEffect, createResource, createSignal } from 'solid-js';
+import { batch, createResource, createSignal } from 'solid-js';
 import { useAppContext } from '../../app/Store.app';
 import { GetTodosResponse, Todo } from '../../models/Todo.model';
 import { http } from '../../services/api/http';
@@ -97,19 +97,6 @@ const useTodoPageVM = () => {
   const [, storeAction] = useAppContext();
   const [todos, { refetch: refetchTodos }] = useTodosResource();
   const form = useForm({ refetchTodos });
-
-  // The first execution of the effect function is not immediate; it's scheduled to run after the current rendering phase
-  createEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('🚀 ~ file: Todo.page.tsx:8 ~ todos', {
-      loading: todos.loading,
-      error: todos.error as unknown,
-      todos: todos(),
-    });
-  });
-
-  // eslint-disable-next-line no-console
-  console.log('this should be displayed first, then the todos object.');
 
   return { storeAction, todos, form };
 };
