@@ -11,7 +11,7 @@ export type TodoItemProps = {
 // #endregion
 
 const TodoItem: Component<TodoItemProps> = (props) => (
-  <div class="flex items-center justify-between mb-2">
+  <div class="mb-2 flex items-center justify-between">
     <input
       type="checkbox"
       name={`todo-${props.todo.id}`}
@@ -20,7 +20,7 @@ const TodoItem: Component<TodoItemProps> = (props) => (
       onChange={() => void props.onChangeTodoItemCheckbox(props.todo)}
     />
 
-    <p class="text-lg text-left w-full ml-5" classList={{ 'line-through': props.todo.completed }}>
+    <p class="ml-5 w-full text-left text-lg" classList={{ 'line-through': props.todo.completed }}>
       {props.todo.title}
     </p>
 

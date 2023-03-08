@@ -8,18 +8,18 @@ const TodoPage: Component = () => {
   const vm = useTodoPageVM();
 
   return (
-    <main class="py-20 px-10 md:px-24 lg:px-40 xl:px-52 flex flex-col items-center justify-center duration-300">
-      <h1 class="text-2xl mb-10 font-semibold tracking-wider text-violet-500">
+    <main class="flex flex-col items-center justify-center py-20 px-10 duration-300 md:px-24 lg:px-40 xl:px-52">
+      <h1 class="mb-10 text-2xl font-semibold tracking-wider text-violet-500">
         {vm.storeAction.translate?.('Todo List')}
       </h1>
 
-      <section class="block w-full border rounded p-5 shadow-md border-slate-300">
+      <section class="block w-full rounded border border-slate-300 p-5 shadow-md">
         <form
-          class="flex flex-col w-full mb-5 duration-300 md:flex-row"
+          class="mb-5 flex w-full flex-col duration-300 md:flex-row"
           onSubmit={(ev) => void vm.form.onSubmitTodo(ev)}
         >
           <input
-            class="p-2 w-10/12 mr-2 duration-300"
+            class="mr-2 w-10/12 p-2 duration-300"
             placeholder="What should you do next..."
             name="todoText"
             id="todoText"
@@ -30,14 +30,14 @@ const TodoPage: Component = () => {
             value={vm.form.todoText()}
           />
 
-          <Button.Solid class="w-2/12 mt-2 px-0.5 md:mt-0" type="submit">
+          <Button.Solid class="mt-2 w-2/12 px-0.5 md:mt-0" type="submit">
             Add Todo
           </Button.Solid>
         </form>
 
         <Show when={!!vm.form.todoTextError()}>
           <div class="block pt-4">
-            <h2 class="font-semibold p-2 border rounded border-red-500 text-red-500 bg-red-50">
+            <h2 class="rounded border border-red-500 bg-red-50 p-2 font-semibold text-red-500">
               {vm.form.todoTextError()}
             </h2>
           </div>
@@ -45,13 +45,13 @@ const TodoPage: Component = () => {
 
         <Switch>
           <Match when={vm.todos.loading}>
-            <div class="flex py-5 justify-center items-center">
+            <div class="flex items-center justify-center py-5">
               <LoadingSpinner />
             </div>
           </Match>
 
           <Match when={vm.todos.error as unknown}>
-            <div class="flex py-5 justify-center items-center">
+            <div class="flex items-center justify-center py-5">
               <p>Error todos</p>
             </div>
           </Match>
@@ -59,7 +59,7 @@ const TodoPage: Component = () => {
           <Match when={!vm.todos.error && !vm.todos.loading}>
             <For
               each={(vm.todos() as GetTodosSuccessResponse).todos}
-              fallback={<div class="flex py-5 justify-center items-center">No Data</div>}
+              fallback={<div class="flex items-center justify-center py-5">No Data</div>}
             >
               {(todo) => (
                 <TodoItem

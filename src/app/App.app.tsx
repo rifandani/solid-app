@@ -27,7 +27,7 @@ const App: Component = () => (
                 element={
                   <Suspense
                     fallback={
-                      <div class="flex py-16 justify-center items-center">
+                      <div class="flex items-center justify-center py-16">
                         <LoadingSpinner />
                       </div>
                     }
@@ -43,7 +43,7 @@ const App: Component = () => (
               element={
                 <Suspense
                   fallback={
-                    <div class="flex py-16 justify-center items-center">
+                    <div class="flex items-center justify-center py-16">
                       <LoadingSpinner />
                     </div>
                   }
@@ -59,7 +59,7 @@ const App: Component = () => (
                 element={
                   <Suspense
                     fallback={
-                      <div class="flex py-16 justify-center items-center">
+                      <div class="flex items-center justify-center py-16">
                         <LoadingSpinner />
                       </div>
                     }
@@ -76,7 +76,7 @@ const App: Component = () => (
                 element={
                   <Suspense
                     fallback={
-                      <div class="flex py-16 justify-center items-center">
+                      <div class="flex items-center justify-center py-16">
                         <LoadingSpinner />
                       </div>
                     }
@@ -90,7 +90,7 @@ const App: Component = () => (
                 element={
                   <Suspense
                     fallback={
-                      <div class="flex py-16 justify-center items-center">
+                      <div class="flex items-center justify-center py-16">
                         <LoadingSpinner />
                       </div>
                     }
@@ -106,7 +106,7 @@ const App: Component = () => (
                 element={
                   <Suspense
                     fallback={
-                      <div class="flex py-16 justify-center items-center">
+                      <div class="flex items-center justify-center py-16">
                         <LoadingSpinner />
                       </div>
                     }
@@ -119,18 +119,19 @@ const App: Component = () => (
 
             <Route path="*" component={NotFoundPage} />
             {/* <Navigate
-              href={() => {
-                // navigate is the result of calling useNavigate();
-                // location is the result of calling useLocation();
-                // You can use those to dynamically determine a path to navigate to
+                  href={() => {
+                    // navigate is the result of calling useNavigate();
+                    // location is the result of calling useLocation();
+                    // You can use those to dynamically determine a path to navigate to
 
-                return '/';
-              }}
-            /> */}
+                    return '/';
+                  }}
+                /> */}
           </Routes>
         </Router>
       </QueryProvider>
     </AppProvider>
+    );
   </AppErrorBoundary>
 );
 

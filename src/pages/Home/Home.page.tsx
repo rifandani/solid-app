@@ -1,6 +1,4 @@
 import { Component, Show } from 'solid-js';
-import { Button } from '../../components/atoms';
-import { SolidLogo } from '../../components/atoms/Icon.atom';
 import { Availability } from '../../configs/locale/locale.type';
 import useHomePageVM from './Home.vm';
 
@@ -8,51 +6,54 @@ const HomePage: Component = () => {
   const vm = useHomePageVM();
 
   return (
-    <main class="text-gray-600 body-font container mx-auto flex px-5 py-24 md:flex-row flex-col items-center duration-300">
-      <div
-        ref={(elem) => vm.setParent(elem)}
-        class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center duration-300"
-      >
-        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-          Solid App
-          <br class="hidden lg:inline-block" />
-          using <code>@solidjs/router</code>
-        </h1>
-        <p class="mb-8 leading-relaxed">
-          With <code>typescript</code>, <code>vite</code>,{' '}
-          <code>vitest + @solidjs/testing-library</code>, <code>@solidjs/router</code>,{' '}
-          <code>msw</code>, <code>tailwindcss</code>.
-        </p>
+    <main
+      ref={(elem) => vm.setParent(elem)}
+      class="container mx-auto flex flex-col items-center py-24 text-primary-content duration-300"
+    >
+      <h1 class="mb-4 text-3xl font-medium text-primary-content sm:text-4xl">Solid App using:</h1>
 
-        <Show when={vm.clock.toggle()} keyed>
-          <p class="mb-8 leading-relaxed font-mono font-extrabold">
-            {vm.clock.hours()} : {vm.clock.minutes()} : {vm.clock.seconds()}{' '}
-          </p>
-        </Show>
-
-        <div class="flex justify-center space-x-3">
-          <Button.Text onClick={() => vm.clock.toggleClock()}>
-            {vm.translator.translate('Toggle Clock')}
-          </Button.Text>
-
-          <Button.Outlined
-            onClick={() =>
-              vm.translator.changeLanguage((lang) =>
-                lang === Availability.en ? Availability.id : Availability.en,
-              )
-            }
-          >
-            {vm.translator.translate('Change Language')}
-          </Button.Outlined>
-
-          <Button.Solid onClick={() => vm.navigate('/todos')}>
-            {vm.translator.translate('Get Started')}
-          </Button.Solid>
-        </div>
+      <div class="mockup-code">
+        <pre data-prefix="$">
+          <code>pnpm add @solidjs/router @tanstack/solid-query zod @formkit/auto-animate ...</code>
+        </pre>
+        <pre data-prefix="$">
+          <code>
+            pnpm add -D typescript vite vitest @solidjs/testing-library msw tailwindcss daisyui ...
+          </code>
+        </pre>
       </div>
 
-      <div class="lg:max-w-lg lg:w-full md:w-1/2 duration-300">
-        <SolidLogo width={200} height={200} />
+      <Show when={vm.clock.toggle()} keyed>
+        <div class="stats mt-8 shadow">
+          <div class="stat">
+            <div class="stat-title">Clock:</div>
+            <div class="stat-value">
+              {vm.clock.hours()} : {vm.clock.minutes()} : {vm.clock.seconds()}{' '}
+            </div>
+            <div class="stat-desc">Click toggle clock to restart the clock</div>
+          </div>
+        </div>
+      </Show>
+
+      <div class="mt-8 grid grid-cols-1 gap-2 duration-300 sm:grid-cols-2 md:grid-cols-3">
+        <button class="btn-outline btn" onClick={() => vm.clock.toggleClock()}>
+          {vm.translator.translate('Toggle Clock')}
+        </button>
+
+        <button
+          class="btn-secondary btn"
+          onClick={() =>
+            vm.translator.changeLanguage((lang) =>
+              lang === Availability.en ? Availability.id : Availability.en,
+            )
+          }
+        >
+          {vm.translator.translate('Change Language')}
+        </button>
+
+        <button class="btn-accent btn" onClick={() => vm.navigate('/todos')}>
+          {vm.translator.translate('Get Started')}
+        </button>
       </div>
     </main>
   );

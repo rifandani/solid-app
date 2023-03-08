@@ -4,9 +4,9 @@ import { Navbar } from '../organisms';
 
 const PageWrapper: Component = () => (
   <>
-    <Navbar />
-
-    <Outlet />
+    <Navbar>
+      <Outlet />
+    </Navbar>
   </>
 );
 

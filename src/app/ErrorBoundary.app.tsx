@@ -7,7 +7,7 @@ const Fallback: Component<{ err: unknown; reset: () => void }> = (props) => {
 
   return (
     // TODO: Update styling based on UI/UX design
-    <main class="min-h-screen flex flex-col justify-center items-center">
+    <main class="flex min-h-screen flex-col items-center justify-center">
       <h1 class="mb-3">Something went wrong.</h1>
 
       <button type="button" onClick={() => props.reset()}>

@@ -8,6 +8,7 @@
     "prepare": "husky install",
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "msw:init": "msw init public/ --save",
     "msw:delete": "rm -rf public/mockServiceWorker.js",
     "start": "vite --mode development",
@@ -26,6 +27,7 @@
     "@solidjs/testing-library": "^0.6.1",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.9",
     "@tanstack/eslint-plugin-query": "^4.24.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/testing-library__jest-dom": "^5.14.5",
@@ -33,6 +35,7 @@
     "@typescript-eslint/parser": "^5.53.0",
     "@vitest/coverage-c8": "^0.28.5",
     "autoprefixer": "^10.4.13",
+    "daisyui": "^2.51.3",
     "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -41,6 +44,7 @@
     "eslint-plugin-jest-dom": "^4.0.3",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-solid": "^0.10.0",
+    "eslint-plugin-tailwindcss": "^3.10.1",
     "eslint-plugin-testing-library": "^5.10.2",
     "husky": "^8.0.3",
     "jsdom": "^21.1.0",
@@ -65,10 +69,11 @@
     "clsx": "^1.2.1",
     "solid-js": "^1.6.11",
     "tailwind-merge": "^1.9.1",
+    "theme-change": "^2.5.0",
     "zod": "^3.20.6"
   },
   "msw": {
     "workerDirectory": "public"
   },
-  "packageManager": "pnpm@7.25.0"
+  "packageManager": "pnpm@7.28.0"
 }

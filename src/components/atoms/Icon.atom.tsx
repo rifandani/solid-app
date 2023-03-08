@@ -88,3 +88,45 @@ export const SolidLogo: Component<SVGProps> = (props) => {
     </svg>
   );
 };
+
+export const HamburgerMenu: Component<SVGProps> = (props) => {
+  const [, rest] = splitProps(props, ['class', 'width', 'height']);
+
+  return (
+    <svg
+      class={props.class}
+      width={props.width || 24}
+      height={props.height || 24}
+      viewBox={`0 0 ${props.width || 24} ${props.height || 24}`}
+      fill={props.fill || 'currentColor'}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M4 6h16M4 12h16M4 18h16"
+      />
+    </svg>
+  );
+};
+
+export const HamburgerMenu2: Component<SVGProps> = (props) => {
+  const [, rest] = splitProps(props, ['class', 'width', 'height']);
+
+  return (
+    <svg
+      class={props.class}
+      width={props.width || 16}
+      height={props.height || 16}
+      viewBox={`0 0 ${props.width || 16} ${props.height || 16}`}
+      fill={props.fill || 'currentColor'}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <title>Hamburger Menu</title>
+      <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+    </svg>
+  );
+};

@@ -14,7 +14,7 @@ const LoginPage: Component = () => {
           <section class="flex justify-center pt-12 md:-mb-24 md:justify-start md:pl-12">
             <Link href="/">
               <a class="relative h-16 w-16 cursor-pointer">
-                <Icon.Home class="hover:text-violet-800 rounded-full" />
+                <Icon.Home class="rounded-full hover:text-violet-800" />
               </a>
             </Link>
           </section>
@@ -62,7 +62,7 @@ const LoginPage: Component = () => {
 
               <Show when={vm.form.loginMutation.isError}>
                 <div class="block pt-4">
-                  <h2 class="font-semibold p-2 border rounded border-red-500 text-red-500 bg-red-50">
+                  <h2 class="rounded border border-red-500 bg-red-50 p-2 font-semibold text-red-500">
                     {String(vm.form.loginMutation.error)}
                   </h2>
                 </div>
@@ -74,7 +74,7 @@ const LoginPage: Component = () => {
             </form>
             {/* <!-- End FORM --> */}
 
-            <div class="pt-12 pb-12 text-center">
+            <div class="py-12 text-center">
               <p>
                 Don&apos;t have an account?{' '}
                 <Link href="/register">
@@ -87,7 +87,7 @@ const LoginPage: Component = () => {
 
         {/* <!-- Image Section --> */}
         <article class="w-1/2 shadow-2xl">
-          <span class="relative hidden h-screen w-full md:flex md:justify-center md:items-center">
+          <span class="relative hidden h-screen w-full md:flex md:items-center md:justify-center">
             <img src="src/assets/online-payment.png" alt="login page cover" />
           </span>
         </article>

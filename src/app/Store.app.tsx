@@ -18,6 +18,37 @@ export type AppAction = Readonly<{
   changeLanguage?: (_language: Availability) => void;
   translate?: (_key: string, unique?: string) => string;
 }>;
+
+export type Theme =
+  | 'light'
+  | 'dark'
+  | 'cupcake'
+  | 'bumblebee'
+  | 'emerald'
+  | 'corporate'
+  | 'synthwave'
+  | 'retro'
+  | 'cyberpunk'
+  | 'valentine'
+  | 'halloween'
+  | 'garden'
+  | 'forest'
+  | 'aqua'
+  | 'lofi'
+  | 'pastel'
+  | 'fantasy'
+  | 'wireframe'
+  | 'black'
+  | 'luxury'
+  | 'dracula'
+  | 'cmyk'
+  | 'autumn'
+  | 'business'
+  | 'acid'
+  | 'lemonade'
+  | 'night'
+  | 'coffee'
+  | 'winter';
 // #endregion
 
 const initialState = {

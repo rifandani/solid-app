@@ -15,6 +15,7 @@ module.exports = {
     'plugin:solid/typescript',
     'plugin:@tanstack/eslint-plugin-query/recommended',
     'plugin:jest-dom/recommended',
+    'plugin:tailwindcss/recommended',
   ],
   rules: {
     'import/no-cycle': 'off',
