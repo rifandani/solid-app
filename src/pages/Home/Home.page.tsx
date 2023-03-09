@@ -1,5 +1,5 @@
-import { Component, Show } from 'solid-js';
-import { Availability } from '../../configs/locale/locale.type';
+import { shuffle } from '@rifandani/nxact-yutiriti';
+import { Component, For, Show } from 'solid-js';
 import useHomePageVM from './Home.vm';
 
 const HomePage: Component = () => {
@@ -35,25 +35,22 @@ const HomePage: Component = () => {
         </div>
       </Show>
 
-      <div class="mt-8 grid grid-cols-1 gap-2 duration-300 sm:grid-cols-2 md:grid-cols-3">
-        <button class="btn-active btn" onClick={() => vm.clock.toggleClock()}>
-          {vm.translator.translate('Toggle Clock')} 🕰
-        </button>
-
-        <button
-          class="btn-secondary btn"
-          onClick={() =>
-            vm.translator.changeLanguage((lang) =>
-              lang === Availability.en ? Availability.id : Availability.en,
-            )
-          }
-        >
-          {vm.translator.translate('Change Language')} ♻
-        </button>
-
-        <button class="btn-accent btn" onClick={() => vm.navigate('/todos')}>
-          {vm.translator.translate('Get Started')} ✨
-        </button>
+      <div
+        ref={(elem) => vm.setParent(elem)}
+        class="mt-8 grid grid-cols-1 gap-2 duration-300 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <For each={vm.buttons()}>
+          {(value) => (
+            <button
+              class={value.class}
+              onClick={
+                value.id === 'sort' ? () => vm.setButtons((prev) => shuffle(prev)) : value.onClick
+              }
+            >
+              {value.text}
+            </button>
+          )}
+        </For>
       </div>
     </main>
   );

@@ -1,6 +1,7 @@
 import { createAutoAnimate } from '@formkit/auto-animate/solid';
 import { useNavigate } from '@solidjs/router';
 import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js';
+import { Availability } from '../../configs/locale/locale.type';
 import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
 
 const useClock = () => {
@@ -54,15 +55,44 @@ const useClock = () => {
 };
 
 const useHomePageVM = () => {
-  const translator = useTranslator();
   const navigate = useNavigate();
+  const translator = useTranslator();
+  const clock = useClock();
+
+  const [buttons, setButtons] = createSignal([
+    {
+      id: 'sort',
+      class: 'btn-ghost btn',
+      onClick: () => {},
+      text: `${translator.translate('Sort Buttons')} 💫`,
+    },
+    {
+      id: 'clock',
+      class: 'btn-active btn',
+      onClick: () => clock.toggleClock(),
+      text: `${translator.translate('Toggle Clock')} 🕰`,
+    },
+    {
+      id: 'language',
+      class: 'btn-accent btn',
+      onClick: () =>
+        translator.changeLanguage((lang) =>
+          lang === Availability.en ? Availability.id : Availability.en,
+        ),
+      text: `${translator.translate('Change Language')} ♻`,
+    },
+    {
+      id: 'start',
+      class: 'btn-secondary btn',
+      onClick: () => navigate('/todos'),
+      text: `${translator.translate('Get Started')} ✨`,
+    },
+  ]);
 
   // refer to this issues: https://github.com/formkit/auto-animate/issues/121
   const [setParent] = createAutoAnimate();
 
-  const clock = useClock();
-
-  return { translator, navigate, setParent, clock };
+  return { navigate, translator, setParent, clock, buttons, setButtons };
 };
 
 export default useHomePageVM;
