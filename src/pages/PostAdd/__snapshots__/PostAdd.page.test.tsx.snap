@@ -47,3 +47,61 @@ exports[`PostAddPage > should render correctly 1`] = `
   </form>
 </main>
 `;
+
+exports[`PostAddPage > should render correctly 2`] = `
+<main
+  class="flex flex-col items-center justify-center py-20 px-10 md:px-24 lg:px-40 xl:px-52"
+>
+  <h1
+    class="mb-5 text-2xl font-semibold tracking-wider text-primary-content"
+  >
+    Add Post ⚡
+  </h1>
+  <form
+    class="form-control flex w-full flex-col space-y-3"
+  >
+    <label
+      class="label"
+      for="title"
+    >
+      <span
+        class="label-text text-primary-content"
+      >
+        Title
+      </span>
+    </label>
+    <input
+      autofocus=""
+      class="input-bordered input-accent input text-accent-content"
+      name="title"
+      placeholder="Title..."
+      required=""
+      type="text"
+    />
+    <label
+      class="label"
+      for="body"
+    >
+      <span
+        class="label-text text-primary-content"
+      >
+        Body
+      </span>
+    </label>
+    <textarea
+      class="textarea-bordered textarea-accent textarea text-accent-content"
+      name="body"
+      placeholder="Body..."
+      required=""
+      rows="3"
+    />
+    
+    <button
+      class="btn-accent btn !mt-5 normal-case"
+      type="submit"
+    >
+      Submit 🎉
+    </button>
+  </form>
+</main>
+`;

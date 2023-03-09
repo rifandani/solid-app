@@ -12,7 +12,7 @@ describe('PostsPage', () => {
     // ASSERT
     await waitFor(() => {
       expect(mockedCreateResource).toHaveBeenCalled();
-      expect(screen.getByText(/Post List/)).toBeInTheDocument();
+      expect(screen.getByText(/Add Post/)).toBeInTheDocument();
       expect(container.firstChild).toMatchSnapshot();
     });
   });

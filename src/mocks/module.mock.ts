@@ -36,6 +36,7 @@ export const mockedCreateResource = vi.fn(() => [
   }),
   { refetch: () => {} },
 ]);
+export const mockedParams = vi.fn();
 
 vi.mock('@solidjs/router', async () => {
   const actual = await vi.importActual<typeof router>('@solidjs/router');
@@ -45,6 +46,7 @@ vi.mock('@solidjs/router', async () => {
     useNavigate: mockedNavigator,
     useLocation: mockedLocation,
     useRouteData: mockedRouteData,
+    useParams: mockedParams,
   };
 });
 

@@ -16,3 +16,28 @@ exports[`NotFoundPage > should render correctly 1`] = `
   </p>
 </section>
 `;
+
+exports[`NotFoundPage > should render correctly 2`] = `
+<section
+  class="flex h-screen flex-col items-center justify-center space-y-3 text-primary-content"
+>
+  <h1
+    class="text-3xl font-bold italic"
+  >
+    404: Not Found
+  </h1>
+  <p
+    class="!mb-5"
+  >
+    It's gone 😞
+  </p>
+  <a
+    aria-current="page"
+    class="link-secondary link active"
+    href="/"
+    link=""
+  >
+    Go back to home 🏡
+  </a>
+</section>
+`;

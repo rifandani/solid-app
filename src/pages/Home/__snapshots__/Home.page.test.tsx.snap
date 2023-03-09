@@ -203,3 +203,87 @@ exports[`HomePage > should render correctly 1`] = `
   </div>
 </main>
 `;
+
+exports[`HomePage > should render correctly 2`] = `
+<main
+  class="container mx-auto flex flex-col items-center py-24 text-primary-content duration-300"
+>
+  <h1
+    class="mb-4 text-3xl font-medium text-primary-content sm:text-4xl"
+  >
+    Solid App using:
+  </h1>
+  <div
+    class="mockup-code"
+  >
+    <pre
+      data-prefix="$"
+    >
+      <code>
+        pnpm add @solidjs/router @tanstack/solid-query zod @formkit/auto-animate ...
+      </code>
+    </pre>
+    <pre
+      data-prefix="$"
+    >
+      <code>
+        pnpm add -D typescript vite vitest @solidjs/testing-library msw tailwindcss daisyui ...
+      </code>
+    </pre>
+  </div>
+  <div
+    class="stats mt-8 shadow"
+  >
+    <div
+      class="stat"
+    >
+      <div
+        class="stat-title"
+      >
+        Clock:
+      </div>
+      <div
+        class="stat-value"
+      >
+        0
+         : 
+        0
+        <!---->
+         : 
+        0
+        <!---->
+         
+      </div>
+      <div
+        class="stat-desc"
+      >
+        Click toggle clock to restart the clock
+      </div>
+    </div>
+  </div>
+  <div
+    class="mt-8 grid grid-cols-1 gap-2 duration-300 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+  >
+    <button
+      class="btn-ghost btn"
+    >
+      Sort Buttons 💫
+    </button>
+    <button
+      class="btn-active btn"
+    >
+      Toggle Clock 🕰
+    </button>
+    <button
+      class="btn-accent btn"
+    >
+      Change Language ♻
+    </button>
+    <button
+      class="btn-secondary btn"
+    >
+      Get Started ✨
+    </button>
+  </div>
+</main>
+`;

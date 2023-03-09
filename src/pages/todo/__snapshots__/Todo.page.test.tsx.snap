@@ -40,3 +40,99 @@ exports[`TodoPage > should render correctly 1`] = `
   </section>
 </main>
 `;
+
+exports[`TodoPage > should render correctly 2`] = `
+<main
+  class="flex flex-col items-center justify-center py-20 px-10 duration-300 md:px-24 lg:px-40 xl:px-52"
+>
+  <h1
+    class="mb-10 text-2xl font-semibold tracking-wider text-primary-content"
+  >
+    Todo List
+  </h1>
+  <section
+    class="card w-full rounded-lg border bg-secondary p-5 text-secondary-content shadow-lg"
+  >
+    <form
+      class="form-control  mb-3 w-full duration-300 lg:flex-row"
+    >
+      <input
+        autofocus=""
+        class="input-bordered input-accent input w-full text-accent-content lg:w-10/12"
+        id="todoText"
+        name="todoText"
+        placeholder="What should you do next..."
+        required=""
+        type="text"
+      />
+      <button
+        class="btn-accent btn mt-2 ml-0 w-full normal-case lg:mt-0 lg:ml-2 lg:w-2/12"
+        type="submit"
+      >
+        Add ✔
+      </button>
+    </form>
+    
+    <form
+      class="mb-3 flex w-full flex-col duration-300 md:flex-row md:space-x-2"
+    >
+      <label
+        class="label"
+      >
+        <span
+          class="label-text"
+        >
+          Sort by
+        </span>
+      </label>
+      <select
+        class="select-bordered select select-md"
+      >
+        <option
+          value="newest"
+        >
+          Newest
+        </option>
+        <option
+          value="oldest"
+        >
+          Oldest
+        </option>
+      </select>
+      <label
+        class="label"
+      >
+        <span
+          class="label-text"
+        >
+          Filter by
+        </span>
+      </label>
+      <select
+        class="select-bordered select select-md"
+      >
+        <option
+          value="all"
+        >
+          All
+        </option>
+        <option
+          value="completed"
+        >
+          Completed
+        </option>
+        <option
+          value="incomplete"
+        >
+          Incomplete
+        </option>
+      </select>
+    </form>
+    <div
+      class="flex items-center justify-center py-5"
+    >
+      No Data
+    </div>
+  </section>
+</main>
+`;
