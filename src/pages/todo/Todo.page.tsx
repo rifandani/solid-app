@@ -15,7 +15,7 @@ const TodoPage: Component = () => {
 
       <section class="card w-full rounded-lg border bg-secondary p-5 text-secondary-content shadow-lg">
         <form
-          class="mb-3 flex w-full flex-col duration-300 lg:flex-row"
+          class="form-control  mb-3 w-full duration-300 lg:flex-row"
           onSubmit={(ev) => void vm.form.onSubmitTodo(ev)}
         >
           <input
@@ -64,6 +64,33 @@ const TodoPage: Component = () => {
           </Match>
 
           <Match when={!vm.todos.error && !vm.todos.loading}>
+            <form class="mb-3 flex w-full flex-col duration-300 md:flex-row md:space-x-2">
+              <label class="label">
+                <span class="label-text">Sort by</span>
+              </label>
+              <select
+                value={vm.formFilter.params.sort || 'newest'}
+                onChange={(e) => vm.formFilter.onChangeFilter('sort', e.currentTarget.value)}
+                class="select-bordered select select-md"
+              >
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+              </select>
+
+              <label class="label">
+                <span class="label-text">Filter by</span>
+              </label>
+              <select
+                value={vm.formFilter.params.filter || 'all'}
+                onChange={(e) => vm.formFilter.onChangeFilter('filter', e.currentTarget.value)}
+                class="select-bordered select select-md"
+              >
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="incomplete">Incomplete</option>
+              </select>
+            </form>
+
             <For
               each={(vm.todos() as GetTodosSuccessResponse).todos}
               fallback={<div class="flex items-center justify-center py-5">No Data</div>}

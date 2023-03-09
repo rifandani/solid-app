@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { rest } from 'msw';
-import { Todo } from '../../../models/Todo.model';
+import { Todo, todoFiltersSchema } from '../../../models/Todo.model';
 import { getBaseUrl } from '../../util.mock';
 import { mockTodo } from '../entities.http';
 
@@ -14,9 +14,35 @@ let todos = Array.from({ length: 10 }, (_, idx) =>
 );
 
 export const todoHandlers = [
-  rest.get(getBaseUrl('todos'), async (_req, res, ctx) =>
-    res(ctx.status(200), ctx.json({ ok: true, todos })),
-  ),
+  rest.get(getBaseUrl('todos'), async (req, res, ctx) => {
+    const searchParamsObject = Object.fromEntries(req.url.searchParams);
+    const hasSearchParams = !!Object.keys(searchParamsObject).length;
+
+    const parsedSearchParams = todoFiltersSchema.safeParse(searchParamsObject);
+
+    if (!hasSearchParams || !parsedSearchParams.success)
+      return res(ctx.status(200), ctx.json({ ok: true, todos }));
+
+    let todoList: Todo[] = todos;
+
+    if (parsedSearchParams.data.filter) {
+      todoList =
+        parsedSearchParams.data.filter === 'all'
+          ? todoList
+          : parsedSearchParams.data.filter === 'completed'
+          ? todoList.filter((val) => val.completed)
+          : todoList.filter((val) => !val.completed);
+    }
+
+    if (parsedSearchParams.data.sort) {
+      todoList =
+        parsedSearchParams.data.sort === 'newest'
+          ? [...todoList].sort((a, b) => b.updatedAt - a.updatedAt)
+          : [...todoList].sort((a, b) => a.updatedAt - b.updatedAt);
+    }
+
+    return res(ctx.status(200), ctx.json({ ok: true, todos: todoList }));
+  }),
   rest.get(getBaseUrl('todos/:id'), async (req, res, ctx) => {
     const { id } = req.params;
     const paramsTodoId = parseInt(id as string, 10);
@@ -55,6 +81,8 @@ export const todoHandlers = [
         title,
         id: todoId + 1,
         completed: false,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
       };
 
       todos = [...todos, newTodo];
@@ -84,7 +112,9 @@ export const todoHandlers = [
     const todo = todos.find((_todo) => _todo.id === paramsTodoId);
 
     if (todo) {
-      todos = todos.map((_todo) => (_todo.id === todo.id ? { ..._todo, completed } : _todo));
+      todos = todos.map((_todo) =>
+        _todo.id === todo.id ? { ..._todo, completed, updatedAt: Date.now() } : _todo,
+      );
 
       return res(
         ctx.status(201),

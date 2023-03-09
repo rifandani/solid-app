@@ -8,6 +8,7 @@ Solid template built with:
 - `vite` + `vitest` + `@solidjs/testing-library` -> unit test, integration test, coverage
 - `msw` -> browser and server mocking
 - `tailwindcss` + `clsx` + `tailwind-merge` -> css utility class for styling
+- `daisyui` -> tailwindcss plugin
 - `@formkit/auto-animate` -> automate transition animation when component mount/unmount
 - `axios` + `@tanstack/solid-query` + `@lukemorales/query-key-factory` -> data fetching
 - `zod` -> schema validation

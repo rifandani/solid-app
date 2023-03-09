@@ -44,6 +44,8 @@ export function mockTodo(initialValue?: Partial<Todo>): Todo {
     id: 1,
     title: 'suscipit repellat esse quibusdam voluptatem incidunt',
     completed: false,
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
     ...(initialValue && initialValue),
   };
 }
