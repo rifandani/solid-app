@@ -32,7 +32,7 @@ const TodoItem: Component<TodoItemProps> = (props) => (
       type="button"
       onClick={() => createEffect(() => props.onDeleteTodoItem(props.todo.id))}
     >
-      Remove
+      Remove 💥
     </button>
   </div>
 );

@@ -1,5 +1,4 @@
 import { Component, Show } from 'solid-js';
-import { Button } from '../../components/atoms';
 import usePostAddPageVM from './PostAdd.vm';
 
 const PostAddPage: Component = () => {
@@ -7,15 +6,17 @@ const PostAddPage: Component = () => {
 
   return (
     <main class="flex flex-col items-center justify-center py-20 px-10 md:px-24 lg:px-40 xl:px-52">
-      <h1 class="text-2xl font-semibold tracking-wider text-violet-500">Add Post</h1>
+      <h1 class="mb-5 text-2xl font-semibold tracking-wider text-primary-content">Add Post ⚡</h1>
 
       <form
-        class="flex w-full flex-col gap-3"
+        class="form-control flex w-full flex-col space-y-3"
         onSubmit={(ev) => void vm.postAddForm.onSubmitForm(ev)}
       >
-        <label for="title">Title</label>
+        <label class="label" for="title">
+          <span class="label-text text-primary-content">Title</span>
+        </label>
         <input
-          class="mt-1"
+          class="input-bordered input-accent input text-accent-content"
           placeholder="Title..."
           name="title"
           type="text"
@@ -25,9 +26,11 @@ const PostAddPage: Component = () => {
           value={vm.postAddForm.postForm().title}
         />
 
-        <label for="body">Body</label>
+        <label class="label" for="body">
+          <span class="label-text text-primary-content">Body</span>
+        </label>
         <textarea
-          class="mt-1"
+          class="textarea-bordered textarea-accent textarea text-accent-content"
           placeholder="Body..."
           name="body"
           rows={3}
@@ -37,20 +40,21 @@ const PostAddPage: Component = () => {
         />
 
         <Show when={vm.postAddForm.postAddMutation.isError}>
-          <div class="block pt-4">
-            <h2 class="rounded border border-red-500 bg-red-50 p-2 font-semibold text-red-500">
-              {String(vm.postAddForm.postAddMutation.error)}
-            </h2>
+          <div class="alert alert-error mt-2 shadow-lg">
+            <div class="flex items-center">
+              <span>❌ Add post error: </span>
+              <pre>{JSON.stringify(vm.postAddForm.postAddMutation.error, null, 2)}</pre>
+            </div>
           </div>
         </Show>
 
-        <Button.Solid
-          class="my-5"
+        <button
+          class="btn-accent btn !mt-5 normal-case"
           type="submit"
           disabled={vm.postAddForm.postAddMutation.isLoading}
         >
-          {vm.postAddForm.postAddMutation.isLoading ? 'Submitting...' : 'Submit'}
-        </Button.Solid>
+          {vm.postAddForm.postAddMutation.isLoading ? 'Submitting...' : 'Submit 🎉'}
+        </button>
       </form>
     </main>
   );

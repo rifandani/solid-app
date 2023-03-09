@@ -37,7 +37,7 @@ const HomePage: Component = () => {
 
       <div class="mt-8 grid grid-cols-1 gap-2 duration-300 sm:grid-cols-2 md:grid-cols-3">
         <button class="btn-outline btn" onClick={() => vm.clock.toggleClock()}>
-          {vm.translator.translate('Toggle Clock')}
+          {vm.translator.translate('Toggle Clock')} 🕰
         </button>
 
         <button
@@ -48,11 +48,11 @@ const HomePage: Component = () => {
             )
           }
         >
-          {vm.translator.translate('Change Language')}
+          {vm.translator.translate('Change Language')} ♻
         </button>
 
         <button class="btn-accent btn" onClick={() => vm.navigate('/todos')}>
-          {vm.translator.translate('Get Started')}
+          {vm.translator.translate('Get Started')} ✨
         </button>
       </div>
     </main>

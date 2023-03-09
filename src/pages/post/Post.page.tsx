@@ -1,6 +1,6 @@
 import { Link } from '@solidjs/router';
 import { Component, Show } from 'solid-js';
-import { Button, LoadingSpinner } from '../../components/atoms';
+import { LoadingSpinner } from '../../components/atoms';
 import { GetPostSuccessResponse } from '../../models/Post.model';
 import usePostPageVM from './Post.vm';
 
@@ -9,53 +9,54 @@ const PostPage: Component = () => {
 
   return (
     <main class="flex flex-col justify-center py-20 px-10 md:px-24 lg:px-40 xl:px-52">
-      <section class="flex w-full justify-between">
-        <Link
-          href="/posts"
-          class="w-32 rounded border p-3 hover:border-violet-500 hover:italic hover:text-violet-500"
-        >
+      <section class="mb-10 flex w-full items-center justify-between">
+        <Link href="/posts" class="btn-accent btn normal-case">
           ⬅ Go Back
         </Link>
 
-        <Button.Outlined
-          size="sm"
+        <h1 class="text-2xl font-semibold tracking-wider text-primary-content">Post Detail 🧻</h1>
+
+        <button
+          class="btn-accent btn normal-case"
+          type="button"
           onClick={(e) => vm.onDeletePost(e)}
           disabled={vm.postDeleteMutation.isLoading}
         >
-          {vm.postDeleteMutation.isLoading ? 'Deleting...' : 'Delete'}
-        </Button.Outlined>
+          {vm.postDeleteMutation.isLoading ? 'Deleting...' : 'Delete 💥'}
+        </button>
       </section>
 
       <Show when={vm.postDeleteMutation.isError}>
-        <div class="flex w-full items-center justify-center py-5">
-          <p>Delete error:</p>
-          <pre>{JSON.stringify(vm.postDeleteMutation.error, null, 2)}</pre>
+        <div class="alert alert-error mt-2 shadow-lg">
+          <div class="flex items-center">
+            <span>❌ Post mutation error: </span>
+            <pre>{JSON.stringify(vm.postDeleteMutation.error, null, 2)}</pre>
+          </div>
         </div>
       </Show>
 
       <Show when={vm.postQuery.isError}>
-        <div class="flex w-full flex-col items-center justify-center py-5">
-          <p>Query error:</p>
-          <pre>{JSON.stringify(vm.postQuery.error, null, 2)}</pre>
+        <div class="alert alert-error mt-2 shadow-lg">
+          <div class="flex items-center">
+            <span>❌ Post query error: </span>
+            <pre>{JSON.stringify(vm.postQuery.error, null, 2)}</pre>
+          </div>
         </div>
       </Show>
 
       <Show when={vm.postQuery.isLoading}>
         <div class="flex items-center justify-center py-5">
-          <LoadingSpinner />
+          <LoadingSpinner color="currentColor" />
         </div>
       </Show>
 
       <Show when={vm.postQuery.isSuccess}>
-        <h1 class="mb-10 text-center text-2xl font-semibold tracking-wider text-violet-500">
-          Post Detail
-        </h1>
-
-        <section class="w-full">
+        <section class="flex w-full flex-col space-y-3 text-primary-content">
           <h3 class="text-lg font-semibold">
             {(vm.postQuery.data as GetPostSuccessResponse).post.title}
           </h3>
-          <h6 class="text-slate-700">{(vm.postQuery.data as GetPostSuccessResponse).post.body}</h6>
+
+          <p class="text-sm">{(vm.postQuery.data as GetPostSuccessResponse).post.body}</p>
         </section>
       </Show>
     </main>

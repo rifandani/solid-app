@@ -34,7 +34,7 @@ const TodoPage: Component = () => {
             class="btn-accent btn mt-2 ml-0 w-full normal-case lg:mt-0 lg:ml-2 lg:w-2/12"
             type="submit"
           >
-            Add
+            Add ✔
           </button>
         </form>
 
@@ -57,7 +57,7 @@ const TodoPage: Component = () => {
           <Match when={!!vm.todos.error}>
             <div class="alert alert-error mt-2 shadow-lg">
               <div class="flex items-center">
-                <span>❌</span>
+                <span>❌ Todos error: </span>
                 <pre>{JSON.stringify(vm.todos.error, null, 2)}</pre>
               </div>
             </div>

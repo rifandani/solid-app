@@ -9,17 +9,18 @@ export interface PostItemProps {
 // #endregion
 
 const PostItem: Component<PostItemProps> = (props) => (
-  <div class="flex flex-col items-center justify-center gap-2 rounded border border-slate-300 p-5 shadow-md">
-    <h3 class="text-center text-lg font-semibold">{props.post.title}</h3>
+  <div class="card border bg-secondary text-secondary-content shadow-xl">
+    <div class="card-body">
+      <h3 class="card-title">{props.post.title}</h3>
 
-    <h6 class="mt-3 mb-2 text-center text-slate-700 line-clamp-3">{props.post.body}</h6>
+      <p class="line-clamp-3">{props.post.body}</p>
 
-    <Link
-      href={String(props.post.id)}
-      class="rounded border p-3 hover:border-violet-500 hover:italic hover:text-violet-500"
-    >
-      See More ➡
-    </Link>
+      <div class="card-actions mt-3">
+        <Link href={String(props.post.id)} class="btn-accent btn normal-case">
+          See More ➡
+        </Link>
+      </div>
+    </div>
   </div>
 );
 

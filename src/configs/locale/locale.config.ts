@@ -17,6 +17,10 @@ export const localeConfig: Lang[] = [
     en: 'Todo List',
     id: 'Daftar Todo',
   },
+  {
+    en: 'Post List',
+    id: 'Daftar Post',
+  },
 ];
 
 export default { localeConfig };
