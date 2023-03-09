@@ -36,7 +36,7 @@ const HomePage: Component = () => {
       </Show>
 
       <div class="mt-8 grid grid-cols-1 gap-2 duration-300 sm:grid-cols-2 md:grid-cols-3">
-        <button class="btn-outline btn" onClick={() => vm.clock.toggleClock()}>
+        <button class="btn-active btn" onClick={() => vm.clock.toggleClock()}>
           {vm.translator.translate('Toggle Clock')} 🕰
         </button>
 
