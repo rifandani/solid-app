@@ -1,6 +1,6 @@
 import { createContext, createSignal, useContext } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import { Interpolate, Translations } from '../../configs/locale/locale.type';
+import { Interpolate, LocaleDictLanguage, Translations } from '../../configs/locale/locale.type';
 import { deepReadObject, template } from '../../utils/helper/helper.util';
 
 /**
@@ -95,7 +95,7 @@ export const createI18nContext = (
      *
      * ```
      */
-    locale: (_lang?: string) => (_lang ? setLocale(_lang) : locale()),
+    locale: (_lang?: LocaleDictLanguage) => (_lang ? setLocale(_lang) : locale()),
     /**
      * Retrieve the dictionary of a language
      *
