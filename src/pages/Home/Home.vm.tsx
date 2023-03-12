@@ -1,8 +1,7 @@
 import { createAutoAnimate } from '@formkit/auto-animate/solid';
 import { useNavigate } from '@solidjs/router';
 import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js';
-import { Availability } from '../../configs/locale/locale.type';
-import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
+import { useI18n } from '../../hooks/usei18n/usei18n.hook';
 
 const useClock = () => {
   // Crucial to automatic dependency tracking, calling the getter within a tracking scope causes the calling function to depend on this Signal, so that function will rerun if the Signal gets updated.
@@ -43,7 +42,7 @@ const useClock = () => {
   const toggleClock = () => setToggle((prev) => !prev);
 
   // eslint-disable-next-line no-console
-  console.log('this should be displayed first, then the toggle() signal.');
+  console.log('this should be displayed first, then the `toggle` signal from `createEffect`.');
 
   return {
     seconds,
@@ -56,7 +55,7 @@ const useClock = () => {
 
 const useHomePageVM = () => {
   const navigate = useNavigate();
-  const translator = useTranslator();
+  const [t, { locale }] = useI18n();
   const clock = useClock();
 
   const [buttons, setButtons] = createSignal([
@@ -64,35 +63,32 @@ const useHomePageVM = () => {
       id: 'sort',
       class: 'btn-ghost btn',
       onClick: () => {},
-      text: `${translator.translate('Sort Buttons')} 💫`,
+      text: `${t('sortButtons')} 💫`,
     },
     {
       id: 'clock',
       class: 'btn-active btn',
       onClick: () => clock.toggleClock(),
-      text: `${translator.translate('Toggle Clock')} 🕰`,
+      text: `${t('toggleClock')} 🕰`,
     },
     {
       id: 'language',
       class: 'btn-accent btn',
-      onClick: () =>
-        translator.changeLanguage((lang) =>
-          lang === Availability.en ? Availability.id : Availability.en,
-        ),
-      text: `${translator.translate('Change Language')} ♻`,
+      onClick: () => locale(locale() === 'en-US' ? 'id' : 'en-US'),
+      text: `${t('changeLanguage')} ♻`,
     },
     {
       id: 'start',
       class: 'btn-secondary btn',
       onClick: () => navigate('/todos'),
-      text: `${translator.translate('Get Started')} ✨`,
+      text: `${t('getStarted')} ✨`,
     },
   ]);
 
   // refer to this issues: https://github.com/formkit/auto-animate/issues/121
   const [setParent] = createAutoAnimate();
 
-  return { navigate, translator, setParent, clock, buttons, setButtons };
+  return { navigate, t, setParent, clock, buttons, setButtons };
 };
 
 export default useHomePageVM;

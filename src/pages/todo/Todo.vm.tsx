@@ -1,6 +1,6 @@
 import { useSearchParams } from '@solidjs/router';
 import { batch, createMemo, createResource, createSignal } from 'solid-js';
-import { useAppContext } from '../../app/Store.app';
+import { useI18n } from '../../hooks/usei18n/usei18n.hook';
 import { GetTodosResponse, Todo, TodoFiltersSchema } from '../../models/Todo.model';
 import { http } from '../../services/api/http';
 import { FormOnSubmitEvent, InputOnKeyUp } from '../../types';
@@ -110,12 +110,13 @@ const useFormFilter = () => {
 };
 
 const useTodoPageVM = () => {
-  const [, storeAction] = useAppContext();
+  const [t] = useI18n();
+
   const [todos, { refetch: refetchTodos }] = useTodosResource();
   const form = useForm({ refetchTodos });
   const formFilter = useFormFilter();
 
-  return { storeAction, todos, form, formFilter };
+  return { t, todos, form, formFilter };
 };
 
 export default useTodoPageVM;

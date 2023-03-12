@@ -10,7 +10,7 @@ const TodoPage: Component = () => {
   return (
     <main class="flex flex-col items-center justify-center py-20 px-10 duration-300 md:px-24 lg:px-40 xl:px-52">
       <h1 class="mb-10 text-2xl font-semibold tracking-wider text-primary-content">
-        {vm.storeAction.translate?.('Todo List')}
+        {vm.t('xList', { feature: 'Todo' })}
       </h1>
 
       <section class="card w-full rounded-lg border bg-secondary p-5 text-secondary-content shadow-lg">

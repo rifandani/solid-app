@@ -1,63 +1,30 @@
-import { vi } from 'vitest';
-import { generateRandomNumber, getDefaultLang, sleep } from './helper.util';
+import { deepReadObject, template } from './helper.util';
 
-describe('sleep', () => {
-  it('should suspends a thread for a specified number of milliseconds', async () => {
-    // ARRANGE
-    const ONE_SECOND = 1000;
-    const before = Date.now();
-    await sleep(ONE_SECOND);
-    const after = Date.now();
+describe('deepReadObject', () => {
+  it('should work correctly', () => {
+    const obj = { a: { b: { c: 'hello' } } };
 
-    // ASSERT
-    expect(after).toBeGreaterThanOrEqual(before + ONE_SECOND);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const hello = deepReadObject(obj, 'a.b.c');
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const undefinedVal = deepReadObject(obj, 'a.b.d');
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const notFound = deepReadObject(obj, 'a.b.d', 'not found');
+
+    expect(hello).toBe('hello');
+    expect(undefinedVal).toBeUndefined();
+    expect(notFound).toBe('not found');
   });
 });
 
-describe('generateRandomNumber', () => {
-  it('should generate number between 1-10', () => {
-    // ARRANGE
-    const randNumber = generateRandomNumber(1, 10);
+describe('template', () => {
+  it('should work correctly', () => {
+    const helloTom = template('Hello {{ name }}', { name: 'Tom' });
+    const itIsBlue = template('It is {{color}}', { color: 'blue' });
+    const itIsBlueRegex = template('It is <color>', { color: 'blue' }, /<(.+?)>/g);
 
-    // ASSERT
-    expect(randNumber).toBeGreaterThanOrEqual(1);
-    expect(randNumber).toBeLessThanOrEqual(10);
-  });
-});
-
-describe('getDefaultLang', () => {
-  const spy = vi.spyOn(navigator, 'language', 'get');
-
-  it('should return en', () => {
-    spy.mockReturnValue('en-US');
-
-    const lang = getDefaultLang();
-
-    expect(lang).toEqual('en');
-  });
-
-  it('should return id', () => {
-    spy.mockReturnValue('id-ID');
-
-    const lang = getDefaultLang();
-
-    expect(lang).toEqual('id');
-  });
-
-  it('should return en when the language is not supported', () => {
-    // TODO: Change this if we support French
-    spy.mockReturnValue('fr-FR');
-
-    const lang = getDefaultLang();
-
-    expect(lang).toEqual('en');
-  });
-
-  it('should return en when navigator.language returns empty string', () => {
-    spy.mockReturnValue('');
-
-    const lang = getDefaultLang();
-
-    expect(lang).toEqual('en');
+    expect(helloTom).toBe('Hello Tom');
+    expect(itIsBlue).toBe('It is blue');
+    expect(itIsBlueRegex).toBe('It is blue');
   });
 });

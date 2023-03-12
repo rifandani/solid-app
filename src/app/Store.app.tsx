@@ -1,10 +1,10 @@
 import { createContext, createEffect, ParentComponent, useContext } from 'solid-js';
 import { createStore, SetStoreFunction, Store } from 'solid-js/store';
-import { localeConfig } from '../configs/locale/locale.config';
-import { Availability } from '../configs/locale/locale.type';
+import { localeDict } from '../configs/locale/locale.config';
+import { LocaleDictLanguage } from '../configs/locale/locale.type';
+import { createI18nContext, I18nContext } from '../hooks/usei18n/usei18n.hook';
 import { Setting } from '../models/Setting.model';
 import { UserStore } from '../models/User.model';
-import { getDefaultLang } from '../utils/helper/helper.util';
 
 // #region INTERFACES
 export type AppStore = {
@@ -15,8 +15,6 @@ export type AppStore = {
 export type AppAction = Readonly<{
   resetUser?: () => void;
   updateUser?: (_user: UserStore) => void;
-  changeLanguage?: (_language: Availability) => void;
-  translate?: (_key: string, unique?: string) => string;
 }>;
 
 export type Theme =
@@ -54,13 +52,23 @@ export type Theme =
 const initialState = {
   user: null,
   setting: {
-    currentLanguage: getDefaultLang(),
+    showNotification: true,
   },
 } satisfies AppStore;
 
 export const [appStore, setAppStore] = createStore<AppStore>(initialState);
 
-// #region CONTEXT
+// #region PROVIDERS
+const I18nProvider: ParentComponent<{
+  dict?: Record<string, Record<string, unknown>>;
+  locale?: LocaleDictLanguage;
+}> = (props) => {
+  // eslint-disable-next-line solid/reactivity
+  const value = createI18nContext(props.dict, props.locale);
+
+  return <I18nContext.Provider value={value}>{props.children}</I18nContext.Provider>;
+};
+
 export const AppContext = createContext<[AppStore, AppAction]>([initialState, {}]);
 export const useAppContext = () => useContext(AppContext);
 
@@ -70,23 +78,13 @@ export const AppProvider: ParentComponent = (props) => {
   const action = {
     resetUser: () => setStore('user', null),
     updateUser: (_user) => setStore('user', _user),
-    changeLanguage: (_language) => setStore('setting', 'currentLanguage', _language),
-    translate: (key: string, unique?: string) => {
-      const langMap =
-        localeConfig.find((locale) => (unique ? locale.unique === unique : locale.en === key)) ??
-        localeConfig.find((locale) => locale.en === key);
-
-      if (langMap && langMap[store.setting.currentLanguage] !== null) {
-        // return what's found in the `localeConfig`
-        return langMap[store.setting.currentLanguage];
-      }
-
-      // return back passed `key`
-      return key;
-    },
   } satisfies AppAction;
 
-  return <AppContext.Provider value={[store, action]}>{props.children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={[store, action]}>
+      <I18nProvider dict={localeDict}>{props.children}</I18nProvider>
+    </AppContext.Provider>
+  );
 };
 // #endregion
 

@@ -1,6 +1,6 @@
 import { useNavigate } from '@solidjs/router';
 import { createQuery } from '@tanstack/solid-query';
-import { useAppContext } from '../../app/Store.app';
+import { useI18n } from '../../hooks/usei18n/usei18n.hook';
 import { queryKeys } from '../../services/api';
 import { fetchPostsList } from '../../services/api/posts';
 
@@ -14,7 +14,7 @@ const usePostsResource = () => {
 };
 
 const usePostsPageVM = () => {
-  const [, storeAction] = useAppContext();
+  const [t] = useI18n();
   const navigate = useNavigate();
 
   const postsQuery = usePostsResource();
@@ -23,7 +23,7 @@ const usePostsPageVM = () => {
     navigate('add');
   };
 
-  return { storeAction, postsQuery, onNavigateToPostAdd };
+  return { t, postsQuery, onNavigateToPostAdd };
 };
 
 export default usePostsPageVM;

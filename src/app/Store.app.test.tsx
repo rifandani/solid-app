@@ -1,7 +1,7 @@
 import { createEffect, createRoot } from 'solid-js';
 import { createLocalStore } from './Store.app';
 
-describe('Store.app createLocalStore', () => {
+describe('createLocalStore', () => {
   beforeEach(() => {
     localStorage.removeItem('todos');
   });

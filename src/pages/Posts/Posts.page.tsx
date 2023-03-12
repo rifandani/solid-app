@@ -10,7 +10,7 @@ const PostsPage: Component = () => {
   return (
     <main class="flex flex-col items-center justify-center py-20 px-10 md:px-24 lg:px-40 xl:px-52">
       <h1 class="text-2xl font-semibold tracking-wider text-primary-content">
-        {vm.storeAction.translate?.('Post List')}
+        {vm.t('xList', { feature: 'Post' })}
       </h1>
 
       <button
