@@ -1,3 +1,4 @@
+import { random } from '@rifandani/nxact-yutiriti';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { rest } from 'msw';
 import { Todo, todoFiltersSchema } from '../../../models/Todo.model';
@@ -10,6 +11,7 @@ let todos = Array.from({ length: 10 }, (_, idx) =>
     id: idx + 1,
     title: `Todo title ${idx + 1}`,
     completed: idx % 2 === 0,
+    createdAt: Date.now() + random(1, 1_000),
   }),
 );
 

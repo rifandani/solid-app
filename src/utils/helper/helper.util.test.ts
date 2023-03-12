@@ -19,7 +19,7 @@ describe('deepReadObject', () => {
 
 describe('template', () => {
   it('should work correctly', () => {
-    const helloTom = template('Hello {{ name }}', { name: 'Tom' });
+    const helloTom = template('Hello {{name}}', { name: 'Tom' });
     const itIsBlue = template('It is {{color}}', { color: 'blue' });
     const itIsBlueRegex = template('It is <color>', { color: 'blue' }, /<(.+?)>/g);
 

@@ -1,5 +1,6 @@
 import { createContext, createSignal, useContext } from 'solid-js';
 import { createStore } from 'solid-js/store';
+import { Interpolate, Translations } from '../../configs/locale/locale.type';
 import { deepReadObject, template } from '../../utils/helper/helper.util';
 
 /**
@@ -34,22 +35,24 @@ export const createI18nContext = (
    * ```tsx
    * const [t] = useI18n();
    *
-   * const dict = { fr: 'Bonjour {{ name }} !' }
+   * const dict = { fr: 'Bonjour {{name}} !' }
    *
-   * t('hello', { name: 'John' }, 'Hello, {{ name }}!');
+   * t('hello', { name: 'John' }, 'Hello, {{name}}!');
    * locale('fr')
    * // => 'Bonjour John !'
    * locale('unknown')
    * // => 'Hello, John!'
    * ```
    */
-  const translate = (
-    key: string,
-    params?: Record<string, string>,
-    defaultValue?: string,
+  const translate = <T extends keyof Translations, Payload = Interpolate<T>>(
+    ...args: keyof Payload extends never
+      ? [translation: T]
+      : [translation: T, payload: Interpolate<T>]
   ): string => {
+    const [key, params] = args;
+
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const val = deepReadObject(dict[locale()], key, defaultValue || '');
+    const val = deepReadObject(dict[locale()], key); // we can pass `defaultValue` as third parameter
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
     if (typeof val === 'function') return val(params);
@@ -70,7 +73,7 @@ export const createI18nContext = (
      * ```js
      * const [_, { add }] = useI18n();
      *
-     * const addSwedish = () => add('sw', { hello: 'Hej {{ name }}' })
+     * const addSwedish = () => add('sw', { hello: 'Hej {{name}}' })
      * ```
      */
     add(_lang: string, table: Record<string, unknown>) {

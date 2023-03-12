@@ -7,8 +7,8 @@ export const enUSLocale = {
   changeLanguage: 'Change Language',
   toggleClock: 'Toggle Clock',
   getStarted: 'Get Started',
-  xList: '{{ feature }} List',
-};
+  xList: '{{feature}} List',
+} as const;
 
 export const idLocale = {
   theme: 'Tema',
@@ -17,10 +17,10 @@ export const idLocale = {
   changeLanguage: 'Ganti Bahasa',
   toggleClock: 'Toggle Jam',
   getStarted: 'Mulai Sekarang',
-  xList: 'Daftar {{ feature }}',
-};
+  xList: 'Daftar {{feature}}',
+} as const;
 
 export const localeDict: LocaleDict = {
   'en-US': enUSLocale,
   id: idLocale,
-};
+} as const;
