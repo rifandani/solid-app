@@ -1,8 +1,9 @@
 import { useNavigate } from '@solidjs/router';
 import { createMutation } from '@tanstack/solid-query';
-import { createSignal, onMount } from 'solid-js';
+import { createSignal } from 'solid-js';
 import { ApiSuccessResponse } from '../../constants/types.constant';
 import { useAppStorage } from '../../hooks/useAppStorage/useAppStorage.hook';
+import useAuth from '../../hooks/useAuth/useAuth.hook';
 import { ApiErrorResponse } from '../../models/Api.model';
 import { Login, Token } from '../../models/Auth.model';
 import { UserStorageSchema } from '../../models/User.model';
@@ -63,14 +64,9 @@ const useForm = () => {
 };
 
 const useLoginPageVM = () => {
-  const navigate = useNavigate();
-  const form = useForm();
+  useAuth();
 
-  onMount(() => {
-    // redirect already logged in user to home
-    const user = localStorage.getItem('user');
-    if (user) navigate('/');
-  });
+  const form = useForm();
 
   return { form };
 };
