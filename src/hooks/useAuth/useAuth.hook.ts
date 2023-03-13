@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from '@solidjs/router';
 import { onMount } from 'solid-js';
-import { appStore, setAppStore } from '../../app/Store.app';
-import { UserStore } from '../../models/User.model';
+import { useAppStorage } from '../useAppStorage/useAppStorage.hook';
 
 /**
  * Hooks to authenticate your user, wheter they're logged in or not
@@ -9,19 +8,14 @@ import { UserStore } from '../../models/User.model';
 function useAuth() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [appStorage] = useAppStorage();
 
   onMount(() => {
-    const user = localStorage.getItem('user');
-
-    if (!user) {
+    if (!appStorage.user) {
       navigate('/login', { replace: true });
     }
 
-    if (user && !appStore.user) {
-      setAppStore('user', JSON.parse(user) as UserStore);
-    }
-
-    if (user && appStore.user && location.pathname.includes('login')) {
+    if (appStorage.user && location.pathname.includes('login')) {
       navigate('/');
     }
   });

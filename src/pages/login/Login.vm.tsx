@@ -1,11 +1,11 @@
 import { useNavigate } from '@solidjs/router';
 import { createMutation } from '@tanstack/solid-query';
 import { createSignal, onMount } from 'solid-js';
-import { setAppStore } from '../../app/Store.app';
 import { ApiSuccessResponse } from '../../constants/types.constant';
+import { useAppStorage } from '../../hooks/useAppStorage/useAppStorage.hook';
 import { ApiErrorResponse } from '../../models/Api.model';
 import { Login, Token } from '../../models/Auth.model';
-import { UserStore } from '../../models/User.model';
+import { UserStorageSchema } from '../../models/User.model';
 import { login } from '../../services/api/auth';
 import { FormOnSubmit, InputOnKeyUp } from '../../types';
 
@@ -16,6 +16,7 @@ const formInitialValue: Login = {
 
 const useForm = () => {
   const navigate = useNavigate();
+  const [, setApp] = useAppStorage();
   const [form, setForm] = createSignal(formInitialValue);
 
   const loginMutation = createMutation({
@@ -25,13 +26,12 @@ const useForm = () => {
         throw new Error((resp as ApiErrorResponse).error.code);
       } else {
         // set user data to local storage and global store
-        const user: UserStore = {
+        const user: UserStorageSchema = {
           email: form().email,
           token: (resp as ApiSuccessResponse<Token>).login.token,
         };
 
-        localStorage.setItem('user', JSON.stringify(user));
-        setAppStore('user', user);
+        setApp('user', user);
         navigate('/');
       }
     },

@@ -1,5 +1,5 @@
 import { createEffect, createRoot } from 'solid-js';
-import { createLocalStore } from './Store.app';
+import { createLocalStore } from './createLocalStore.hook';
 
 describe('createLocalStore', () => {
   beforeEach(() => {

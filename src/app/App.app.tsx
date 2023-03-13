@@ -5,7 +5,7 @@ import { PageWrapper } from '../components/templates';
 import routeDataPost from '../pages/Post/Post.data';
 import AppErrorBoundary from './ErrorBoundary.app';
 import QueryProvider, { queryClient } from './QueryClient.app';
-import { AppProvider } from './Store.app';
+import { RootProvider } from './Store.app';
 
 const HomePage = lazy(() => import('../pages/Home/Home.page'));
 const PostPage = lazy(() => import('../pages/Post/Post.page'));
@@ -17,7 +17,7 @@ const NotFoundPage = lazy(() => import('../pages/NotFound/NotFound.page'));
 
 const App: Component = () => (
   <AppErrorBoundary>
-    <AppProvider>
+    <RootProvider>
       <QueryProvider>
         <Router>
           <Routes>
@@ -130,7 +130,7 @@ const App: Component = () => (
           </Routes>
         </Router>
       </QueryProvider>
-    </AppProvider>
+    </RootProvider>
   </AppErrorBoundary>
 );
 

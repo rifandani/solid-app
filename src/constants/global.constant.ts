@@ -1,4 +1,4 @@
-import { Theme } from '../app/Store.app';
+import { Theme } from '../types/store.type';
 
 export const themes: Theme[] = [
   'light',

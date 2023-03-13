@@ -3,7 +3,7 @@ import { Router, Routes } from '@solidjs/router';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '@solidjs/testing-library';
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
-import { AppProvider } from '../app/Store.app';
+import { RootProvider } from '../app/Store.app';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,13 +24,13 @@ export const renderProviders = (
 ) =>
   render(ui, {
     wrapper: (props) => (
-      <AppProvider>
+      <RootProvider>
         <QueryClientProvider client={queryClient}>
           <Router>
             <Routes>{props.children}</Routes>
           </Router>
         </QueryClientProvider>
-      </AppProvider>
+      </RootProvider>
     ),
     ...options,
   });

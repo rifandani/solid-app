@@ -1,6 +1,5 @@
 import { Route } from '@solidjs/router';
 import { vi } from 'vitest';
-import { appStore, setAppStore } from '../../app/Store.app';
 import { mockedLocation, mockedNavigator } from '../../mocks/module.mock';
 import { renderProviders } from '../../utils/test.util';
 import useAuth from './useAuth.hook';

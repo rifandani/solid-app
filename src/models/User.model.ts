@@ -1,7 +1,6 @@
-export interface UserStore {
-  email: string;
-  token: string;
-}
+import { z } from 'zod';
+
+export type UserStorageSchema = z.infer<typeof userStorageSchema>;
 
 export interface User {
   id: number;
@@ -32,3 +31,8 @@ export interface Company {
   catchPhrase: string;
   bs: string;
 }
+
+export const userStorageSchema = z.object({
+  email: z.string(),
+  token: z.string(),
+});

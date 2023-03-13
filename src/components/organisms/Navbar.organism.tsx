@@ -1,9 +1,9 @@
 import { Link, NavLink, useNavigate } from '@solidjs/router';
 import { Component, For, onMount, ParentComponent, Show } from 'solid-js';
 import { themeChange } from 'theme-change';
-import { appStore, setAppStore } from '../../app/Store.app';
 import solidLogo from '../../assets/solid.svg';
 import { themes } from '../../constants/global.constant';
+import { useAppStorage } from '../../hooks/useAppStorage/useAppStorage.hook';
 import useAuth from '../../hooks/useAuth/useAuth.hook';
 import { useI18n } from '../../hooks/usei18n/usei18n.hook';
 import { Icon } from '../atoms';
@@ -16,10 +16,13 @@ const useNavbarVM = () => {
   useAuth();
 
   const navigate = useNavigate();
+  const [, , { remove }] = useAppStorage();
 
   const onClickLogout = () => {
-    localStorage.removeItem('user');
-    setAppStore('user', null);
+    // remove `user` key in local storage
+    remove('user');
+
+    // back to login
     navigate('/login');
   };
 
@@ -32,6 +35,7 @@ const useNavbarVM = () => {
 
 const NavbarMenuContent: Component<NavbarMenuContentProps> = (props) => {
   const [t] = useI18n();
+  const [appStorage] = useAppStorage();
 
   return (
     <>
@@ -79,10 +83,10 @@ const NavbarMenuContent: Component<NavbarMenuContentProps> = (props) => {
         </ul>
       </li>
 
-      <Show when={!!appStore.user}>
+      <Show when={!!appStorage.user}>
         <li class="ml-0 mt-auto lg:ml-3 lg:mt-0">
           <button class="btn-primary btn h-full normal-case" onClick={() => props.onClickLogout()}>
-            {t('logout')} ({appStore.user?.email})
+            {t('logout')} ({appStorage.user?.email})
           </button>
         </li>
       </Show>
