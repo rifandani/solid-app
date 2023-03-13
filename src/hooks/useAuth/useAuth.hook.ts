@@ -4,6 +4,12 @@ import { useAppStorage } from '../useAppStorage/useAppStorage.hook';
 
 /**
  * Hooks to authenticate your user, wheter they're logged in or not
+ *
+ * @example
+ *
+ * ```tsx
+ * useAuth()
+ * ```
  */
 function useAuth() {
   const navigate = useNavigate();

@@ -35,25 +35,13 @@ describe('useAuth hook', () => {
     expect(mockedNavigator).toHaveBeenCalled();
   });
 
-  it('should populate appStore, when "user" key exists in localStorage && "user" key equals to null in appStore', () => {
+  it('should navigate to /, when "user" key exists in localStorage && current location pathname includes "/login"', () => {
     // ARRANGE
     getItemSpy.mockImplementationOnce(() => '{"email":"my email"}');
     renderProviders(() => <Route path="/" component={TestComponent} />);
 
     // ASSERT
     expect(getItemSpy).toHaveBeenCalled();
-    expect(appStore.user).not.toBeNull();
-  });
-
-  it('should navigate to /, when "user" key exists in localStorage && "user" key and value exists in appStore && current location pathname includes "/login"', () => {
-    // ARRANGE
-    getItemSpy.mockImplementationOnce(() => '{"email":"my email"}');
-    setAppStore('user', { email: 'my email' });
-    renderProviders(() => <Route path="/" component={TestComponent} />);
-
-    // ASSERT
-    expect(getItemSpy).toHaveBeenCalled();
-    expect(appStore.user).not.toBeNull();
     expect(mockedLocation).toHaveBeenCalled();
     expect(mockedNavigator).toHaveBeenCalled();
   });
