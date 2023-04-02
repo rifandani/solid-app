@@ -8,18 +8,18 @@ const TodoPage: Component = () => {
   const vm = useTodoPageVM();
 
   return (
-    <main class="flex flex-col items-center justify-center py-20 px-10 duration-300 md:px-24 lg:px-40 xl:px-52">
-      <h1 class="mb-10 text-2xl font-semibold tracking-wider text-primary-content">
+    <main class="flex flex-col items-center justify-center px-10 py-20 duration-300 md:px-24 lg:px-40 xl:px-52">
+      <h1 class="text-primary-content mb-10 text-2xl font-semibold tracking-wider">
         {vm.t('xList', { feature: 'Todo' })}
       </h1>
 
-      <section class="card w-full rounded-lg border bg-secondary p-5 text-secondary-content shadow-lg">
+      <section class="card bg-secondary text-secondary-content w-full rounded-lg border p-5 shadow-lg">
         <form
           class="form-control  mb-3 w-full duration-300 lg:flex-row"
           onSubmit={(ev) => void vm.form.onSubmitTodo(ev)}
         >
           <input
-            class="input-bordered input-accent input w-full text-accent-content lg:w-10/12"
+            class="input-bordered input-accent input text-accent-content w-full lg:w-10/12"
             placeholder="What should you do next..."
             name="todoText"
             id="todoText"
@@ -31,7 +31,7 @@ const TodoPage: Component = () => {
           />
 
           <button
-            class="btn-accent btn mt-2 ml-0 w-full normal-case lg:mt-0 lg:ml-2 lg:w-2/12"
+            class="btn-accent btn ml-0 mt-2 w-full normal-case lg:ml-2 lg:mt-0 lg:w-2/12"
             type="submit"
           >
             Add ✔

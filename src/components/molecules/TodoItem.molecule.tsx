@@ -21,7 +21,7 @@ const TodoItem: Component<TodoItemProps> = (props) => (
     />
 
     <p
-      class="ml-5 w-full text-left text-lg text-secondary-content"
+      class="text-secondary-content ml-5 w-full text-left text-lg"
       classList={{ 'line-through': props.todo.completed }}
     >
       {props.todo.title}

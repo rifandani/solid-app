@@ -23,5 +23,6 @@ module.exports = {
     'no-nested-ternary': 'off',
     'testing-library/no-node-access': ['error', { allowContainerFirstChild: true }],
     '@tanstack/query/exhaustive-deps': 'off',
+    'tailwindcss/no-custom-classname': 'off',
   },
 };

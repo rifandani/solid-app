@@ -1,21 +1,4 @@
-import { deepReadObject, template } from './helper.util';
-
-describe('deepReadObject', () => {
-  it('should work correctly', () => {
-    const obj = { a: { b: { c: 'hello' } } };
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const hello = deepReadObject(obj, 'a.b.c');
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const undefinedVal = deepReadObject(obj, 'a.b.d');
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const notFound = deepReadObject(obj, 'a.b.d', 'not found');
-
-    expect(hello).toBe('hello');
-    expect(undefinedVal).toBeUndefined();
-    expect(notFound).toBe('not found');
-  });
-});
+import { template } from './helper.util';
 
 describe('template', () => {
   it('should work correctly', () => {

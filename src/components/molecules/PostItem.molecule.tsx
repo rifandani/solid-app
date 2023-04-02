@@ -9,7 +9,7 @@ export interface PostItemProps {
 // #endregion
 
 const PostItem: Component<PostItemProps> = (props) => (
-  <div class="card border bg-secondary text-secondary-content shadow-xl">
+  <div class="card bg-secondary text-secondary-content border shadow-xl">
     <div class="card-body">
       <h3 class="card-title">{props.post.title}</h3>
 

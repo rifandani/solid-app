@@ -8,13 +8,13 @@ const PostsPage: Component = () => {
   const vm = usePostsPageVM();
 
   return (
-    <main class="flex flex-col items-center justify-center py-20 px-10 md:px-24 lg:px-40 xl:px-52">
-      <h1 class="text-2xl font-semibold tracking-wider text-primary-content">
+    <main class="flex flex-col items-center justify-center px-10 py-20 md:px-24 lg:px-40 xl:px-52">
+      <h1 class="text-primary-content text-2xl font-semibold tracking-wider">
         {vm.t('xList', { feature: 'Post' })}
       </h1>
 
       <button
-        class="btn-accent btn mt-5 mb-10 normal-case"
+        class="btn-accent btn mb-10 mt-5 normal-case"
         onClick={() => vm.onNavigateToPostAdd()}
       >
         Add Post ⚡

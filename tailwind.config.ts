@@ -1,7 +1,11 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+/* eslint-disable import/no-extraneous-dependencies */
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
+import daisyui from 'daisyui';
+import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class', // default 'media'
   theme: {
@@ -10,8 +14,6 @@ module.exports = {
         sans: ['Josefin Sans', ...defaultTheme.fontFamily.sans],
       },
       lineClamp: {
-        5: '5',
-        6: '6',
         7: '7',
         8: '8',
         9: '9',
@@ -19,13 +21,8 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/line-clamp'),
-    require('daisyui'),
-  ],
+  plugins: [typography, forms, daisyui],
   daisyui: {
     logs: false,
   },
-};
+} satisfies Config;

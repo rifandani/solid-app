@@ -12,6 +12,6 @@
     "noEmit": true,
     "isolatedModules": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "index.d.ts"],
-  "exclude": ["node_modules", "postcss.config.js", "tailwind.config.js"]
+  "include": ["**/*.ts", "**/*.tsx", "index.d.ts", "tailwind.config.ts"],
+  "exclude": ["node_modules", "postcss.config.js"]
 }

@@ -5,8 +5,8 @@ const PostAddPage: Component = () => {
   const vm = usePostAddPageVM();
 
   return (
-    <main class="flex flex-col items-center justify-center py-20 px-10 md:px-24 lg:px-40 xl:px-52">
-      <h1 class="mb-5 text-2xl font-semibold tracking-wider text-primary-content">Add Post ⚡</h1>
+    <main class="flex flex-col items-center justify-center px-10 py-20 md:px-24 lg:px-40 xl:px-52">
+      <h1 class="text-primary-content mb-5 text-2xl font-semibold tracking-wider">Add Post ⚡</h1>
 
       <form
         class="form-control flex w-full flex-col space-y-3"

@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from '@solidjs/router';
-import { Component, For, onMount, ParentComponent, Show } from 'solid-js';
+import { Component, For, ParentComponent, Show, onMount } from 'solid-js';
 import { themeChange } from 'theme-change';
 import solidLogo from '../../assets/solid.svg';
 import { themes } from '../../constants/global.constant';
@@ -52,7 +52,7 @@ const NavbarMenuContent: Component<NavbarMenuContentProps> = (props) => {
       <li>
         <NavLink
           href="/posts"
-          class="link-hover link mx-0 text-primary lg:mx-3"
+          class="link-hover link text-primary mx-0 lg:mx-3"
           activeClass="link-secondary"
           inactiveClass="link-neutral"
         >
@@ -62,19 +62,19 @@ const NavbarMenuContent: Component<NavbarMenuContentProps> = (props) => {
       <li class="dropdown-bottom dropdown-end dropdown mt-3 lg:mt-0">
         <label
           tabIndex={0}
-          class="btn-secondary btn rounded-none normal-case text-secondary-content"
+          class="btn-secondary btn text-secondary-content rounded-none normal-case"
         >
           {t('theme')}
         </label>
 
         <ul
           tabIndex={0}
-          class="dropdown-content menu rounded-box block max-h-60 w-52 overflow-y-auto bg-base-100 p-2 shadow"
+          class="dropdown-content menu rounded-box bg-base-100 block max-h-60 w-52 overflow-y-auto p-2 shadow"
         >
           <For each={themes}>
             {(theme) => (
               <li>
-                <button class="capitalize text-secondary" data-set-theme={theme}>
+                <button class="text-secondary capitalize" data-set-theme={theme}>
                   {theme}
                 </button>
               </li>
@@ -103,7 +103,7 @@ const Navbar: ParentComponent = (props) => {
 
       <section class="drawer-content flex flex-col">
         {/* <!-- Navbar --> */}
-        <div class="navbar w-full bg-base-300">
+        <div class="navbar bg-base-300 w-full">
           <div class="flex-none lg:hidden">
             <label for="my-nav-drawer" class="btn-ghost btn-square btn">
               <Icon.HamburgerMenu2 width={20} height={20} />
@@ -112,8 +112,8 @@ const Navbar: ParentComponent = (props) => {
 
           <Link href="/" class="link-primary link mx-2 flex-1 px-2">
             <span class="flex items-center space-x-2 pl-2 text-2xl">
-              <img src={solidLogo} alt="solidLogo logo" class="h-8 w-8" />
-              <p class="font-semibold text-primary">Solid Template</p>
+              <img src={solidLogo} alt="solid logo" class="h-8 w-8" />
+              <p class="text-primary font-semibold">Solid Template</p>
             </span>
           </Link>
 
@@ -132,7 +132,7 @@ const Navbar: ParentComponent = (props) => {
       <section class="drawer-side">
         <label for="my-nav-drawer" class="drawer-overlay" />
 
-        <ul class="menu w-80 bg-base-100 p-4">
+        <ul class="menu bg-base-100 w-80 p-4">
           {/* <!-- Sidebar content here --> */}
           <NavbarMenuContent onClickLogout={vm.onClickLogout} />
         </ul>

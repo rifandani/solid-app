@@ -1,7 +1,8 @@
+import { deepReadObject } from '@rifandani/nxact-yutiriti';
 import { createContext, createSignal, useContext } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { Interpolate, LocaleDictLanguage, Translations } from '../../configs/locale/locale.type';
-import { deepReadObject, template } from '../../utils/helper/helper.util';
+import { template } from '../../utils/helper/helper.util';
 
 /**
  * This creates a I18nContext.

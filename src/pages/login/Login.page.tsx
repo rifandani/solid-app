@@ -13,12 +13,12 @@ const LoginPage: Component = () => {
         <section class="flex w-full flex-col md:w-1/2">
           <div class="flex justify-center pt-12 md:-mb-24 md:justify-start md:pl-12">
             <Link href="/" class="relative cursor-pointer">
-              <Icon.Home class="h-8 w-8 rounded-full hover:text-primary" />
+              <Icon.Home class="hover:text-primary h-8 w-8 rounded-full" />
             </Link>
           </div>
 
           <div class="my-auto flex flex-col justify-center px-8 pt-8 md:justify-start md:px-24 md:pt-0 lg:px-32">
-            <p class="text-center text-3xl text-primary">Welcome Back</p>
+            <p class="text-primary text-center text-3xl">Welcome Back</p>
 
             {/* <!-- Start FORM --> */}
             <form class="form-control pt-3 md:pt-8" onSubmit={(ev) => vm.form.onSubmitForm(ev)}>

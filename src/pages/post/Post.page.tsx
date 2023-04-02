@@ -8,13 +8,13 @@ const PostPage: Component = () => {
   const vm = usePostPageVM();
 
   return (
-    <main class="flex flex-col justify-center py-20 px-10 md:px-24 lg:px-40 xl:px-52">
+    <main class="flex flex-col justify-center px-10 py-20 md:px-24 lg:px-40 xl:px-52">
       <section class="mb-10 flex w-full items-center justify-between">
         <Link href="/posts" class="btn-accent btn normal-case">
           ⬅ Go Back
         </Link>
 
-        <h1 class="text-2xl font-semibold tracking-wider text-primary-content">Post Detail 🧻</h1>
+        <h1 class="text-primary-content text-2xl font-semibold tracking-wider">Post Detail 🧻</h1>
 
         <button
           class="btn-accent btn normal-case"
@@ -51,7 +51,7 @@ const PostPage: Component = () => {
       </Show>
 
       <Show when={vm.postQuery.isSuccess}>
-        <section class="flex w-full flex-col space-y-3 text-primary-content">
+        <section class="text-primary-content flex w-full flex-col space-y-3">
           <h3 class="text-lg font-semibold">
             {(vm.postQuery.data as GetPostSuccessResponse).post.title}
           </h3>

@@ -1,4 +1,4 @@
-import { SetupWorkerApi } from 'msw';
+import { SetupWorker } from 'msw';
 
 declare module 'solid-js' {
   namespace JSX {
@@ -13,7 +13,7 @@ declare module 'solid-js' {
 declare global {
   interface Window {
     msw: {
-      worker: SetupWorkerApi;
+      worker: SetupWorker;
     };
   }
 }
