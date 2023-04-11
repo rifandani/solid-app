@@ -42,8 +42,7 @@ const PostAddPage: Component = () => {
         <Show when={vm.postAddForm.postAddMutation.isError}>
           <div class="alert alert-error mt-2 shadow-lg">
             <div class="flex items-center">
-              <span>❌ Add post error: </span>
-              <pre>{JSON.stringify(vm.postAddForm.postAddMutation.error, null, 2)}</pre>
+              <span>❌ {(vm.postAddForm.postAddMutation.error as Error).message}</span>
             </div>
           </div>
         </Show>

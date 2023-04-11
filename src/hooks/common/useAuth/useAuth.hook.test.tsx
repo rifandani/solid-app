@@ -1,7 +1,7 @@
 import { Route } from '@solidjs/router';
 import { vi } from 'vitest';
-import { mockedLocation, mockedNavigator } from '../../mocks/module.mock';
-import { renderProviders } from '../../utils/test.util';
+import { mockedLocation, mockedNavigator } from '../../../mocks/module.mock';
+import { renderProviders } from '../../../utils/test.util';
 import useAuth from './useAuth.hook';
 
 function TestComponent() {

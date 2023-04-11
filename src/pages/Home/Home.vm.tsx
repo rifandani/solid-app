@@ -1,7 +1,7 @@
 import { createAutoAnimate } from '@formkit/auto-animate/solid';
 import { useNavigate } from '@solidjs/router';
 import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js';
-import { useI18n } from '../../hooks/usei18n/usei18n.hook';
+import { useI18n } from '../../hooks/common/usei18n/usei18n.hook';
 
 const useClock = () => {
   // Crucial to automatic dependency tracking, calling the getter within a tracking scope causes the calling function to depend on this Signal, so that function will rerun if the Signal gets updated.

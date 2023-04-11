@@ -1,6 +1,6 @@
 import { createRoot } from 'solid-js';
 import { describe } from 'vitest';
-import { localeDict } from '../../configs/locale/locale.config';
+import { localeDict } from '../../../configs/locale/locale.config';
 import { createI18nContext } from './usei18n.hook';
 
 describe('createI18nContext', () => {

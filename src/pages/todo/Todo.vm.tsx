@@ -1,6 +1,6 @@
 import { useSearchParams } from '@solidjs/router';
 import { batch, createMemo, createResource, createSignal } from 'solid-js';
-import { useI18n } from '../../hooks/usei18n/usei18n.hook';
+import { useI18n } from '../../hooks/common/usei18n/usei18n.hook';
 import { GetTodosResponse, Todo, TodoFiltersSchema } from '../../models/Todo.model';
 import { http } from '../../services/api/http';
 import { FormOnSubmitEvent, InputOnKeyUp } from '../../types';

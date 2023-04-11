@@ -1,8 +1,11 @@
 import { ParentComponent } from 'solid-js';
 import { localeDict } from '../configs/locale/locale.config';
 import { LocaleDictLanguage } from '../configs/locale/locale.type';
-import { AppStoreContext, createAppStoreContext } from '../hooks/useAppStore/useAppStore.hook';
-import { createI18nContext, I18nContext } from '../hooks/usei18n/usei18n.hook';
+import {
+  AppStoreContext,
+  createAppStoreContext,
+} from '../hooks/common/useAppStore/useAppStore.hook';
+import { I18nContext, createI18nContext } from '../hooks/common/usei18n/usei18n.hook';
 import { AppStore } from '../types/store.type';
 
 // #region PROVIDERS

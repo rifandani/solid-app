@@ -11,9 +11,9 @@ const usePostQuery = (id: number) => {
   const { queryKey } = queryKeys.posts.detailById(id);
 
   const postQuery = createQuery({
+    initialData,
     queryKey: () => queryKey,
     queryFn: () => fetchPostDetailById(id),
-    initialData,
   });
 
   return postQuery;
@@ -25,11 +25,15 @@ const usePostMutation = (id: number) => {
 
   const postDeleteMutation = createMutation({
     mutationFn: () => deletePostById(id),
-    onSuccess: async () => {
-      // NOTE: the order of function call MATTERS
-      navigate('/posts');
-      await queryClient.invalidateQueries({ queryKey: queryKeys.posts.list.queryKey });
-      await queryClient.invalidateQueries({ queryKey: queryKeys.posts.detailById(id).queryKey });
+    onSuccess: async (resp) => {
+      if (!resp.ok) {
+        throw new Error(resp.error.code);
+      } else {
+        // NOTE: the order of function call MATTERS
+        navigate('/posts');
+        await queryClient.invalidateQueries({ queryKey: queryKeys.posts.list.queryKey });
+        await queryClient.invalidateQueries({ queryKey: queryKeys.posts.detailById(id).queryKey });
+      }
     },
   });
 

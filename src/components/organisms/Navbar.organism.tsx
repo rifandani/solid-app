@@ -3,9 +3,9 @@ import { Component, For, ParentComponent, Show, onMount } from 'solid-js';
 import { themeChange } from 'theme-change';
 import solidLogo from '../../assets/solid.svg';
 import { themes } from '../../constants/global.constant';
-import { useAppStorage } from '../../hooks/useAppStorage/useAppStorage.hook';
-import useAuth from '../../hooks/useAuth/useAuth.hook';
-import { useI18n } from '../../hooks/usei18n/usei18n.hook';
+import { useAppStorage } from '../../hooks/common/useAppStorage/useAppStorage.hook';
+import useAuth from '../../hooks/common/useAuth/useAuth.hook';
+import { useI18n } from '../../hooks/common/usei18n/usei18n.hook';
 import { Icon } from '../atoms';
 
 interface NavbarMenuContentProps {

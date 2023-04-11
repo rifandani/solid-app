@@ -1,6 +1,6 @@
 import { useNavigate } from '@solidjs/router';
 import { createQuery } from '@tanstack/solid-query';
-import { useI18n } from '../../hooks/usei18n/usei18n.hook';
+import { useI18n } from '../../hooks/common/usei18n/usei18n.hook';
 import { queryKeys } from '../../services/api';
 import { fetchPostsList } from '../../services/api/posts';
 

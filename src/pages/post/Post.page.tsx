@@ -29,8 +29,7 @@ const PostPage: Component = () => {
       <Show when={vm.postDeleteMutation.isError}>
         <div class="alert alert-error mt-2 shadow-lg">
           <div class="flex items-center">
-            <span>❌ Post mutation error: </span>
-            <pre>{JSON.stringify(vm.postDeleteMutation.error, null, 2)}</pre>
+            <span>❌ Mutation error: {(vm.postDeleteMutation.error as Error).message}</span>
           </div>
         </div>
       </Show>
@@ -38,8 +37,7 @@ const PostPage: Component = () => {
       <Show when={vm.postQuery.isError}>
         <div class="alert alert-error mt-2 shadow-lg">
           <div class="flex items-center">
-            <span>❌ Post query error: </span>
-            <pre>{JSON.stringify(vm.postQuery.error, null, 2)}</pre>
+            <span>❌ Query error: {(vm.postQuery.error as Error).message}</span>
           </div>
         </div>
       </Show>

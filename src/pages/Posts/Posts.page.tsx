@@ -31,8 +31,7 @@ const PostsPage: Component = () => {
           <Match when={vm.postsQuery.isError}>
             <div class="alert alert-error mt-2 shadow-lg">
               <div class="flex items-center">
-                <span>❌ Posts error: </span>
-                <pre>{JSON.stringify(vm.postsQuery.error, null, 2)}</pre>
+                <span>❌ {(vm.postsQuery.error as Error).message}</span>
               </div>
             </div>
           </Match>

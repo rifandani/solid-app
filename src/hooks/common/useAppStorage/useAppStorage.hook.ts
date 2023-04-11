@@ -1,6 +1,6 @@
 import { createStorage } from '@solid-primitives/storage';
 import { z } from 'zod';
-import { userStorageSchema } from '../../models/User.model';
+import { userStorageSchema } from '../../../models/User.model';
 
 export type AppStorageSchema = z.infer<typeof appStorageSchema>;
 export type AppStorageInterface = ReturnType<typeof useAppStorage>;

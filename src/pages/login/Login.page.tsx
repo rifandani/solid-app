@@ -61,8 +61,7 @@ const LoginPage: Component = () => {
               <Show when={vm.form.loginMutation.isError}>
                 <div class="alert alert-error mt-3 shadow-lg">
                   <div class="flex flex-col items-start">
-                    <span>❌ Form error: </span>
-                    <span>{String(vm.form.loginMutation.error)}</span>
+                    <span>❌ {(vm.form.loginMutation.error as Error).message} </span>
                   </div>
                 </div>
               </Show>
