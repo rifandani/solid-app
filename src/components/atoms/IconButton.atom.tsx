@@ -1,5 +1,5 @@
 import { Component, JSX, splitProps } from 'solid-js';
-import { cn } from '../../utils/helper/helper.util';
+import { twMerge } from 'tailwind-merge';
 
 // #region INTERFACES
 export type IconButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -8,17 +8,14 @@ export type IconButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 // #endregion
 
-const baseIconButton =
-  'text-black flex items-center p-2 rounded-full duration-200 cursor-pointer hover:(bg-violet-200 bg-opacity-25)';
-
 const IconButton: Component<IconButtonProps> = (props) => {
   const [, rest] = splitProps(props, ['onClick']);
 
   return (
     <button
-      class={cn(
-        baseIconButton,
-        props.disabled && 'opacity-50 hover:(cursor-default bg-opacity-0)',
+      class={twMerge(
+        'hover:(bg-violet-200 bg-opacity-25) flex cursor-pointer items-center rounded-full p-2 text-black duration-200',
+        props.disabled && 'hover:(cursor-default bg-opacity-0) opacity-50',
         props.roundedFull ? 'rounded-full' : 'rounded',
         props.class,
       )}

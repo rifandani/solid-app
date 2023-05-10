@@ -1,6 +1,4 @@
 import { deepReadObject } from '@rifandani/nxact-yutiriti';
-import clsx, { ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
 import { ApiResponse, ApiSuccessResponse } from '../../constants/types.constant';
 
 /**
@@ -35,13 +33,4 @@ export function isApiSuccessResponse<T>(
   obj: ApiResponse<T> | undefined,
 ): obj is ApiSuccessResponse<T> {
   return obj ? obj.ok : false;
-}
-
-/**
- * Small wrapper around `clsx` and `twMerge` function.
- * `clsx` is for conditional classes.
- * `twMerge` is for resolving class conflicts and useful when we want to override styles for a component.
- */
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
 }

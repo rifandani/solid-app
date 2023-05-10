@@ -24,5 +24,12 @@ module.exports = {
     'testing-library/no-node-access': ['error', { allowContainerFirstChild: true }],
     '@tanstack/query/exhaustive-deps': 'off',
     'tailwindcss/no-custom-classname': 'off',
+    'tailwindcss/classnames-order': 'error',
+  },
+  settings: {
+    tailwindcss: {
+      callees: ['twMerge'],
+      config: 'tailwind.config.ts',
+    },
   },
 };
