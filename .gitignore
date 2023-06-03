@@ -17,9 +17,6 @@ public/mockServiceWorker.js
 # misc
 .DS_Store
 .env.*
-!.env.development
-!.env.qa
-!.env.production
 
 npm-debug.log*
 yarn-debug.log*

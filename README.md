@@ -24,8 +24,6 @@ $ pnpm msw:init
 
 # Runs the app
 $ pnpm start
-$ pnpm start:qa
-$ pnpm start:prod
 ```
 
 ```bash
@@ -47,8 +45,6 @@ Your app is ready to be deployed!
 ```bash
 # build app
 $ pnpm build
-$ pnpm build:qa
-$ pnpm build:prod
 ```
 
 ## Deployment
