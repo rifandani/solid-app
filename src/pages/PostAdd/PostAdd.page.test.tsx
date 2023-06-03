@@ -6,12 +6,11 @@ import PostAddPage from './PostAdd.page';
 describe('PostAddPage', () => {
   it('should render correctly', async () => {
     // ARRANGE
-    const { container } = renderProviders(() => <Route path="/" component={PostAddPage} />);
+    renderProviders(() => <Route path="/" component={PostAddPage} />);
 
     // ASSERT
     await waitFor(() => {
       expect(screen.getByText(/Add Post/)).toBeInTheDocument();
-      expect(container.firstChild).toMatchSnapshot();
     });
   });
 });

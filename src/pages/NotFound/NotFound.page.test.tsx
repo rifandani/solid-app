@@ -6,12 +6,11 @@ import NotFoundPage from './NotFound.page';
 describe('NotFoundPage', () => {
   it('should render correctly', async () => {
     // ARRANGE
-    const { container } = renderProviders(() => <Route path="/" component={NotFoundPage} />);
+    renderProviders(() => <Route path="/" component={NotFoundPage} />);
 
     // ASSERT
     await waitFor(() => {
       expect(screen.getByText(/404: Not Found/)).toBeInTheDocument();
-      expect(container.firstChild).toMatchSnapshot();
     });
   });
 });

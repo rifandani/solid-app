@@ -27,16 +27,16 @@ const useClock = () => {
     console.log('🚀 ~ file: Home.vm.tsx:27 ~ createEffect ~ toggle():', toggle());
 
     if (toggle()) {
+      // if the clock is shown, increment the seconds
       id = setInterval(() => {
         setSeconds((prev) => +(prev + 0.1).toFixed(2));
       }, 100);
     } else {
+      // if the clock is NOT shown, reset the seconds
       setSeconds(0);
     }
 
-    onCleanup(() => {
-      clearInterval(id);
-    });
+    onCleanup(() => clearInterval(id));
   });
 
   const toggleClock = () => setToggle((prev) => !prev);

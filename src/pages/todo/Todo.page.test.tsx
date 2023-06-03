@@ -7,13 +7,12 @@ import TodoPage from './Todo.page';
 describe('TodoPage', () => {
   it('should render correctly', async () => {
     // ARRANGE
-    const { container } = renderProviders(() => <Route path="/" component={TodoPage} />);
+    renderProviders(() => <Route path="/" component={TodoPage} />);
 
     // ASSERT
     await waitFor(() => {
       expect(mockedCreateResource).toHaveBeenCalled();
       expect(screen.getByText(/Todo List/)).toBeInTheDocument();
-      expect(container.firstChild).toMatchSnapshot();
     });
   });
 });

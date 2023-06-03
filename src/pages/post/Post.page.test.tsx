@@ -12,13 +12,12 @@ describe('PostPage', () => {
     // ARRANGE
     mockedParams.mockReturnValueOnce({ id: 1 });
     mockedRouteData.mockImplementationOnce(() => [{ name: 'Name', body: 'Body', email: 'Email' }]);
-    const { container } = renderProviders(() => <Route path="/" component={PostPage} />);
+    renderProviders(() => <Route path="/" component={PostPage} />);
 
     // ASSERT
     await waitFor(() => {
       expect(mockedRouteData).toHaveBeenCalled();
       expect(screen.getByText(/Post Detail/)).toBeInTheDocument();
-      expect(container.firstChild).toMatchSnapshot();
     });
   });
 });

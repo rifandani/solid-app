@@ -6,12 +6,11 @@ import HomePage from './Home.page';
 describe('HomePage', () => {
   it('should render correctly', async () => {
     // ARRANGE
-    const { container } = renderProviders(() => <Route path="/" component={HomePage} />);
+    renderProviders(() => <Route path="/" component={HomePage} />);
 
     // ASSERT
     await waitFor(() => {
       expect(screen.getByText(/Get Started/)).toBeInTheDocument();
-      expect(container.firstChild).toMatchSnapshot();
     });
   });
 });

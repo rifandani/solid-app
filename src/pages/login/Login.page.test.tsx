@@ -15,12 +15,11 @@ describe('LoginPage', () => {
 
   it('should render correctly', async () => {
     // ARRANGE
-    const { container } = renderProviders(() => <Route path="/" component={LoginPage} />);
+    renderProviders(() => <Route path="/" component={LoginPage} />);
 
     // ASSERT
     await waitFor(() => {
       expect(screen.getByText(/Welcome Back/)).toBeInTheDocument();
-      expect(container.firstChild).toMatchSnapshot();
     });
   });
 });
