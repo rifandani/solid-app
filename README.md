@@ -7,10 +7,9 @@ Solid template built with:
 - `@solidjs/router` -> route data function, dynamic route, nested route
 - `vite` + `vitest` + `@solidjs/testing-library` -> unit test, integration test, coverage
 - `msw` -> browser and server mocking
-- `tailwindcss` + `clsx` + `tailwind-merge` -> css utility class for styling
-- `daisyui` -> tailwindcss plugin
+- `tailwindcss` + `tailwind-merge` + `daisyui` -> css utility class for styling
 - `@formkit/auto-animate` -> automate transition animation when component mount/unmount
-- `axios` + `@tanstack/solid-query` + `@lukemorales/query-key-factory` -> data fetching
+- `axios` + `@tanstack/solid-query` -> data fetching
 - `zod` -> schema validation
 
 ## Development

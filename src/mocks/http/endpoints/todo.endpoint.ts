@@ -1,7 +1,7 @@
 import { random } from '@rifandani/nxact-yutiriti';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { rest } from 'msw';
-import { Todo, todoFiltersSchema } from '../../../models/Todo.model';
+import { Todo, todoFiltersSchema } from '../../../modules/todo/api/todo.schema';
 import { getBaseUrl } from '../../util.mock';
 import { mockTodo } from '../entities.http';
 
@@ -161,5 +161,3 @@ export const todoHandlers = [
     );
   }),
 ];
-
-export default { todoHandlers };

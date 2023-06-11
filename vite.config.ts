@@ -36,6 +36,12 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 5000,
     },
+    build: {
+      target: 'esnext',
+    },
+    resolve: {
+      conditions: ['development', 'browser'],
+    },
     test: {
       environment: 'jsdom',
       globals: true,
@@ -77,12 +83,6 @@ export default defineConfig(({ mode }) => {
           'src/models/**',
         ],
       },
-    },
-    build: {
-      target: 'esnext',
-    },
-    resolve: {
-      conditions: ['development', 'browser'],
     },
   };
 });

@@ -1,6 +1,6 @@
-import { Post } from '../../models/Post.model';
-import { Todo } from '../../models/Todo.model';
-import { User } from '../../models/User.model';
+import { Post } from '../../modules/post/api/post.schema';
+import { Todo } from '../../modules/todo/api/todo.schema';
+import { User } from '../../modules/user/api/user.schema';
 
 export function mockUser(initialValue?: Partial<User>): User {
   return {

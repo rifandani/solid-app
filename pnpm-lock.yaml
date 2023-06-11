@@ -4,9 +4,6 @@ dependencies:
   '@formkit/auto-animate':
     specifier: 1.0.0-beta.6
     version: 1.0.0-beta.6
-  '@lukemorales/query-key-factory':
-    specifier: ^1.2.0
-    version: 1.2.0(@tanstack/query-core@4.29.11)
   '@rifandani/nxact-yutiriti':
     specifier: ^1.2.0
     version: 1.2.0
@@ -2535,15 +2532,6 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
-
-  /@lukemorales/query-key-factory@1.2.0(@tanstack/query-core@4.29.11):
-    resolution: {integrity: sha512-ilUedLpJdpOCMKgxoncRkYEFF7C+K//IK/QWXHs0G6HjmZunT9XcrpWHNc5RjrBBqPhdxYNa7aUoEhjonwl4eQ==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      '@tanstack/query-core': ^4.0.0
-    dependencies:
-      '@tanstack/query-core': 4.29.11
-    dev: false
 
   /@mswjs/cookies@0.2.2:
     resolution: {integrity: sha512-mlN83YSrcFgk7Dm1Mys40DLssI1KdJji2CMKN8eOlBqsTADYzj2+jWzsANsUTFbxDMWPD5e9bfA1RGqBpS3O1g==}

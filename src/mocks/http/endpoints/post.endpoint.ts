@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { rest } from 'msw';
-import { Post } from '../../../models/Post.model';
+import { Post } from '../../../modules/post/api/post.schema';
 import { getBaseUrl } from '../../util.mock';
 import { mockPost } from '../entities.http';
 
@@ -140,5 +140,3 @@ export const postHandlers = [
     );
   }),
 ];
-
-export default { postHandlers };

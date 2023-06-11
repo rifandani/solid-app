@@ -5,5 +5,3 @@ import { postHandlers } from './endpoints/post.endpoint';
 import { todoHandlers } from './endpoints/todo.endpoint';
 
 export const handlers: Array<RequestHandler> = [...authHandlers, ...postHandlers, ...todoHandlers];
-
-export default { handlers };

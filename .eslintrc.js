@@ -19,6 +19,7 @@ module.exports = {
   ],
   rules: {
     'import/no-cycle': 'off',
+    'import/prefer-default-export': 'off',
     'no-void': 'off',
     'no-nested-ternary': 'off',
     'testing-library/no-node-access': ['error', { allowContainerFirstChild: true }],
