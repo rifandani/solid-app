@@ -1,163 +1,133 @@
-import { random } from '@rifandani/nxact-yutiriti';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { rest } from 'msw';
-import { Todo, todoFiltersSchema } from '../../../modules/todo/api/todo.schema';
+import { ResourceParamsSchema, resourceParamsSchema } from '../../../modules/shared/api/api.schema';
+import type {
+  CreateTodoSchema,
+  DeleteTodoApiResponseSchema,
+  TodoSchema,
+  UpdateTodoSchema,
+} from '../../../modules/todo/api/todo.schema';
 import { getBaseUrl } from '../../util.mock';
 import { mockTodo } from '../entities.http';
+
+function getTodos(length: number) {
+  return Array.from({ length }, (_, idx) =>
+    mockTodo({
+      id: idx + 1,
+      userId: idx + 1,
+      todo: `Todo title ${idx + 1}`,
+      completed: idx % 2 === 0,
+    }),
+  );
+}
 
 // mock 10 Todo entity
 let todos = Array.from({ length: 10 }, (_, idx) =>
   mockTodo({
     id: idx + 1,
-    title: `Todo title ${idx + 1}`,
+    userId: idx + 1,
+    todo: `Todo title ${idx + 1}`,
     completed: idx % 2 === 0,
-    createdAt: Date.now() + random(1, 1_000),
   }),
 );
 
 export const todoHandlers = [
   rest.get(getBaseUrl('todos'), async (req, res, ctx) => {
-    const searchParamsObject = Object.fromEntries(req.url.searchParams);
+    const searchParamsObject = Object.fromEntries(req.url.searchParams) as ResourceParamsSchema;
     const hasSearchParams = !!Object.keys(searchParamsObject).length;
 
-    const parsedSearchParams = todoFiltersSchema.safeParse(searchParamsObject);
+    const parsedSearchParams = resourceParamsSchema.safeParse(searchParamsObject);
 
     if (!hasSearchParams || !parsedSearchParams.success)
-      return res(ctx.status(200), ctx.json({ ok: true, todos }));
-
-    let todoList: Todo[] = todos;
-
-    if (parsedSearchParams.data.filter) {
-      todoList =
-        parsedSearchParams.data.filter === 'all'
-          ? todoList
-          : parsedSearchParams.data.filter === 'completed'
-          ? todoList.filter((val) => val.completed)
-          : todoList.filter((val) => !val.completed);
-    }
-
-    if (parsedSearchParams.data.sort) {
-      todoList =
-        parsedSearchParams.data.sort === 'newest'
-          ? [...todoList].sort((a, b) => b.updatedAt - a.updatedAt)
-          : [...todoList].sort((a, b) => a.updatedAt - b.updatedAt);
-    }
-
-    return res(ctx.status(200), ctx.json({ ok: true, todos: todoList }));
-  }),
-  rest.get(getBaseUrl('todos/:id'), async (req, res, ctx) => {
-    const { id } = req.params;
-    const paramsTodoId = parseInt(id as string, 10);
-
-    if (paramsTodoId === 500) {
-      // throw error
-      return res(ctx.status(500));
-    }
-
-    const todo = todos.find((_todo) => _todo.id === paramsTodoId);
-
-    if (todo) {
       return res(
         ctx.status(200),
         ctx.json({
-          ok: true,
-          todo,
+          todos: getTodos(10),
+          limit: 10,
+          skip: 0,
+          total: 150,
         }),
       );
-    }
+
+    const limit = parsedSearchParams.data?.limit ?? 10;
+    const skip = parsedSearchParams.data?.skip ?? 0;
 
     return res(
-      ctx.status(404),
+      ctx.status(200),
       ctx.json({
-        ok: false,
-        error: { code: `there is no todo with id: ${id as string}` },
+        todos: getTodos(limit),
+        limit,
+        skip,
+        total: 150,
       }),
     );
   }),
-  rest.post(getBaseUrl('todos'), async (req, res, ctx) => {
-    const { title } = await req.json<Pick<Todo, 'title'>>();
+  rest.post(getBaseUrl('todos/add'), async (req, res, ctx) => {
+    const todoPayload = await req.json<CreateTodoSchema>();
     const todoId = todos.at(-1)?.id;
 
     if (todoId) {
-      const newTodo: Todo = {
-        title,
-        id: todoId + 1,
-        completed: false,
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-      };
+      const newTodo: TodoSchema = todoPayload;
 
-      todos = [...todos, newTodo];
+      todos = [newTodo, ...todos];
 
-      return res(
-        ctx.status(201),
-        ctx.json({
-          ok: true,
-          todo: newTodo,
-        }),
-      );
+      return res(ctx.status(200), ctx.json(todoPayload));
     }
 
     return res(
-      ctx.status(500),
+      ctx.status(400),
       ctx.json({
-        ok: false,
-        error: { code: `ooppss, unknown error occurred` },
+        message: `ooppss, unknown error occurred`,
       }),
     );
   }),
-  rest.patch(getBaseUrl('todos/:id'), async (req, res, ctx) => {
-    const { completed } = await req.json<Pick<Todo, 'completed'>>();
+  rest.put(getBaseUrl('todos/:id'), async (req, res, ctx) => {
+    const todoPayload = await req.json<UpdateTodoSchema>();
     const { id } = req.params;
-    const paramsTodoId = parseInt(id as string, 10);
+    const todoId = parseInt(id as string, 10);
 
-    const todo = todos.find((_todo) => _todo.id === paramsTodoId);
+    const todo = todos.find((_todo) => _todo.id === todoId);
 
     if (todo) {
       todos = todos.map((_todo) =>
-        _todo.id === todo.id ? { ..._todo, completed, updatedAt: Date.now() } : _todo,
+        _todo.id === todo.id ? { ..._todo, completed: todoPayload.completed } : _todo,
       );
 
-      return res(
-        ctx.status(201),
-        ctx.json({
-          ok: true,
-          todo,
-        }),
-      );
+      return res(ctx.status(200), ctx.json({ ...todo, completed: todoPayload.completed }));
     }
 
     return res(
       ctx.status(404),
       ctx.json({
-        ok: false,
-        error: { code: `there is no todo with id: ${id as string}` },
+        message: `there is no todo with id: ${todoId}`,
       }),
     );
   }),
   rest.delete(getBaseUrl('todos/:id'), async (req, res, ctx) => {
     const { id } = req.params;
-    const paramsTodoId = parseInt(id as string, 10);
+    const todoId = parseInt(id as string, 10);
 
-    const todo = todos.find((_todo) => _todo.id === paramsTodoId);
+    const todo = todos.find((_todo) => _todo.id === todoId);
 
     if (todo) {
       todos = todos.filter((_todo) => _todo.id !== todo.id);
 
-      return res(
-        ctx.status(200),
-        ctx.json({
-          ok: true,
-        }),
-      );
+      const deleteResponse: DeleteTodoApiResponseSchema = {
+        ...todo,
+        isDeleted: true,
+        deletedOn: new Date().toISOString(),
+      };
+
+      return res(ctx.status(200), ctx.json(deleteResponse));
     }
 
     return res(
       ctx.status(404),
       ctx.json({
-        ok: false,
-        error: { code: `there is no todo with id: ${id as string}` },
+        message: `there is no todo with id: ${todoId}`,
       }),
     );
   }),
 ];
+
+export default { todoHandlers };

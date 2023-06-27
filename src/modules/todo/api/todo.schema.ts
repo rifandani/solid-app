@@ -1,34 +1,39 @@
 import { z } from 'zod';
-import { ApiResponse, ApiSuccessResponse } from '../../shared/constants/types.constant';
+import { resourceListSchema } from '../../shared/api/api.schema';
 
-export interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-  createdAt: number;
-  updatedAt: number;
-}
-
-export type TodoSortParams = 'newest' | 'oldest';
-export type TodoFilterParams = 'all' | 'completed' | 'incomplete';
-
-export const todoFiltersSchema = z.object({
-  sort: z.union([z.literal('newest'), z.literal('oldest')]).optional(),
-  filter: z.union([z.literal('all'), z.literal('completed'), z.literal('incomplete')]).optional(),
+// #region ENTITY SCHEMA
+export const todoSchema = z.object({
+  id: z.number().positive(),
+  todo: z.string(),
+  completed: z.boolean(),
+  userId: z.number().positive(),
 });
-
-// #region API
-export interface PostTodoRequest {
-  title: string;
-  completed: boolean;
-}
-
-export interface PatchTodoRequest {
-  title: string;
-  completed: boolean;
-}
+export const createTodoSchema = todoSchema;
+export const updateTodoSchema = todoSchema.omit({ userId: true });
+export const deleteTodoSchema = todoSchema.pick({ id: true });
 // #endregion
 
-export type GetTodosResponse = ApiResponse<{ todos: Todo[] }>;
-export type GetTodosSuccessResponse = ApiSuccessResponse<{ todos: Todo[] }>;
-export type TodoFiltersSchema = z.infer<typeof todoFiltersSchema>;
+// #region API SCHEMA
+export const todoListApiResponseSchema = resourceListSchema.extend({
+  todos: z.array(todoSchema),
+});
+export const todoDetailApiResponseSchema = todoSchema;
+export const createTodoApiResponseSchema = todoSchema;
+export const updateTodoApiResponseSchema = todoSchema;
+export const deleteTodoApiResponseSchema = todoSchema.extend({
+  isDeleted: z.literal(true),
+  deletedOn: z.string().datetime(),
+});
+// #endregion
+
+// #region SCHEMA TYPES
+export type TodoSchema = z.infer<typeof todoSchema>;
+export type CreateTodoSchema = z.infer<typeof createTodoSchema>;
+export type UpdateTodoSchema = z.infer<typeof updateTodoSchema>;
+export type DeleteTodoSchema = z.infer<typeof deleteTodoSchema>;
+export type TodoListApiResponseSchema = z.infer<typeof todoListApiResponseSchema>;
+export type TodoDetailApiResponseSchema = z.infer<typeof todoDetailApiResponseSchema>;
+export type CreateTodoApiResponseSchema = z.infer<typeof createTodoApiResponseSchema>;
+export type UpdateTodoApiResponseSchema = z.infer<typeof updateTodoApiResponseSchema>;
+export type DeleteTodoApiResponseSchema = z.infer<typeof deleteTodoApiResponseSchema>;
+// #endregion

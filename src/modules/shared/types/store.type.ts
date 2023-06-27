@@ -1,7 +1,7 @@
-import { Setting } from '../../setting/api/setting.schema';
+import { SettingSchema } from '../../setting/api/setting.schema';
 
 export type AppStore = {
-  setting: Setting;
+  setting: SettingSchema;
 };
 
 export type AppAction = Readonly<{

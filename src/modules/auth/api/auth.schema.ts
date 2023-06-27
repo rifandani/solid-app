@@ -1,28 +1,23 @@
 import { z } from 'zod';
-import { apiResponseSchema } from '../../shared/api/api.schema';
 
-// #region schemas
-export const loginSchema = z
-  .object({
-    email: z.string().email(),
-    password: z.string().min(8),
-  })
-  .required();
-
-export const tokenSchema = z.object({
-  login: z.object({
-    token: z.string(),
-  }),
+// #region SCHEMAS
+export const loginSchema = z.object({
+  username: z.string().min(3, 'username must contain at least 3 characters'),
+  password: z.string().min(6, 'password must contain at least 6 characters'),
+  expiresInMins: z.number().optional(),
 });
 
-export const loginApiResponseSchema = apiResponseSchema(tokenSchema);
-export const refreshTokenApiResponseSchema = apiResponseSchema(tokenSchema);
+export const loginApiResponseSchema = z.object({
+  id: z.number(),
+  username: z.string(),
+  email: z.string().email(),
+  firstName: z.string(),
+  lastName: z.string(),
+  gender: z.union([z.literal('male'), z.literal('female')]),
+  image: z.string().url(),
+  token: z.string(),
+});
 // #endregion
 
-// #region types
-export type Login = z.infer<typeof loginSchema>;
-export type LoginApiResponse = z.infer<typeof loginApiResponseSchema>;
-
-export type Token = z.infer<typeof tokenSchema>;
-export type RefreshTokenApiResponse = z.infer<typeof refreshTokenApiResponseSchema>;
-// #endregion
+export type LoginSchema = z.infer<typeof loginSchema>;
+export type LoginApiResponseSchema = z.infer<typeof loginApiResponseSchema>;

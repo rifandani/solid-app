@@ -156,3 +156,25 @@ export const Error: Component<SVGProps> = (props) => {
     </svg>
   );
 };
+
+export const OutlineClose: Component<SVGProps> = (props) => {
+  const [, rest] = splitProps(props, ['class', 'width', 'height']);
+
+  return (
+    <svg
+      class={props.class}
+      width={props.width || 24}
+      height={props.height || 24}
+      viewBox={props.viewBox || `0 0 ${props.width || 24} ${props.height || 24}`}
+      fill={props.fill || 'currentColor'}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <title>Error</title>
+      <path
+        fill="currentColor"
+        d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z"
+      />
+    </svg>
+  );
+};

@@ -1,51 +1,29 @@
-import { Post } from '../../modules/post/api/post.schema';
-import { Todo } from '../../modules/todo/api/todo.schema';
-import { User } from '../../modules/user/api/user.schema';
+import type { LoginApiResponseSchema } from '../../modules/auth/api/auth.schema';
+import type { TodoSchema } from '../../modules/todo/api/todo.schema';
 
-export function mockUser(initialValue?: Partial<User>): User {
+export function mockLoginResponse(
+  initialValue?: Partial<LoginApiResponseSchema>,
+): LoginApiResponseSchema {
   return {
-    id: 1,
-    name: 'Leanne Graham',
-    username: 'Bret',
-    email: 'Sincere@april.biz',
-    address: {
-      street: 'Kulas Light',
-      suite: 'Apt. 556',
-      city: 'Gwenborough',
-      zipcode: '92998-3874',
-      geo: {
-        lat: '-37.3159',
-        lng: '81.1496',
-      },
-    },
-    phone: '1-770-736-8031 x56442',
-    website: 'hildegard.org',
-    company: {
-      name: 'Romaguera-Crona',
-      catchPhrase: 'Multi-layered client-server neural-net',
-      bs: 'harness real-time e-markets',
-    },
+    id: 15,
+    username: 'kminchelle',
+    email: 'kminchelle@qq.com',
+    firstName: 'Jeanne',
+    lastName: 'Halvorson',
+    gender: 'female',
+    image: 'https://robohash.org/autquiaut.png',
+    token:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInVzZXJuYW1lIjoia21pbmNoZWxsZSIsImVtYWlsIjoia21pbmNoZWxsZUBxcS5jb20iLCJmaXJzdE5hbWUiOiJKZWFubmUiLCJsYXN0TmFtZSI6IkhhbHZvcnNvbiIsImdlbmRlciI6ImZlbWFsZSIsImltYWdlIjoiaHR0cHM6Ly9yb2JvaGFzaC5vcmcvYXV0cXVpYXV0LnBuZyIsImlhdCI6MTY4NTU5NzcxNiwiZXhwIjoxNjg1NjAxMzE2fQ.nmKDmEtDztT2ufadJrDiJfolMtiP-fS_ZNk1XJVPSJE',
     ...(initialValue && initialValue),
   };
 }
 
-export function mockPost(initialValue?: Partial<Post>): Post {
+export function mockTodo(initialValue?: Partial<TodoSchema>): TodoSchema {
   return {
+    id: 1,
     userId: 1,
-    id: 1,
-    title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-    body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
-    ...(initialValue && initialValue),
-  };
-}
-
-export function mockTodo(initialValue?: Partial<Todo>): Todo {
-  return {
-    id: 1,
-    title: 'suscipit repellat esse quibusdam voluptatem incidunt',
+    todo: 'Mocked Todo 1',
     completed: false,
-    createdAt: Date.now(),
-    updatedAt: Date.now(),
     ...(initialValue && initialValue),
   };
 }

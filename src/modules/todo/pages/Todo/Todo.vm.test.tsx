@@ -1,6 +1,6 @@
 import useTodoPageVM from './Todo.vm';
 
-describe('TodoPageVM', () => {
+describe('useTodoPageVM', () => {
   it('should be defined', () => {
     // ASSERT
     expect(useTodoPageVM).toBeDefined();

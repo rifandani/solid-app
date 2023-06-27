@@ -1,6 +1,6 @@
 import { createStorage } from '@solid-primitives/storage';
 import { z } from 'zod';
-import { userStorageSchema } from '../../../user/api/user.schema';
+import { loginApiResponseSchema } from '../../../auth/api/auth.schema';
 
 export type AppStorageSchema = z.infer<typeof appStorageSchema>;
 export type AppStorageInterface = ReturnType<typeof useAppStorage>;
@@ -16,7 +16,7 @@ type StorageActions<T> = {
 };
 
 export const appStorageSchema = z.object({
-  user: userStorageSchema.optional(),
+  user: loginApiResponseSchema.optional(),
 });
 
 export const useAppStorage = () =>

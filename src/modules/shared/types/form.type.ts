@@ -21,18 +21,14 @@ export type FormOnSubmit =
     >
   | undefined;
 
-export type InputOnInput =
-  | JSX.EventHandlerUnion<HTMLInputElement, InputEvent>
-  | undefined;
+export type InputOnInput = JSX.EventHandlerUnion<HTMLInputElement, InputEvent> | undefined;
 
-export type InputOnChange =
-  | JSX.EventHandlerUnion<HTMLInputElement, Event>
-  | undefined;
+export type InputOnChange = JSX.EventHandlerUnion<HTMLInputElement, Event> | undefined;
 
 export type InputOnKeyUp =
   | JSX.EventHandlerUnion<HTMLInputElement | HTMLTextAreaElement, KeyboardEvent>
   | undefined;
 
-export type ButtonOnClick =
-  | JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>
-  | undefined;
+export type ButtonOnClick = JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent> | undefined;
+
+export type SelectOnChange = JSX.EventHandlerUnion<HTMLSelectElement, Event> | undefined;

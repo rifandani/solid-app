@@ -8,7 +8,7 @@ describe('createI18nContext', () => {
     const [t, { add, locale }] = createRoot(() => createI18nContext(localeDict, 'en'));
     Object.entries(localeDict).forEach(([lang, translations]) => add(lang, translations));
 
-    locale('en-US');
+    locale('en');
     expect(t('xList', { feature: 'Post' })).toBe('Post List');
 
     locale('id');

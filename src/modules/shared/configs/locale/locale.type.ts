@@ -1,9 +1,9 @@
-import { enUSLocale } from './locale.config';
+import { enLocale } from './locale.config';
 
-export type LocaleDictLanguage = 'en-US' | 'id';
+export type LocaleDictLanguage = 'en' | 'id';
 export type LocaleDict = Record<LocaleDictLanguage, Record<string, string>>;
 
-export type Translations = typeof enUSLocale;
+export type Translations = typeof enLocale;
 export type InterpolateInner<
   S extends string,
   // eslint-disable-next-line @typescript-eslint/ban-types

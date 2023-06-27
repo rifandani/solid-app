@@ -1,1 +1,1 @@
-export { default as Navbar } from './Navbar.organism';
+export { default as Navbar } from './Navbar/Navbar.organism';

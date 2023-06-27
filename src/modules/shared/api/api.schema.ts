@@ -1,24 +1,23 @@
 import { z } from 'zod';
 
-// #region schemas
-export const apiErrorSchema = z.object({
-  ok: z.literal(false),
-  error: z.object({ code: z.string() }),
+// #region SCHEMAS
+export const errorApiResponseSchema = z.object({
+  message: z.string(),
 });
-export const apiSuccessSchema = <T extends z.ZodRawShape>(rawShape: T) =>
-  z.object({ ok: z.literal(true) }).extend(rawShape);
-export const apiResponseSchema = <T extends z.AnyZodObject>(schema: T) =>
-  z.discriminatedUnion('ok', [apiErrorSchema, z.object({ ok: z.literal(true) }).merge(schema)]);
 
-export const apiSuccessUnionSchema = z.object({ ok: z.literal(true) });
-export const apiResponseUnionSchema = apiErrorSchema.or(apiSuccessUnionSchema);
+export const resourceParamsSchema = z.object({
+  limit: z.number().optional(),
+  skip: z.number().optional(),
+  select: z.string().optional(),
+});
+
+export const resourceListSchema = z.object({
+  total: z.number(),
+  skip: z.number(),
+  limit: z.number(),
+});
 // #endregion
 
-// #region types
-export type ApiErrorResponse = z.infer<typeof apiErrorSchema>;
-export type ApiSuccessResponse = z.infer<ReturnType<typeof apiSuccessSchema>>;
-export type ApiResponse = z.infer<ReturnType<typeof apiResponseSchema>>;
-
-export type ApiSuccessResponseUnion = z.infer<typeof apiSuccessUnionSchema>;
-export type ApiResponseUnion = z.infer<typeof apiResponseUnionSchema>;
-// #endregion
+export type ErrorApiResponseSchema = z.infer<typeof errorApiResponseSchema>;
+export type ResourceParamsSchema = z.infer<typeof resourceParamsSchema>;
+export type ResourceListSchema = z.infer<typeof resourceListSchema>;

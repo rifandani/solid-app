@@ -1,20 +1,5 @@
 import { deepReadObject } from '@rifandani/nxact-yutiriti';
-import { ApiResponse, ApiSuccessResponse } from '../../constants/types.constant';
-
-/**
- * Type Guard for typescript assertions
- *
- * @example
- *
- * ```ts
- * isApiSuccessResponse(postDetail.postDetailData) && ...
- * ```
- */
-export function isApiSuccessResponse<T>(
-  obj: ApiResponse<T> | undefined,
-): obj is ApiSuccessResponse<T> {
-  return obj ? obj.ok : false;
-}
+import { extendTailwindMerge } from 'tailwind-merge';
 
 /**
  * Provided a string template it will replace dynamics parts in place of variables.
@@ -35,9 +20,8 @@ export function isApiSuccessResponse<T>(
 export const template = (str: string, params: Record<string, string>, reg = /{{(.*?)}}/g): string =>
   str.replace(reg, (_, key: string) => deepReadObject(params, key, ''));
 
-export function clamp({ value, min, max }: { value: number; min: number; max: number }) {
-  return Math.min(Math.max(value, min), max);
-}
+export const clamp = ({ value, min, max }: { value: number; min: number; max: number }) =>
+  Math.min(Math.max(value, min), max);
 
 /**
  * Check if we are in browser, not server
@@ -150,7 +134,7 @@ export const removeLeadingWhitespace = (value?: string) => {
  * 2. If the file source is on different location e.g s3 bucket, etc. Set the response headers `Content-Disposition: attachment`.
  * Otherwise it only view on new tab.
  */
-export function doDownload(url: string): void {
+export const doDownload = (url: string) => {
   if (!url) return;
   const link = document.createElement('a');
   link.href = url;
@@ -159,4 +143,24 @@ export function doDownload(url: string): void {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-}
+};
+
+/**
+ * create merge function with custom config which extends the default config.
+ * Use this if you use the default Tailwind config and just extend it in some places.
+ */
+export const tw = extendTailwindMerge({
+  classGroups: {
+    // ↓ The `foo` key here is the class group ID
+    //   ↓ Creates group of classes which have conflicting styles
+    //     Classes here: 'alert-info', 'alert-success', 'alert-warning', 'alert-error'
+    alert: ['alert-info', 'alert-success', 'alert-warning', 'alert-error'],
+  },
+  // ↓ Here you can define additional conflicts across different groups
+  conflictingClassGroups: {
+    // ↓ ID of class group which creates a conflict with…
+    //     ↓ …classes from groups with these IDs
+    // In this case `tw('alert-success alert-error') → 'alert-error'`
+    alert: ['alert'],
+  },
+});

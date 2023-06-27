@@ -1,0 +1,37 @@
+.my-toast[data-opened] {
+  animation: slideIn 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.my-toast[data-closed] {
+  animation: swipeOut 250ms ease-out;
+}
+.my-toast[data-swipe='move'] {
+  transform: translateX(var(--kb-toast-swipe-move-x));
+}
+.my-toast[data-swipe='cancel'] {
+  transform: translateX(0);
+  transition: transform 250ms ease-out;
+}
+.my-toast[data-swipe='end'] {
+  animation: swipeOut 250ms ease-out;
+}
+.my-toast__progress-fill {
+  width: var(--kb-toast-progress-fill-width);
+  transition: width 250ms linear;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(calc(100% + 16px));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes swipeOut {
+  from {
+    transform: translateX(var(--kb-toast-swipe-end-x));
+  }
+  to {
+    transform: translateX(calc(100% + 16px));
+  }
+}

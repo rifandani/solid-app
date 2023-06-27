@@ -5,7 +5,7 @@ import LoginForm from '../../components/LoginForm/LoginForm.component';
 import useLoginPageVM from './Login.vm';
 
 const LoginPage: Component = () => {
-  useLoginPageVM();
+  const vm = useLoginPageVM();
 
   return (
     <main class="h-screen bg-white">
@@ -20,16 +20,16 @@ const LoginPage: Component = () => {
 
           <div class="my-auto flex flex-col justify-center px-8 pt-8 md:justify-start md:px-24 md:pt-0 lg:px-32">
             <p class="text-center text-3xl text-primary" data-testid="title">
-              Welcome Back
+              {vm.t('welcome')}
             </p>
 
             <LoginForm />
 
             <div class="py-12 text-center">
               <p>
-                Don&apos;t have an account?{' '}
+                {vm.t('noAccount')}{' '}
                 <Link class="link-primary link" href="/register">
-                  Register here
+                  {vm.t('registerHere')}
                 </Link>
               </p>
             </div>
@@ -39,7 +39,12 @@ const LoginPage: Component = () => {
         {/* <!-- Image Section --> */}
         <section class="w-1/2 shadow-2xl">
           <span class="relative hidden h-screen w-full md:flex md:items-center md:justify-center">
-            <img src="src/assets/online-payment.png" alt="login page cover" loading="lazy" />
+            <img
+              src="src/assets/solidjs.webp"
+              alt="login page cover"
+              loading="lazy"
+              class="h-full object-cover object-right"
+            />
           </span>
         </section>
       </div>

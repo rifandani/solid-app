@@ -1,122 +1,82 @@
-import { useSearchParams } from '@solidjs/router';
-import { batch, createMemo, createResource, createSignal } from 'solid-js';
+import { createForm } from '@felte/solid';
+import { toaster } from '@kobalte/core';
+import { useNavigate, useParams, useRouteData } from '@solidjs/router';
+import { createMutation, createQuery, useQueryClient } from '@tanstack/solid-query';
+import { z } from 'zod';
+import { ErrorApiResponseSchema } from '../../../shared/api/api.schema';
+import { Toaster } from '../../../shared/components/molecules';
 import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
-import { http } from '../../../shared/services/api/http';
-import { FormOnSubmitEvent, InputOnKeyUp } from '../../../shared/types/form.type';
-import { GetTodosResponse, Todo, TodoFiltersSchema } from '../../api/todo.schema';
+import { todoApi, todoKeys } from '../../api/todo.api';
+import {
+  TodoDetailApiResponseSchema,
+  UpdateTodoApiResponseSchema,
+  UpdateTodoSchema,
+} from '../../api/todo.schema';
 
-// #region INTERFACES
-type UseTodoFormParams = {
-  refetchTodos: ReturnType<typeof useTodosResource>[1]['refetch'];
-};
-// #endregion
+const useInitialTodo = (id: number) => {
+  const initialData = useRouteData<TodoDetailApiResponseSchema>();
+  const queryKey = () => todoKeys.detail(id);
+  const queryFn = () => todoApi.detail(id);
 
-const useTodosResource = () => {
-  const [searchParams] = useSearchParams();
-  const paramsObject = createMemo(
-    () => JSON.parse(JSON.stringify(searchParams)) as TodoFiltersSchema,
-  );
-
-  const todosResource = createResource(paramsObject, (params) =>
-    http.get('/todos', { params }).then((res) => res.data as GetTodosResponse),
-  );
-
-  return todosResource;
+  // pass `initialData` that we get from route data
+  return createQuery({
+    initialData,
+    queryKey,
+    queryFn,
+  });
 };
 
-const useForm = ({ refetchTodos }: UseTodoFormParams) => {
-  const [todoText, setTodoText] = createSignal('');
-  const [todoTextError, setTodoTextError] = createSignal('');
+const useTodoUpdate = () => {
+  const [t] = useI18n();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const onKeyUpTodoText: InputOnKeyUp = (ev) => {
-    setTodoText(ev.currentTarget.value);
-  };
-
-  const onChangeTodoItemCheckbox = async (todo: Todo) => {
-    // update todo
-    const resp = await http.patch<Todo>(`/todos/${todo.id}`, {
-      completed: !todo.completed,
-    });
-
-    // on failed
-    if (resp.status !== 201) {
-      setTodoTextError('Error editing todo!');
-      return;
-    }
-
-    // on success
-    setTodoTextError('');
-    await refetchTodos();
-  };
-
-  const onDeleteTodoItem = async (todoId: number) => {
-    // delete todo
-    const resp = await http.delete<Todo>(`/todos/${todoId}`);
-
-    // on failed
-    if (resp.status !== 200) {
-      setTodoTextError('Error deleting todo!');
-      return;
-    }
-
-    // on success
-    setTodoTextError('');
-    await refetchTodos();
-  };
-
-  const onSubmitTodo = async (ev: FormOnSubmitEvent) => {
-    ev.preventDefault();
-
-    // add todo
-    const resp = await http.post<Todo>('/todos', {
-      title: todoText(),
-    });
-
-    // on failed
-    if (resp.status !== 201) {
-      batch(() => {
-        setTodoText('');
-        setTodoTextError('Error adding new todo!');
-      });
-      return;
-    }
-
-    // on success
-    batch(() => {
-      setTodoText('');
-      setTodoTextError('');
-    });
-    await refetchTodos();
-  };
-
-  return {
-    todoText,
-    todoTextError,
-    onKeyUpTodoText,
-    onChangeTodoItemCheckbox,
-    onDeleteTodoItem,
-    onSubmitTodo,
-  };
-};
-
-const useFormFilter = () => {
-  const [params, setParams] = useSearchParams();
-
-  const onChangeFilter = (field: 'sort' | 'filter', value: string) => {
-    setParams({ [field]: value });
-  };
-
-  return { params, onChangeFilter };
+  return createMutation<UpdateTodoApiResponseSchema, ErrorApiResponseSchema, UpdateTodoSchema>({
+    mutationKey: todoKeys.lists(),
+    mutationFn: (updateTodo) => todoApi.update(updateTodo),
+    onSuccess: async (updatedTodo) => {
+      // NOTE: the order of function call MATTERS
+      navigate('/todos');
+      queryClient.removeQueries({ queryKey: todoKeys.detail(updatedTodo.id) }); // delete the query cache
+      await queryClient.invalidateQueries({ queryKey: todoKeys.lists() });
+    },
+    onSettled: (_updateTodo, error) => {
+      toaster.show((props) => (
+        <Toaster
+          toastId={props.toastId}
+          type={error ? 'error' : 'success'}
+          title={
+            error
+              ? t('xUpdateError', { feature: 'Todo' })
+              : t('xUpdateSuccess', { feature: 'Todo' })
+          }
+        />
+      ));
+    },
+  });
 };
 
 const useTodoPageVM = () => {
   const [t] = useI18n();
+  const params = useParams();
+  // will throw error if `params.id` is not a number
+  const id = z.coerce.number().parse(params.id);
+  const todoQuery = useInitialTodo(id);
+  const todoUpdateMutation = useTodoUpdate();
 
-  const [todos, { refetch: refetchTodos }] = useTodosResource();
-  const form = useForm({ refetchTodos });
-  const formFilter = useFormFilter();
+  const felte = createForm<Pick<UpdateTodoSchema, 'todo'>>({
+    onSubmit: (values) => {
+      const payload: UpdateTodoSchema = {
+        ...values,
+        id: todoQuery.data?.id,
+        completed: todoQuery.data?.completed,
+      };
 
-  return { t, todos, form, formFilter };
+      todoUpdateMutation.mutate(payload);
+    },
+  });
+
+  return { t, todoQuery, todoUpdateMutation, ...felte };
 };
 
 export default useTodoPageVM;

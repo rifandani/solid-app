@@ -29,7 +29,7 @@ module.exports = {
   },
   settings: {
     tailwindcss: {
-      callees: ['twMerge'],
+      callees: ['tw', 'twMerge'],
       config: 'tailwind.config.ts',
     },
   },

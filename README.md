@@ -11,6 +11,7 @@ Solid template built with:
 - `@formkit/auto-animate` -> automate transition animation when component mount/unmount
 - `axios` + `@tanstack/solid-query` -> data fetching
 - `zod` -> schema validation
+- `@felte/solid` -> form management
 
 ## Development
 
@@ -49,3 +50,47 @@ $ pnpm build
 ## Deployment
 
 You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+
+## Notes
+
+Todos:
+
+- [ ] use router routes configuration object, instead of `Routes`
+- [ ] revamp navbar, and all UI's
+- [ ] `/playground` route to showcase svelte-specific API's superiority, so that we can compare it to another framework
+- [ ] use more [@solid-primitives](https://primitives.solidjs.community/)
+- [x] use [kobalte](https://kobalte.dev/docs/core/overview/introduction)
+- [x] use API from [dummyjson](https://dummyjson.com)
+
+Debugging:
+
+```tsx
+const [searchParams] = useSearchParams();
+const params = () => ({ ...searchParams, limit: Number(searchParams?.limit ?? defaultLimit) });
+
+createEffect(() =>
+  console.log('🚀 ~ useTodosCreate', {
+    todosQuery: { ...todosQuery },
+    todoListsQueryData: queryClient.getQueryData(todoKeys.lists()),
+    todoListQueryData: queryClient.getQueryData(todoKeys.list(params())), // TodoListApiResponseSchema
+    todoDetailsQueryData: queryClient.getQueryData(todoKeys.details()),
+    todoDetail1QueryData: queryClient.getQueryData(todoKeys.detail(1)),
+    queryCache: queryClient.getQueryCache(),
+  }),
+);
+```
+
+```tsx
+const useTodosResource = () => {
+  const [searchParams] = useSearchParams();
+  const paramsObject = createMemo(
+    () => JSON.parse(JSON.stringify(searchParams)) as TodoFiltersSchema,
+  );
+
+  const todosResource = createResource(paramsObject, (params) =>
+    http.get('/todos', { params }).then((res) => res.data as GetTodosResponse),
+  );
+
+  return todosResource;
+};
+```

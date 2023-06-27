@@ -1,26 +1,24 @@
+import { authEnLocale, authIdLocale } from './auth.locale';
+import { commonEnLocale, commonIdLocale } from './common.locale';
+import { homeEnLocale, homeIdLocale } from './home.locale';
 import { LocaleDict } from './locale.type';
+import { todoEnLocale, todoIdLocale } from './todo.locale';
 
-export const enUSLocale = {
-  theme: 'Theme',
-  logout: 'Logout',
-  sortButtons: 'Sort Buttons',
-  changeLanguage: 'Change Language',
-  toggleClock: 'Toggle Clock',
-  getStarted: 'Get Started',
-  xList: '{{feature}} List',
+export const enLocale = {
+  ...commonEnLocale,
+  ...authEnLocale,
+  ...homeEnLocale,
+  ...todoEnLocale,
 } as const;
 
 export const idLocale = {
-  theme: 'Tema',
-  logout: 'Keluar',
-  sortButtons: 'Urutkan Tombol',
-  changeLanguage: 'Ganti Bahasa',
-  toggleClock: 'Toggle Jam',
-  getStarted: 'Mulai Sekarang',
-  xList: 'Daftar {{feature}}',
+  ...commonIdLocale,
+  ...authIdLocale,
+  ...homeIdLocale,
+  ...todoIdLocale,
 } as const;
 
 export const localeDict: LocaleDict = {
-  'en-US': enUSLocale,
+  en: enLocale,
   id: idLocale,
 } as const;
