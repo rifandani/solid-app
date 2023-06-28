@@ -10,6 +10,7 @@ import { AppRootProvider, queryClient } from './Store.app';
 
 export const LazyHomePage = lazy(() => import('../modules/home/pages/Home/Home.page'));
 export const LazyLoginPage = lazy(() => import('../modules/auth/pages/Login/Login.page'));
+export const LazyPlaygroundPage = lazy(() => import('../modules/playground/pages/Playground.page'));
 export const LazyTodosPage = lazy(() => import('../modules/todo/pages/Todos/Todos.page'));
 export const LazyTodoPage = lazy(() => import('../modules/todo/pages/Todo/Todo.page'));
 export const LazyNotFoundPage = lazy(() => import('../modules/auth/pages/NotFound/NotFound.page'));
@@ -37,6 +38,16 @@ const App: Component = () => (
             element={
               <SuspenseWithFallbackSpinner>
                 <LazyHomePage />
+              </SuspenseWithFallbackSpinner>
+            }
+          />
+
+          {/* playground routes */}
+          <Route
+            path="/playground"
+            element={
+              <SuspenseWithFallbackSpinner>
+                <LazyPlaygroundPage />
               </SuspenseWithFallbackSpinner>
             }
           />
@@ -76,7 +87,7 @@ const App: Component = () => (
 
         {/* toast with portal */}
         <Portal>
-          <Toast.Region duration={30_000} pauseOnInteraction swipeDirection="right">
+          <Toast.Region duration={3_000} pauseOnInteraction swipeDirection="right">
             <Toast.List class="toast-end toast z-20 w-96" />
           </Toast.Region>
         </Portal>

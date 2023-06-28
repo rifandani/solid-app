@@ -1,5 +1,5 @@
 export const homeEnLocale = {
-  title: 'Solid App using:',
+  title: 'Solid App',
   sortButtons: 'Sort Buttons',
   clock: 'Clock',
   toggleClock: 'Toggle Clock',
@@ -9,7 +9,7 @@ export const homeEnLocale = {
 } as const;
 
 export const homeIdLocale = {
-  title: 'Aplikasi Solid menggunakan:',
+  title: 'Aplikasi Solid',
   sortButtons: 'Urutkan Tombol',
   clock: 'Jam',
   toggleClock: 'Toggle Jam',

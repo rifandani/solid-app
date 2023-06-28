@@ -28,14 +28,13 @@ const useTodoDelete = () => {
       await queryClient.cancelQueries({ queryKey: todoKeys.list(params()) });
 
       // Snapshot the previous value
-      const previousTodosQueryResponse = queryClient.getQueryData(
-        todoKeys.list(params()),
-      ) as TodoListApiResponseSchema;
+      const previousTodosQueryResponse = (queryClient.getQueryData(todoKeys.list(params())) ??
+        []) as TodoListApiResponseSchema;
 
       // Optimistically update to the new value
       queryClient.setQueryData(todoKeys.list(params()), {
         ...previousTodosQueryResponse,
-        todos: previousTodosQueryResponse.todos.filter((_todo) => _todo.id !== id),
+        todos: previousTodosQueryResponse.todos?.filter((_todo) => _todo.id !== id),
       });
 
       // Return a context object with the snapshotted value
@@ -61,7 +60,7 @@ const useTodoDelete = () => {
         queryClient.setQueryData(todoKeys.list(params()), context?.previousTodosQueryResponse);
 
       // if we want to refetch after error or success:
-      // queryClient.invalidateQueries({ queryKey: todoKeys.list(params()) });
+      // await queryClient.invalidateQueries({ queryKey: todoKeys.list(params()) });
     },
   });
 };

@@ -4,10 +4,6 @@ import { TodoSchema } from '../../api/todo.schema';
 import useTodoDelete from '../../hooks/useTodoDelete/useTodoDelete.hook';
 import useTodoUpdate from '../../hooks/useTodoUpdate/useTodoUpdate.hook';
 
-// #region INTERFACES
-export type UseTodosItemHook = ReturnType<typeof useTodosItem>;
-// #endregion
-
 export default function useTodosItem() {
   const [t] = useI18n();
   const [appStorage] = useAppStorage();

@@ -1,9 +1,7 @@
 import type { LoginApiResponseSchema } from '../../modules/auth/api/auth.schema';
-import type { TodoSchema } from '../../modules/todo/api/todo.schema';
+import type { TodoListApiResponseSchema, TodoSchema } from '../../modules/todo/api/todo.schema';
 
-export function mockLoginResponse(
-  initialValue?: Partial<LoginApiResponseSchema>,
-): LoginApiResponseSchema {
+export function mockLogin(initialValue?: Partial<LoginApiResponseSchema>): LoginApiResponseSchema {
   return {
     id: 15,
     username: 'kminchelle',
@@ -24,6 +22,18 @@ export function mockTodo(initialValue?: Partial<TodoSchema>): TodoSchema {
     userId: 1,
     todo: 'Mocked Todo 1',
     completed: false,
+    ...(initialValue && initialValue),
+  };
+}
+
+export function mockTodoListApiResponse(
+  initialValue?: Partial<TodoListApiResponseSchema>,
+): TodoListApiResponseSchema {
+  return {
+    limit: 10,
+    skip: 0,
+    total: 100,
+    todos: Array.from({ length: 10 }).map((_, id) => mockTodo({ id, userId: id })),
     ...(initialValue && initialValue),
   };
 }

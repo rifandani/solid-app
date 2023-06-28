@@ -7,12 +7,8 @@ const TodoPage: Component = () => {
   const { t, todoQuery, todoUpdateMutation, form } = useTodoPageVM();
 
   return (
-    <form
-      use:form
-      data-testid="form"
-      class="flex flex-col justify-center px-10 py-20 md:px-24 lg:px-40 xl:px-52"
-    >
-      <section class="mb-10 flex w-full flex-col space-y-2">
+    <section class="flex flex-col justify-center px-10 py-20 md:px-24 lg:px-40 xl:px-52">
+      <div class="mb-10 flex w-full flex-col space-y-2">
         <Link href="/todos" class="btn-link w-fit normal-case text-primary-content ">
           ⬅ {t('goBackTo', { target: 'Todos' })}
         </Link>
@@ -20,7 +16,7 @@ const TodoPage: Component = () => {
         <h1 class="text-2xl font-semibold tracking-wider text-primary-content">
           {t('xDetail', { feature: 'Todo' })}
         </h1>
-      </section>
+      </div>
 
       <Show when={todoUpdateMutation.isError}>
         <div class="alert alert-error mt-2 shadow-lg">
@@ -50,7 +46,7 @@ const TodoPage: Component = () => {
         </Match>
 
         <Match when={todoQuery.isSuccess}>
-          <fieldset class="join">
+          <form use:form data-testid="form" class="join">
             <input
               data-testid="input-todo"
               class="input-bordered input-accent input join-item w-full text-accent-content"
@@ -68,10 +64,10 @@ const TodoPage: Component = () => {
             >
               {t('update', { icon: '🖋' })}
             </button>
-          </fieldset>
+          </form>
         </Match>
       </Switch>
-    </form>
+    </section>
   );
 };
 

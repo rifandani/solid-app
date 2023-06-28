@@ -53,13 +53,12 @@ You can deploy the `dist` folder to any static host provider (netlify, surge, no
 
 ## Notes
 
-- [ ] change `axios` to `ky`
-- [ ] `/playground` route to showcase solid-specific API's, so that we can compare it to another framework
 - [ ] revamp navbar, and all UI's
 - [ ] use more [@solid-primitives](https://primitives.solidjs.community/)
 - [x] use [kobalte](https://kobalte.dev/docs/core/overview/introduction)
 - [x] use API from [dummyjson](https://dummyjson.com)
 - [x] use router routes configuration object, instead of `Routes`. Not possible. Even tried to separate routes as Router component, but still -> `Uncaught Error: Make sure your app is wrapped in a <Router />`
+- [x] `/playground` route to showcase solid-specific API's, so that we can compare it to another framework
 
 ```tsx
 const [searchParams] = useSearchParams();
