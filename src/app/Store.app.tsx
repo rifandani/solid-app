@@ -35,7 +35,7 @@ export const QueryProvider: ParentComponent = (props) => (
   <QueryClientProvider client={queryClient}>{props.children}</QueryClientProvider>
 );
 
-export const RootProvider: ParentComponent = (props) => (
+export const AppRootProvider: ParentComponent = (props) => (
   <AppStoreProvider>
     <I18nProvider dict={localeDict}>
       <QueryProvider>{props.children}</QueryProvider>

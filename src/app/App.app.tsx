@@ -1,101 +1,87 @@
 import { Toast } from '@kobalte/core';
 import { Route, Router, Routes } from '@solidjs/router';
-import { Component, Suspense, lazy } from 'solid-js';
+import { Component, lazy } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import { LoadingSpinner } from '../modules/shared/components/atoms';
+import { SuspenseWithFallbackSpinner } from '../modules/shared/components/molecules';
 import { PageWrapper } from '../modules/shared/components/templates';
 import routeDataTodo from '../modules/todo/pages/Todo/Todo.data';
 import AppErrorBoundary from './ErrorBoundary.app';
-import { RootProvider, queryClient } from './Store.app';
+import { AppRootProvider, queryClient } from './Store.app';
 
-const HomePage = lazy(() => import('../modules/home/pages/Home/Home.page'));
-const TodosPage = lazy(() => import('../modules/todo/pages/Todos/Todos.page'));
-const TodoPage = lazy(() => import('../modules/todo/pages/Todo/Todo.page'));
-const LoginPage = lazy(() => import('../modules/auth/pages/Login/Login.page'));
-const NotFoundPage = lazy(() => import('../modules/auth/pages/NotFound/NotFound.page'));
+export const LazyHomePage = lazy(() => import('../modules/home/pages/Home/Home.page'));
+export const LazyLoginPage = lazy(() => import('../modules/auth/pages/Login/Login.page'));
+export const LazyTodosPage = lazy(() => import('../modules/todo/pages/Todos/Todos.page'));
+export const LazyTodoPage = lazy(() => import('../modules/todo/pages/Todo/Todo.page'));
+export const LazyNotFoundPage = lazy(() => import('../modules/auth/pages/NotFound/NotFound.page'));
 
 const App: Component = () => (
   <AppErrorBoundary>
-    <RootProvider>
+    <AppRootProvider>
       <Router>
         <Routes>
+          {/* home routes */}
           <Route path="/" component={PageWrapper}>
             <Route
               path="/"
               element={
-                <Suspense
-                  fallback={
-                    <div class="flex items-center justify-center py-16">
-                      <LoadingSpinner />
-                    </div>
-                  }
-                >
-                  <HomePage />
-                </Suspense>
+                <SuspenseWithFallbackSpinner>
+                  <LazyHomePage />
+                </SuspenseWithFallbackSpinner>
               }
             />
           </Route>
 
+          {/* login routes */}
           <Route
             path="/login"
             element={
-              <Suspense
-                fallback={
-                  <div class="flex items-center justify-center py-16">
-                    <LoadingSpinner />
-                  </div>
-                }
-              >
-                <LoginPage />
-              </Suspense>
+              <SuspenseWithFallbackSpinner>
+                <LazyHomePage />
+              </SuspenseWithFallbackSpinner>
             }
           />
 
+          {/* todos routes */}
           <Route path="/todos" component={PageWrapper}>
             <Route
               path="/"
               element={
-                <Suspense
-                  fallback={
-                    <div class="flex items-center justify-center py-16">
-                      <LoadingSpinner />
-                    </div>
-                  }
-                >
-                  <TodosPage />
-                </Suspense>
+                <SuspenseWithFallbackSpinner>
+                  <LazyTodosPage />
+                </SuspenseWithFallbackSpinner>
               }
             />
 
-            {/* render-as-you-fetch for dynamic routes */}
             <Route
               path="/:id"
               data={routeDataTodo(queryClient)}
               element={
-                <Suspense
-                  fallback={
-                    <div class="flex items-center justify-center py-16">
-                      <LoadingSpinner />
-                    </div>
-                  }
-                >
-                  <TodoPage />
-                </Suspense>
+                <SuspenseWithFallbackSpinner>
+                  <LazyTodoPage />
+                </SuspenseWithFallbackSpinner>
               }
             />
           </Route>
 
-          <Route path="*" component={NotFoundPage} />
+          {/* not found routes */}
+          <Route
+            path="*"
+            element={
+              <SuspenseWithFallbackSpinner>
+                <LazyNotFoundPage />
+              </SuspenseWithFallbackSpinner>
+            }
+          />
         </Routes>
 
-        {/* toast */}
+        {/* toast with portal */}
         <Portal>
           <Toast.Region duration={30_000} pauseOnInteraction swipeDirection="right">
             <Toast.List class="toast-end toast z-20 w-96" />
           </Toast.Region>
         </Portal>
       </Router>
-    </RootProvider>
+    </AppRootProvider>
   </AppErrorBoundary>
 );
 

@@ -1,18 +1,46 @@
 import { createAutoAnimate } from '@formkit/auto-animate/solid';
+import { shuffle } from '@rifandani/nxact-yutiriti';
 import { useNavigate } from '@solidjs/router';
 import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js';
+import { createStore } from 'solid-js/store';
 import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
 
 const useHomeClock = () => {
   const navigate = useNavigate();
   const [t, { locale }] = useI18n();
 
-  // Crucial to automatic dependency tracking, calling the getter within a tracking scope causes the calling function to depend on this Signal, so that function will rerun if the Signal gets updated.
-  // toggle clock
+  const [setParent] = createAutoAnimate();
   const [toggle, setToggle] = createSignal(true);
-
-  // time
   const [seconds, setSeconds] = createSignal(0);
+
+  const toggleClock = () => setToggle((prev) => !prev);
+  const [buttons, setButtons] = createStore([
+    {
+      id: 'sort',
+      class: 'btn-ghost btn',
+      onClick: () => setButtons((prev) => shuffle(prev)),
+      text: 'sortButtons' as const,
+    },
+    {
+      id: 'clock',
+      class: 'btn-active btn',
+      onClick: () => toggleClock(),
+      text: 'toggleClock' as const,
+    },
+    {
+      id: 'language',
+      class: 'btn-accent btn',
+      onClick: () => locale(locale() === 'en' ? 'id' : 'en'),
+      text: 'changeLanguage' as const,
+    },
+    {
+      id: 'start',
+      class: 'btn-secondary btn',
+      onClick: () => navigate('/todos'),
+      text: 'getStarted' as const,
+    },
+  ]);
+
   const minutes = createMemo(
     (prev: number) => (seconds() > 0 ? (seconds() % 2 === 0 ? prev + 1 : prev) : 0),
     0,
@@ -38,37 +66,6 @@ const useHomeClock = () => {
 
     onCleanup(() => clearInterval(id));
   });
-
-  const toggleClock = () => setToggle((prev) => !prev);
-
-  const [buttons, setButtons] = createSignal([
-    {
-      id: 'sort',
-      class: 'btn-ghost btn',
-      onClick: () => {},
-      text: `${t('sortButtons')} 💫`,
-    },
-    {
-      id: 'clock',
-      class: 'btn-active btn',
-      onClick: () => toggleClock(),
-      text: `${t('toggleClock')} 🕰`,
-    },
-    {
-      id: 'language',
-      class: 'btn-accent btn',
-      onClick: () => locale(locale() === 'en' ? 'id' : 'en'),
-      text: `${t('changeLanguage')} ♻`,
-    },
-    {
-      id: 'start',
-      class: 'btn-secondary btn',
-      onClick: () => navigate('/todos'),
-      text: `${t('getStarted')} ✨`,
-    },
-  ]);
-
-  const [setParent] = createAutoAnimate();
 
   return {
     t,
