@@ -10,7 +10,7 @@ describe('NotFoundPage', () => {
 
     // ASSERT
     await waitFor(() => {
-      expect(screen.getByText(/404: Not Found/)).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /404: not found/i }));
     });
   });
 });

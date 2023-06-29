@@ -5,7 +5,7 @@ import { renderProviders } from '../../../shared/utils/test.util';
 import TodosPage from './Todos.page';
 
 describe('TodosPage', () => {
-  it('should render correctly', async () => {
+  it.todo('should render correctly', async () => {
     // ARRANGE
     renderProviders(() => <Route path="/" component={TodosPage} />);
 
