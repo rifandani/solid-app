@@ -2,12 +2,11 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import devtools from 'solid-devtools/vite';
 import { defineConfig, PluginOption } from 'vite';
 import eslint from 'vite-plugin-eslint';
 import solid from 'vite-plugin-solid';
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(() => {
   const plugins: PluginOption[] | undefined = [
     solid(),
     {
@@ -16,20 +15,6 @@ export default defineConfig(({ mode }) => {
       apply: 'build',
     },
   ];
-
-  if (mode === 'development')
-    plugins.unshift(
-      devtools({
-        /* additional options */
-        autoname: true, // e.g. enable autoname
-        // pass `true` or an object with options
-        locator: {
-          targetIDE: 'vscode',
-          componentLocation: true,
-          jsxLocation: true,
-        },
-      }),
-    );
 
   return {
     plugins,
