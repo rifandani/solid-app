@@ -1,24 +1,67 @@
 import { createConnectivitySignal } from '@solid-primitives/connectivity';
 import { createEventListener } from '@solid-primitives/event-listener';
-import {
-  Component,
-  For,
-  Match,
-  Switch,
-  createEffect,
-  createResource,
-  onCleanup,
-  onMount,
-} from 'solid-js';
+import { createTimer } from '@solid-primitives/timer';
+import { Component, For, createEffect, createResource, onCleanup, onMount } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 import { LoadingSpinner } from '../../../shared/components/atoms';
-import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
 import { todoApi } from '../../../todo/api/todo.api';
-import { TodoListApiResponseSchema } from '../../../todo/api/todo.schema';
+import { TodoListApiResponseSchema, TodoSchema } from '../../../todo/api/todo.schema';
 import TodosFilter from '../../../todo/components/TodosFilter/TodosFilter.component';
 import { useTodosParams } from '../../../todo/hooks/useTodos/useTodos.hook';
 
+// #region  DYNAMIC RENDERING
+const Pending: Component = () => (
+  <div class="flex items-center justify-center py-5">
+    <LoadingSpinner color="currentColor" />
+  </div>
+);
+const Errored: Component<{ error: unknown }> = (props) => (
+  <div class="alert alert-error mt-2 shadow-lg">
+    <div class="flex items-center">
+      <pre>{JSON.stringify(props.error, null, 2)}</pre>
+    </div>
+  </div>
+);
+const Success: Component<{ todos: TodoSchema[]; onChange: (_todo: TodoSchema) => void }> = (
+  props,
+) => (
+  <For each={props.todos} fallback={<div class="flex items-center justify-center py-5">Empty</div>}>
+    {(todo) => (
+      <form data-testid="playground-resource-form" class="mb-2 flex items-center justify-between">
+        <input
+          data-testid="playground-resource-input-checkbox"
+          class="checkbox-accent checkbox"
+          type="checkbox"
+          id={`todo-${todo.id}`}
+          name={`todo-${todo.id}`}
+          checked={todo.completed}
+          onChange={() => props.onChange(todo)}
+        />
+
+        <p
+          data-testid="playground-resource-p"
+          class="ml-5 w-full text-left text-lg text-secondary-content hover:font-bold"
+          classList={{ 'line-through': todo.completed }}
+        >
+          {todo.todo}
+        </p>
+      </form>
+    )}
+  </For>
+);
+
+// bad example, the good one should be typed NOT `any`, because the component should have the same props type
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const resourceMap: Record<'unresolved' | 'pending' | 'ready' | 'refreshing' | 'errored', any> = {
+  unresolved: null,
+  pending: Pending,
+  ready: Success,
+  refreshing: Pending,
+  errored: Errored,
+};
+// #endregion
+
 const Resource: Component = () => {
-  const [t] = useI18n();
   const params = useTodosParams();
   const isOnline = createConnectivitySignal();
   // refetch when back online
@@ -35,6 +78,9 @@ const Resource: Component = () => {
 
   // window focus refetching
   createEventListener(document, 'visibilitychange', () => document.hidden || void refetch());
+
+  // polling -> refetch every 10s
+  createTimer(() => void refetch(), 10_000, setInterval);
 
   // Effects are meant primarily for side effects that read but don't write to the reactive system
   // it's best to avoid setting signals in effects,
@@ -82,67 +128,26 @@ const Resource: Component = () => {
         Refetch
       </button>
 
-      <Switch>
-        <Match when={todosResource.state === 'pending' || todosResource.state === 'refreshing'}>
-          <div class="flex items-center justify-center py-5">
-            <LoadingSpinner color="currentColor" />
-          </div>
-        </Match>
-
-        <Match when={todosResource.state === 'errored'}>
-          <div class="alert alert-error mt-2 shadow-lg">
-            <div class="flex items-center">
-              <pre>{JSON.stringify(todosResource.error, null, 2)}</pre>
-            </div>
-          </div>
-        </Match>
-
-        <Match when={todosResource.state === 'ready'}>
-          <For
-            each={(todosResource() as TodoListApiResponseSchema).todos}
-            fallback={<div class="flex items-center justify-center py-5">{t('empty')}</div>}
-          >
-            {(todo) => (
-              <form
-                data-testid="playground-resource-form"
-                class="mb-2 flex items-center justify-between"
-              >
-                <input
-                  data-testid="playground-resource-input-checkbox"
-                  class="checkbox-accent checkbox"
-                  type="checkbox"
-                  id={`todo-${todo.id}`}
-                  name={`todo-${todo.id}`}
-                  checked={todo.completed}
-                  onChange={() =>
-                    // `mutate` allows to manually overwrite the resource without calling the fetcher
-                    mutate((prev) =>
-                      prev
-                        ? {
-                            ...prev,
-                            todos: prev.todos.map((_todo) =>
-                              _todo.id === todo.id
-                                ? { ..._todo, completed: !_todo.completed }
-                                : _todo,
-                            ),
-                          }
-                        : prev,
-                    )
-                  }
-                />
-
-                <p
-                  data-testid="playground-resource-p"
-                  class="ml-5 w-full text-left text-lg text-secondary-content hover:font-bold"
-                  classList={{ 'line-through': todo.completed }}
-                >
-                  {todo.todo}
-                </p>
-              </form>
-            )}
-          </For>
-        </Match>
-      </Switch>
+      <Dynamic
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        component={resourceMap[todosResource.state]}
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        error={todosResource.error}
+        todos={(todosResource() as TodoListApiResponseSchema).todos}
+        onChange={(todo: TodoSchema) =>
+          // `mutate` allows to manually overwrite the resource without calling the fetcher
+          mutate((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  todos: prev.todos.map((_todo) =>
+                    _todo.id === todo.id ? { ..._todo, completed: !_todo.completed } : _todo,
+                  ),
+                }
+              : prev,
+          )
+        }
+      />
     </section>
   );
 };

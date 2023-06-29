@@ -25,6 +25,9 @@ dependencies:
   '@solid-primitives/storage':
     specifier: ^1.3.11
     version: 1.3.11(solid-js@1.7.7)
+  '@solid-primitives/timer':
+    specifier: ^1.3.7
+    version: 1.3.7(solid-js@1.7.7)
   '@solidjs/router':
     specifier: ^0.8.2
     version: 0.8.2(solid-js@1.7.7)
@@ -2986,6 +2989,14 @@ packages:
       '@solid-primitives/rootless': 1.4.1(solid-js@1.7.7)
       solid-js: 1.7.7
     dev: true
+
+  /@solid-primitives/timer@1.3.7(solid-js@1.7.7):
+    resolution: {integrity: sha512-zS3qA7WVZYsW7+iTdk2M4W1wpMvRhdcMnO23Tcd+nX3YD7eMvjOnO15Oz2mymyfl/OC2ZgM1L5ec66GayEvPwQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      solid-js: 1.7.7
+    dev: false
 
   /@solid-primitives/utils@5.5.2(solid-js@1.7.7):
     resolution: {integrity: sha512-L52ig3eHKU6CqbPCKJIb4lweBuINHBOERcE1duApyKozEN8+zCqEKwD1Qo9ljKeEzJTBGWClxNpwEiNTUWTGvg==}
