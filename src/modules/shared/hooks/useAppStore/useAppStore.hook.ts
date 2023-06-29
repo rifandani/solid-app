@@ -39,4 +39,11 @@ export const AppStoreContext = createContext<AppStoreContextInterface>(
   {} as AppStoreContextInterface,
 );
 
-export const useAppStore = () => useContext(AppStoreContext);
+export const useAppStore = () => {
+  const context = useContext(AppStoreContext);
+  if (!context) {
+    throw new Error('useAppStore: cannot find the AppStoreContext');
+  }
+
+  return context;
+};

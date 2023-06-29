@@ -1,10 +1,12 @@
 import { SetupWorker } from 'msw';
+import 'solid-js';
+import { ClickOutsideDirectiveParams } from './src/modules/shared/directives/clickOutside.directive';
 
 declare module 'solid-js' {
   namespace JSX {
     interface Directives {
       form: true;
-      // model: [() => any, (v: any) => any];
+      clickOutside: ClickOutsideDirectiveParams;
       // autoAnimate: Partial<AutoAnimateOptions> | AutoAnimationPlugin | true;
     }
   }

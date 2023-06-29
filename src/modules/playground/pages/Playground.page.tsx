@@ -1,5 +1,6 @@
 import { Component } from 'solid-js';
 import { useI18n } from '../../shared/hooks/usei18n/usei18n.hook';
+import Directive from '../components/Directive/Directive.component';
 import Resource from '../components/Resource/Resource.component';
 
 const PlaygroundPage: Component = () => {
@@ -10,6 +11,7 @@ const PlaygroundPage: Component = () => {
       <h1 class="text-3xl font-medium text-primary-content sm:text-4xl">{t('playgroundTitle')}</h1>
 
       <Resource />
+      <Directive />
     </main>
   );
 };

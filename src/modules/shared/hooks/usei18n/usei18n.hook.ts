@@ -114,4 +114,11 @@ export type I18nContextInterface = ReturnType<typeof createI18nContext>;
 
 export const I18nContext = createContext<I18nContextInterface>({} as I18nContextInterface);
 
-export const useI18n = () => useContext(I18nContext);
+export const useI18n = () => {
+  const context = useContext(I18nContext);
+  if (!context) {
+    throw new Error('useI18n: cannot find the I18nContext');
+  }
+
+  return context;
+};
