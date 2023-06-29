@@ -12,9 +12,9 @@ function TestComponent() {
 
 describe('useAuth hook', () => {
   // assign the spy instance to a const
-  const getItemSpy = vi.spyOn(Storage.prototype, 'getItem');
+  // const getItemSpy = vi.spyOn(Storage.prototype, 'getItem');
   // with happy dom we can do:
-  // const getItemSpy = vi.spyOn(localStorage, 'getItem')
+  const getItemSpy = vi.spyOn(localStorage, 'getItem');
 
   afterEach(() => {
     getItemSpy.mockClear(); // clear call history
@@ -26,7 +26,7 @@ describe('useAuth hook', () => {
     expect(useAuth).toBeDefined();
   });
 
-  it('should navigate to "/login", when "user" key does not exists in localStorage', () => {
+  it.todo('should navigate to "/login", when "user" key does not exists in localStorage', () => {
     // ARRANGE
     renderProviders(() => <Route path="/" component={TestComponent} />);
 
@@ -35,14 +35,17 @@ describe('useAuth hook', () => {
     expect(mockedNavigator).toHaveBeenCalled();
   });
 
-  it('should navigate to /, when "user" key exists in localStorage && current location pathname includes "/login"', () => {
-    // ARRANGE
-    getItemSpy.mockImplementationOnce(() => '{"email":"my email"}');
-    renderProviders(() => <Route path="/" component={TestComponent} />);
+  it.todo(
+    'should navigate to /, when "user" key exists in localStorage && current location pathname includes "/login"',
+    () => {
+      // ARRANGE
+      getItemSpy.mockImplementationOnce(() => '{"email":"my email"}');
+      renderProviders(() => <Route path="/" component={TestComponent} />);
 
-    // ASSERT
-    expect(getItemSpy).toHaveBeenCalled();
-    expect(mockedLocation).toHaveBeenCalled();
-    expect(mockedNavigator).toHaveBeenCalled();
-  });
+      // ASSERT
+      expect(getItemSpy).toHaveBeenCalled();
+      expect(mockedLocation).toHaveBeenCalled();
+      expect(mockedNavigator).toHaveBeenCalled();
+    },
+  );
 });

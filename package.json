@@ -18,9 +18,12 @@
     "msw:delete": "rm -rf public/mockServiceWorker.js",
     "start": "vite",
     "build": "pnpm msw:delete && vite build",
-    "serve": "vite preview",
+    "preview": "vite preview",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "test:preview": "vite preview --outDir html",
+    "test:preview:coverage": "vite preview --outDir coverage"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
@@ -33,7 +36,8 @@
     "@types/testing-library__jest-dom": "^5.14.6",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
-    "@vitest/coverage-c8": "^0.29.7",
+    "@vitest/coverage-istanbul": "^0.32.2",
+    "@vitest/ui": "^0.32.2",
     "autoprefixer": "^10.4.14",
     "daisyui": "^3.1.7",
     "eslint": "^8.43.0",
@@ -58,7 +62,7 @@
     "vite": "^4.3.9",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-solid": "^2.7.0",
-    "vitest": "^0.29.2"
+    "vitest": "^0.32.2"
   },
   "dependencies": {
     "@felte/solid": "^1.2.10",

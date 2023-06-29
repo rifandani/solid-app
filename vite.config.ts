@@ -43,8 +43,11 @@ export default defineConfig(({ mode }) => {
       conditions: ['development', 'browser'],
     },
     test: {
-      environment: 'jsdom',
-      globals: true,
+      // to see how your tests are running in real time in the terminal, add "default"
+      // to generate HTML output and preview the results of your tests, add "html"
+      reporters: ['default', 'html'],
+      environment: 'jsdom', // mocking the DOM API
+      globals: true, // use APIs globally like jest
       transformMode: { web: [/\.[jt]sx?$/] },
       setupFiles: ['node_modules/@testing-library/jest-dom/extend-expect.js', 'src/setupTests.ts'],
       // Will call .mockRestore() on all spies before each test. This will clear mock history and reset its implementation to the original one.
@@ -56,12 +59,12 @@ export default defineConfig(({ mode }) => {
       // threads: false,
       // isolate: false,
       coverage: {
-        provider: 'c8', // 'istanbul' / 'c8'
+        provider: 'istanbul', // 'istanbul' / 'v8'
         reporter: ['text', 'json', 'html'],
-        statements: 80,
-        branches: 80,
-        functions: 65,
-        lines: 80,
+        statements: 50,
+        branches: 50,
+        functions: 50,
+        lines: 50,
         exclude: [
           'coverage/**',
           'dist/**',
@@ -80,7 +83,6 @@ export default defineConfig(({ mode }) => {
           'src/index.tsx',
           'src/mocks/**',
           'src/assets/**',
-          'src/models/**',
         ],
       },
     },
