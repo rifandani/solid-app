@@ -2,16 +2,18 @@
 
 Solid template built with:
 
-- `typescript` + `eslint` + `prettier` -> boosts dev productivity
+- `typescript` + `eslint` + `prettier` -> dev productivity
 - `solid-devtools` -> debug reactivity graph
-- `@solidjs/router` -> route data function, dynamic route, nested route
+- `@solid-primitives` -> common primitives (similar to custom hooks or `react-use` in React)
+- `@solidjs/router` -> routing
 - `vite` + `vitest` + `@solidjs/testing-library` -> unit test, integration test, coverage
 - `msw` -> browser and server mocking
-- `tailwindcss` + `tailwind-merge` + `daisyui` -> css utility class for styling
+- `tailwindcss` + `tailwind-merge` + `daisyui` -> styling
 - `@formkit/auto-animate` -> automate transition animation when component mount/unmount
 - `axios` + `@tanstack/solid-query` -> data fetching
 - `zod` -> schema validation
 - `@felte/solid` -> form management
+- `@kobalte/core` -> unstyled UI component library (similar to `radix-ui` in React)
 
 ## Development
 
@@ -53,12 +55,22 @@ You can deploy the `dist` folder to any static host provider (netlify, surge, no
 
 ## Notes
 
-- [ ] revamp navbar, and all UI's
-- [ ] use more [@solid-primitives](https://primitives.solidjs.community/)
+Notes:
+
+- upgrading `vite`, `vitest`, and `@vitest/coverage-c8` breaks the app
+- using router configuration object OR separate the routes in a component breaks the app. `Uncaught Error: Make sure your app is wrapped in a <Router />`
+
+Todos:
+
+- [ ] `@vitest/coverage-c8` no longer maintained. Use `@vitest/coverage-istanbul` instead
+- [ ] fix all tests
+- [x] use more [@solid-primitives](https://primitives.solidjs.community/)
 - [x] use [kobalte](https://kobalte.dev/docs/core/overview/introduction)
 - [x] use API from [dummyjson](https://dummyjson.com)
-- [x] use router routes configuration object, instead of `Routes`. Not possible. Even tried to separate routes as Router component, but still -> `Uncaught Error: Make sure your app is wrapped in a <Router />`
+- [x] use router routes configuration object, instead of `Routes`. Not possible. Even tried to
 - [x] `/playground` route to showcase solid-specific API's, so that we can compare it to another framework
+
+Debugging:
 
 ```tsx
 const [searchParams] = useSearchParams();
@@ -74,19 +86,4 @@ createEffect(() =>
     queryCache: queryClient.getQueryCache(),
   }),
 );
-```
-
-```tsx
-const useTodosResource = () => {
-  const [searchParams] = useSearchParams();
-  const paramsObject = createMemo(
-    () => JSON.parse(JSON.stringify(searchParams)) as TodoFiltersSchema,
-  );
-
-  const todosResource = createResource(paramsObject, (params) =>
-    http.get('/todos', { params }).then((res) => res.data as GetTodosResponse),
-  );
-
-  return todosResource;
-};
 ```
