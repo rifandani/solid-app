@@ -37,7 +37,7 @@ const App: Component = () => (
             path="/login"
             element={
               <SuspenseWithFallbackSpinner>
-                <LazyHomePage />
+                <LazyLoginPage />
               </SuspenseWithFallbackSpinner>
             }
           />
