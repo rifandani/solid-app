@@ -1,5 +1,6 @@
 import { Link } from '@solidjs/router';
 import { Component } from 'solid-js';
+import solidjs from '../../../../assets/solidjs.webp';
 import { Icon } from '../../../shared/components/atoms';
 import LoginForm from '../../components/LoginForm/LoginForm.component';
 import useLoginPageVM from './Login.vm';
@@ -40,7 +41,7 @@ const LoginPage: Component = () => {
         <section class="w-1/2 shadow-2xl">
           <span class="relative hidden h-screen w-full md:flex md:items-center md:justify-center">
             <img
-              src="src/assets/solidjs.webp"
+              src={solidjs}
               alt="login page cover"
               loading="lazy"
               class="h-full object-cover object-right"

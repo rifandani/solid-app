@@ -2,6 +2,8 @@ import { Toast } from '@kobalte/core';
 import { Route, Router, Routes } from '@solidjs/router';
 import { Component, lazy } from 'solid-js';
 import { Portal } from 'solid-js/web';
+import LoginPage from '../modules/auth/pages/Login/Login.page';
+import NotFoundPage from '../modules/auth/pages/NotFound/NotFound.page';
 import { SuspenseWithFallbackSpinner } from '../modules/shared/components/molecules';
 import { PageWrapper } from '../modules/shared/components/templates';
 import routeDataTodo from '../modules/todo/pages/Todo/Todo.data';
@@ -9,11 +11,9 @@ import AppErrorBoundary from './ErrorBoundary.app';
 import { AppRootProvider, queryClient } from './Store.app';
 
 export const LazyHomePage = lazy(() => import('../modules/home/pages/Home/Home.page'));
-export const LazyLoginPage = lazy(() => import('../modules/auth/pages/Login/Login.page'));
 export const LazyPlaygroundPage = lazy(() => import('../modules/playground/pages/Playground.page'));
 export const LazyTodosPage = lazy(() => import('../modules/todo/pages/Todos/Todos.page'));
 export const LazyTodoPage = lazy(() => import('../modules/todo/pages/Todo/Todo.page'));
-export const LazyNotFoundPage = lazy(() => import('../modules/auth/pages/NotFound/NotFound.page'));
 
 const App: Component = () => (
   <AppErrorBoundary>
@@ -37,7 +37,7 @@ const App: Component = () => (
             path="/login"
             element={
               <SuspenseWithFallbackSpinner>
-                <LazyLoginPage />
+                <LoginPage />
               </SuspenseWithFallbackSpinner>
             }
           />
@@ -79,7 +79,7 @@ const App: Component = () => (
             path="*"
             element={
               <SuspenseWithFallbackSpinner>
-                <LazyNotFoundPage />
+                <NotFoundPage />
               </SuspenseWithFallbackSpinner>
             }
           />
