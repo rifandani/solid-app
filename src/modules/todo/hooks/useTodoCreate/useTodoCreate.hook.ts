@@ -25,9 +25,8 @@ const useTodoCreate = () => {
       await queryClient.cancelQueries({ queryKey: todoKeys.list(params()) });
 
       // Snapshot the previous value
-      const previousTodosQueryResponse = queryClient.getQueryData(
-        todoKeys.list(params()),
-      ) as TodoListApiResponseSchema;
+      const previousTodosQueryResponse = (queryClient.getQueryData(todoKeys.list(params())) ??
+        []) as TodoListApiResponseSchema;
 
       // Optimistically update to the new value & delete the last value
       queryClient.setQueryData(todoKeys.list(params()), {

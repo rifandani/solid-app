@@ -23,7 +23,7 @@ const useTodoUpdate = () => {
     { previousTodosQueryResponse: TodoListApiResponseSchema }
   >({
     // Called before `mutationFn`:
-    onMutate: async ({ id, ...body }: UpdateTodoSchema) => {
+    onMutate: async ({ id, ...body }) => {
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries({ queryKey: todoKeys.list(params()) });
 
