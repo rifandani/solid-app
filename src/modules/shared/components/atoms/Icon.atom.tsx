@@ -16,6 +16,7 @@ export const Home: Component<SVGProps> = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
+      <title>Home</title>
       <path
         fill="currentColor"
         d="M12 2a1 1 0 00-.71.297l-10.087 8.8A.5.5 0 001 11.5a.5.5 0 00.5.5H4v8a1 1 0 001 1h4a1 1 0 001-1v-6h4v6a1 1 0 001 1h4a1 1 0 001-1v-8h2.5a.5.5 0 00.5-.5.5.5 0 00-.203-.402l-10.08-8.795a1 1 0 00-.006-.006A1 1 0 0012 2z"
@@ -36,6 +37,7 @@ export const SolidLogo: Component<SVGProps> = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
+      <title>SolidLogo</title>
       <path
         fill="#76b3e1"
         d="M163 35S110-4 69 5l-3 1c-6 2-11 5-14 9l-2 3-15 26 26 5c11 7 25 10 38 7l46 9 18-30z"
@@ -104,6 +106,7 @@ export const HamburgerMenu: Component<SVGProps> = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
+      <title>HamburgerMenu</title>
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -127,7 +130,7 @@ export const HamburgerMenu2: Component<SVGProps> = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <title>Hamburger Menu</title>
+      <title>HamburgerMenu2</title>
       <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
     </svg>
   );
@@ -170,7 +173,7 @@ export const OutlineClose: Component<SVGProps> = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <title>Error</title>
+      <title>OutlineClose</title>
       <path
         fill="currentColor"
         d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z"

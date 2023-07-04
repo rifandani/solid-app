@@ -40,7 +40,6 @@ const useTodoDelete = () => {
       // Return a context object with the snapshotted value
       return { previousTodosQueryResponse };
     },
-    mutationKey: todoKeys.list(params()),
     mutationFn: (id) => todoApi.delete(id),
     onSettled: (_id, error, _variables, context) => {
       toaster.show((props) => (

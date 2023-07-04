@@ -32,7 +32,6 @@ const useTodoUpdate = () => {
   const queryClient = useQueryClient();
 
   return createMutation<UpdateTodoApiResponseSchema, ErrorApiResponseSchema, UpdateTodoSchema>({
-    mutationKey: todoKeys.lists(),
     mutationFn: (updateTodo) => todoApi.update(updateTodo),
     onSuccess: async (updatedTodo) => {
       // NOTE: the order of function call MATTERS

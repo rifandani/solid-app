@@ -42,7 +42,6 @@ const useTodoUpdate = () => {
       // Return a context object with the snapshotted value
       return { previousTodosQueryResponse };
     },
-    mutationKey: todoKeys.list(params()),
     mutationFn: (updateTodo) => todoApi.update(updateTodo),
     onSettled: (_updateTodo, error, _variables, context) => {
       toaster.show((props) => (

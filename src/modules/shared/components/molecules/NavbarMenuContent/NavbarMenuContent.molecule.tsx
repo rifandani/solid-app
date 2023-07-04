@@ -28,15 +28,12 @@ const NavbarMenuContent: Component = () => {
 
         <ul
           tabIndex={0}
-          class="dropdown-content menu rounded-box z-10 block max-h-60 w-72 overflow-y-auto bg-base-100 p-2 shadow lg:w-52"
+          class="dropdown-content menu rounded-box z-10 block max-h-60 w-72 overflow-y-auto bg-secondary p-2 text-secondary-content shadow lg:w-52"
         >
           <For each={themes}>
             {(theme) => (
               <li>
-                <button
-                  class="capitalize tracking-wide text-neutral-content"
-                  data-set-theme={theme}
-                >
+                <button class="capitalize tracking-wide" data-set-theme={theme}>
                   {theme}
                 </button>
               </li>

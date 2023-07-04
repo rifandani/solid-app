@@ -40,7 +40,6 @@ const useTodoCreate = () => {
       // Return a context object with the snapshotted value
       return { previousTodosQueryResponse };
     },
-    mutationKey: todoKeys.list(params()),
     mutationFn: (newTodo) => todoApi.create(newTodo),
   });
 };
