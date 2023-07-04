@@ -9,7 +9,7 @@ Solid template built with:
 - `msw` -> browser and server mocking
 - `tailwindcss` + `tailwind-merge` + `daisyui` -> styling
 - `@formkit/auto-animate` -> automate transition animation when component mount/unmount
-- `axios` + `@tanstack/solid-query` -> data fetching
+- `redaxios` + `@tanstack/solid-query` -> data fetching
 - `zod` -> schema validation
 - `@felte/solid` -> form management
 - `@kobalte/core` -> unstyled UI component library (similar to `radix-ui` in React)
@@ -57,6 +57,7 @@ You can deploy the `dist` folder to any static host provider (netlify, surge, no
 Todos:
 
 - [ ] use `@iconify/solid` OR SVG sprites
+- [ ] @tailwindcss/animate plugin
 - [ ] fix all tests
 - [x] use router routes configuration object, instead of `Routes`. Currently `v0.8.2` not possible. Using router configuration object OR separate the routes in a component breaks the app. `Uncaught Error: Make sure your app is wrapped in a <Router />`
 - [x] integrate `solid-devtools`. Currently `v0.27.3` not possible. Using `"type": "module"` in `package.json` breaks the app. Importing `import 'solid-devtools'` in `index.tsx` also breaks the app.

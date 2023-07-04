@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'redaxios';
 import { env } from '../../configs/env/env.config';
 
 // Set config defaults when creating the instance
@@ -8,6 +8,3 @@ export const http = axios.create({
     // Resolve only if the status code is less than 500
     status < 500,
 });
-
-// Alter defaults after instance has been created
-// instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
