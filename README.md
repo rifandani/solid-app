@@ -56,8 +56,10 @@ You can deploy the `dist` folder to any static host provider (netlify, surge, no
 
 Todos:
 
-- [ ] use `@iconify/solid` OR SVG sprites
-- [ ] @tailwindcss/animate plugin
+- [ ] use `@iconify/solid` and SVG sprites
+- [ ] use `@tailwindcss/animate` plugin or motion one for animation
+- [ ] try out solidjs component compiled to web component
+- [ ] solidjs inside react (?)
 - [ ] fix all tests
 - [x] use router routes configuration object, instead of `Routes`. Currently `v0.8.2` not possible. Using router configuration object OR separate the routes in a component breaks the app. `Uncaught Error: Make sure your app is wrapped in a <Router />`
 - [x] integrate `solid-devtools`. Currently `v0.27.3` not possible. Using `"type": "module"` in `package.json` breaks the app. Importing `import 'solid-devtools'` in `index.tsx` also breaks the app.

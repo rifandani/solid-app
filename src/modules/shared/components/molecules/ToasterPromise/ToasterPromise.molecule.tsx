@@ -16,7 +16,7 @@ type ToasterPromiseProps<T, U> = {
 };
 // #endregion
 
-// TODO
+// TODO: work in progress
 const ToasterPromise = <T, U>(props: ToasterPromiseProps<T, U>): JSX.Element => (
   <Toast.Root class="alert relative overflow-hidden shadow-lg" toastId={props.toastId}>
     <div>

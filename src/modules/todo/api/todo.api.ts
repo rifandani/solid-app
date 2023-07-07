@@ -1,5 +1,5 @@
 import { ResourceParamsSchema } from '../../shared/api/api.schema';
-import { http } from '../../shared/services/http/http';
+import { http } from '../../shared/services/api/http.api';
 import {
   createTodoApiResponseSchema,
   deleteTodoApiResponseSchema,

@@ -23,10 +23,10 @@ const TodosItem: Component<TodosItemProps> = (props) => {
     >
       <input
         data-testid="item-input-todoId"
-        value={props.todo.id}
         type="hidden"
         name="todoId"
         id="todoId"
+        value={props.todo.id}
       />
 
       <input
@@ -40,10 +40,10 @@ const TodosItem: Component<TodosItemProps> = (props) => {
       />
 
       <Link
-        href={props.todo.id.toString()}
         data-testid="item-p-todo"
         class="ml-5 w-full text-left text-lg text-secondary-content hover:font-bold"
         classList={{ 'line-through': props.todo.completed }}
+        href={props.todo.id.toString()}
       >
         {props.todo.todo}
       </Link>

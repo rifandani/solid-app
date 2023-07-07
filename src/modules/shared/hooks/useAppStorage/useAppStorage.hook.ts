@@ -19,6 +19,13 @@ export const appStorageSchema = z.object({
   user: loginApiResponseSchema.optional(),
 });
 
+/**
+ * like createStore, but bound to a localStorage-like API
+ *
+ * @prop prefix - app
+ * @prop serializer - JSON.stringify(value)
+ * @prop deserializer - JSON.parse(value)
+ */
 export const useAppStorage = () =>
   createStorage({
     prefix: 'app',

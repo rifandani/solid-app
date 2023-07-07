@@ -21,6 +21,8 @@ function useAuth() {
   const [appStorage] = useAppStorage();
 
   onMount(() => {
+    if (!appStorage.user && location.pathname.includes('login')) return;
+
     if (!appStorage.user) {
       navigate('/login', { replace: true });
       toaster.show((props) => (

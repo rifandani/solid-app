@@ -7,11 +7,6 @@ import { TodoDetailApiResponseSchema } from '../../api/todo.schema';
 const routeDataTodo =
   (_queryClient: typeof queryClient) =>
   async ({ params }: RouteDataFuncArgs) => {
-    // original implementation using `createResource`
-    // return createResource(params.id, (todoId) =>
-    //   http.get(`todos/${todoId}`).then((res) => res.data as TodoDetailApiResponseSchema),
-    // );
-
     // will throw error if `params.id` is not a number
     const id = z.coerce.number().parse(params.id);
     const queryKey = todoKeys.detail(id);
