@@ -1,6 +1,6 @@
+import { Icon } from '@iconify-icon/solid';
 import { Toast } from '@kobalte/core';
 import { JSX, Show } from 'solid-js';
-import { Icon } from '../../atoms';
 
 // #region INTERFACES
 type ToasterPromiseProps<T, U> = {
@@ -37,7 +37,7 @@ const ToasterPromise = <T, U>(props: ToasterPromiseProps<T, U>): JSX.Element => 
 
     <div class="flex-none">
       <Toast.CloseButton class="btn-sm btn">
-        <Icon.OutlineClose />
+        <Icon icon="lucide:x" height="1.5em" />
       </Toast.CloseButton>
     </div>
   </Toast.Root>

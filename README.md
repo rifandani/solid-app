@@ -56,7 +56,6 @@ You can deploy the `dist` folder to any static host provider (netlify, surge, no
 
 Todos:
 
-- [ ] use `@iconify/solid` and SVG sprites
 - [ ] use `@tailwindcss/animate` plugin or motion one for animation
 - [ ] try out solidjs component compiled to web component
 - [ ] solidjs inside react (?)

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 import daisyui from 'daisyui';

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { RequestHandler } from 'msw';
 import { authHandlers } from './endpoints/auth.endpoint';
 import { todoHandlers } from './endpoints/todo.endpoint';

@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import { Router, Routes } from '@solidjs/router';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '@solidjs/testing-library';
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
 import { AppRootProvider } from '../../../app/Store.app';

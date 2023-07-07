@@ -1,6 +1,6 @@
+import { Icon } from '@iconify-icon/solid';
 import { Link } from '@solidjs/router';
 import { Component, Match, Show, Switch } from 'solid-js';
-import { LoadingSpinner } from '../../../shared/components/atoms';
 import useTodoPageVM from './Todo.vm';
 
 const TodoPage: Component = () => {
@@ -32,7 +32,7 @@ const TodoPage: Component = () => {
       <Switch>
         <Match when={todoQuery.isLoading}>
           <div class="flex items-center justify-center py-5">
-            <LoadingSpinner color="currentColor" />
+            <Icon icon="svg-spinners:3-dots-fade" height="5em" class="text-secondary-content" />
           </div>
         </Match>
 

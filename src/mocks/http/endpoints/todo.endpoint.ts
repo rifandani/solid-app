@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { rest } from 'msw';
 import { ResourceParamsSchema, resourceParamsSchema } from '../../../modules/shared/api/api.schema';
 import type {

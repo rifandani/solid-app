@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import router from '@solidjs/router';
 import solid from 'solid-js';
 import { vi } from 'vitest';

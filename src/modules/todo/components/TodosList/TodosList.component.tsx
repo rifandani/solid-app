@@ -1,5 +1,5 @@
+import { Icon } from '@iconify-icon/solid';
 import { Component, For, Match, Switch } from 'solid-js';
-import { LoadingSpinner } from '../../../shared/components/atoms';
 import { TodoListApiResponseSchema } from '../../api/todo.schema';
 import TodosItem from '../../components/TodosItem/TodosItem.component';
 import useTodosList from './useTodosList.hook';
@@ -11,7 +11,7 @@ const TodosList: Component = () => {
     <Switch>
       <Match when={todosQuery.isLoading}>
         <div class="flex items-center justify-center py-5">
-          <LoadingSpinner color="currentColor" />
+          <Icon icon="svg-spinners:3-dots-fade" height="5em" class="text-secondary-content" />
         </div>
       </Match>
 

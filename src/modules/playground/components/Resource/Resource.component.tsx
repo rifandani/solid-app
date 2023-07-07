@@ -1,9 +1,9 @@
+import { Icon } from '@iconify-icon/solid';
 import { createConnectivitySignal } from '@solid-primitives/connectivity';
 import { createEventListener } from '@solid-primitives/event-listener';
 import { createTimer } from '@solid-primitives/timer';
 import { Component, For, createEffect, createResource, onCleanup, onMount } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
-import { LoadingSpinner } from '../../../shared/components/atoms';
 import { todoApi } from '../../../todo/api/todo.api';
 import { TodoListApiResponseSchema, TodoSchema } from '../../../todo/api/todo.schema';
 import TodosFilter from '../../../todo/components/TodosFilter/TodosFilter.component';
@@ -12,7 +12,7 @@ import { useTodosParams } from '../../../todo/hooks/useTodos/useTodos.hook';
 // #region  DYNAMIC RENDERING
 const Pending: Component = () => (
   <div class="flex items-center justify-center py-5">
-    <LoadingSpinner color="currentColor" />
+    <Icon icon="svg-spinners:3-dots-fade" height="5em" class="text-secondary-content" />
   </div>
 );
 const Errored: Component<{ error: unknown }> = (props) => (

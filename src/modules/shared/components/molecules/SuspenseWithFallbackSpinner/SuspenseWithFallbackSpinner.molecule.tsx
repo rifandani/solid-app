@@ -1,11 +1,11 @@
+import { Icon } from '@iconify-icon/solid';
 import { ParentComponent, Suspense } from 'solid-js';
-import { LoadingSpinner } from '../../atoms';
 
 const SuspenseWithFallbackSpinner: ParentComponent = (props) => (
   <Suspense
     fallback={
       <div class="flex items-center justify-center py-16">
-        <LoadingSpinner />
+        <Icon icon="svg-spinners:3-dots-fade" height="5em" class="text-primary-content" />
       </div>
     }
   >

@@ -1,7 +1,7 @@
+import { Icon } from '@iconify-icon/solid';
 import { Link } from '@solidjs/router';
 import { ParentComponent } from 'solid-js';
-import solidLogo from '../../../../../assets/solid.svg';
-import { Icon } from '../../atoms';
+import { SvgIcon } from '../../atoms';
 import { NavbarMenuContent } from '../../molecules';
 import useNavbar from './useNavbar.hook';
 
@@ -17,13 +17,13 @@ const Navbar: ParentComponent = (props) => {
         <div class="navbar w-full bg-base-300">
           <div class="flex-none lg:hidden">
             <label for="my-nav-drawer" class="btn-ghost btn-square btn">
-              <Icon.HamburgerMenu2 width={20} height={20} style={{ fill: 'hsl(var(--p))' }} />
+              <Icon icon="lucide:menu" height="2em" class="text-primary-content" />
             </label>
           </div>
 
           <Link href="/" class="link-primary link mx-2 flex-1 px-2">
             <span class="flex items-center space-x-2 pl-2 text-2xl">
-              <img src={solidLogo} alt="solid logo" class="h-8 w-6" />
+              <SvgIcon id="icon-solidjs" class="h-6 w-6" />
               <p class="font-semibold tracking-wider text-primary">{t('appName')}</p>
             </span>
           </Link>

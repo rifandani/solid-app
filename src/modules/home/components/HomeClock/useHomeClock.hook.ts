@@ -17,7 +17,7 @@ const useHomeClock = () => {
   const [buttons, setButtons] = createStore([
     {
       id: 'sort',
-      class: 'btn-ghost btn',
+      class: 'btn-neutral btn',
       onClick: () => setButtons((prev) => shuffle(prev)),
       text: 'sortButtons' as const,
     },

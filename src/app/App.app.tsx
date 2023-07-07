@@ -88,7 +88,7 @@ const App: Component = () => (
         {/* toast with portal */}
         <Portal>
           <Toast.Region duration={3_000} pauseOnInteraction swipeDirection="right">
-            <Toast.List class="toast-end toast z-20 w-96" />
+            <Toast.List class="toast-end toast z-20" />
           </Toast.Region>
         </Portal>
       </Router>
