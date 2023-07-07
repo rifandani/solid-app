@@ -15,7 +15,7 @@ const TodosItem: Component<TodosItemProps> = (props) => {
   return (
     <form
       data-testid="item-form"
-      class="mb-2 flex items-center justify-between"
+      class="mb-2 flex items-center justify-between animate-in slide-in-from-left-5 duration-300 ease-in-out"
       onSubmit={(e) => {
         e.preventDefault();
         if (props.todo.userId === appStorage.user?.id) handleDeleteTodo(props.todo);

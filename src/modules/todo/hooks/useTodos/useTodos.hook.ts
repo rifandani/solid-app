@@ -10,7 +10,7 @@ export const useTodosParams = () => {
     ({
       ...searchParams,
       limit: Number(searchParams?.limit ?? defaultLimit),
-    } as ResourceParamsSchema);
+    }) as ResourceParamsSchema;
 
   return params;
 };
@@ -23,6 +23,7 @@ const useTodos = () => {
   return createQuery({
     queryKey,
     queryFn,
+    staleTime: 5_000,
   });
 };
 
