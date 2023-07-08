@@ -26,7 +26,7 @@ const ToasterPromise = <T, U>(props: ToasterPromiseProps<T, U>): JSX.Element => 
 
       <Show when={props?.description}>
         <Toast.Description as="p" class="toast__description">
-          {props?.description}
+          {props.description}
         </Toast.Description>
       </Show>
 

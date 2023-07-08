@@ -2,14 +2,14 @@ import { Icon } from '@iconify-icon/solid';
 import { createConnectivitySignal } from '@solid-primitives/connectivity';
 import { createEventListener } from '@solid-primitives/event-listener';
 import { createTimer } from '@solid-primitives/timer';
-import { Component, For, createEffect, createResource, onCleanup, onMount } from 'solid-js';
+import { Component, For, createEffect, createResource } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 import { todoApi } from '../../../todo/api/todo.api';
 import { TodoListApiResponseSchema, TodoSchema } from '../../../todo/api/todo.schema';
 import TodosFilter from '../../../todo/components/TodosFilter/TodosFilter.component';
 import { useTodosParams } from '../../../todo/hooks/useTodos/useTodos.hook';
 
-// #region  DYNAMIC RENDERING
+// #region DYNAMIC RENDERING
 const Pending: Component = () => (
   <div class="flex items-center justify-center py-5">
     <Icon icon="svg-spinners:3-dots-fade" height="5em" class="text-secondary-content" />
@@ -96,23 +96,9 @@ const Resource: Component = () => {
     return prev;
   }, 0);
 
-  // #region ATTACH CLICK LISTENER TO BUTTON
-  let ref: HTMLButtonElement | undefined;
-
   const onClickRefetch = () =>
     // refetch will re-run the fetcher without changing the source
     void refetch();
-
-  onMount(() => {
-    if (!ref) return;
-    ref.addEventListener('click', onClickRefetch);
-  });
-
-  onCleanup(() =>
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    ref!.removeEventListener('click', onClickRefetch),
-  );
-  // #endregion
 
   return (
     <section class="mx-4 mt-5 rounded-md border-2 border-secondary p-5 md:mx-0">
@@ -123,7 +109,7 @@ const Resource: Component = () => {
       <button
         class="btn-secondary btn-outline btn mb-2.5 text-lg"
         disabled={todosResource.state === 'pending' || todosResource.state === 'refreshing'}
-        ref={ref}
+        onClick={onClickRefetch}
       >
         Refetch
       </button>

@@ -7,7 +7,6 @@ import {
   CreateTodoSchema,
   TodoListApiResponseSchema,
 } from '../../api/todo.schema';
-import { defaultLimit } from '../../constants/todos.constant';
 import { useTodosParams } from '../useTodos/useTodos.hook';
 
 const useTodoCreate = () => {
@@ -31,10 +30,7 @@ const useTodoCreate = () => {
       // Optimistically update to the new value & delete the last value
       queryClient.setQueryData(todoKeys.list(params()), {
         ...previousTodosQueryResponse,
-        todos: [
-          newTodo,
-          ...previousTodosQueryResponse.todos.slice(0, Number(params()?.limit ?? defaultLimit) - 1),
-        ],
+        todos: [newTodo, ...previousTodosQueryResponse.todos.slice(0, Number(params().limit - 1))],
       });
 
       // Return a context object with the snapshotted value

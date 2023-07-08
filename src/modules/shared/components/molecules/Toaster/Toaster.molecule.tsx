@@ -36,7 +36,7 @@ const Toaster: Component<ToasterProps> = (props) => (
         as="p"
         class="line-clamp-3 max-w-[90%] whitespace-pre-wrap break-words px-3 pb-5 text-sm"
       >
-        {props?.description}
+        {props.description}
       </Toast.Description>
     </Show>
 

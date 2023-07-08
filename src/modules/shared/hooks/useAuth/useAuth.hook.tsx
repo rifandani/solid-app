@@ -31,7 +31,7 @@ function useAuth() {
       return;
     }
 
-    if (appStorage.user && location.pathname.includes('login')) {
+    if (location.pathname.includes('login')) {
       navigate('/');
       toaster.show((props) => (
         <Toaster toastId={props.toastId} type="info" title={t('authorized')} />
