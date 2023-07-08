@@ -37,6 +37,9 @@ dependencies:
   redaxios:
     specifier: ^0.5.1
     version: 0.5.1
+  solid-element:
+    specifier: ^1.7.1
+    version: 1.7.1(solid-js@1.7.7)
   solid-js:
     specifier: ^1.7.7
     version: 1.7.7
@@ -2576,6 +2579,10 @@ packages:
       array-ify: 1.0.0
       dot-prop: 5.3.0
     dev: true
+
+  /component-register@0.8.3:
+    resolution: {integrity: sha512-/0u8ov0WPWi2FL78rgB9aFOcfY8pJT4jP/l9NTOukGNLVQ6hk35sEJE1RkEnNQU3yk48Qr7HlDQjRQKEVfgeWg==}
+    dev: false
 
   /concat-map@0.0.1:
     resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
@@ -5382,6 +5389,15 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
     dev: true
+
+  /solid-element@1.7.1(solid-js@1.7.7):
+    resolution: {integrity: sha512-VtG3kg3HRUkq6QN4iyZKX1qmXYCEHMO3yH1DfakifaO+ncxHa56jU8SLtEgD55zR230pXQyPTWaEDDS0hTlmpg==}
+    peerDependencies:
+      solid-js: ^1.7.6
+    dependencies:
+      component-register: 0.8.3
+      solid-js: 1.7.7
+    dev: false
 
   /solid-js@1.7.7:
     resolution: {integrity: sha512-SPdYVke/Z6Za24PBTbULyQYPrhGO1ZbPany76atO2zF2dmYn2pCotbsw1JtlgWnr9dK2JbwPGnA3ODTGPLhZNw==}

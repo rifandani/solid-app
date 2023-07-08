@@ -78,6 +78,7 @@
     "@solidjs/router": "^0.8.2",
     "@tanstack/solid-query": "^4.29.19",
     "redaxios": "^0.5.1",
+    "solid-element": "^1.7.1",
     "solid-js": "^1.7.7",
     "tailwind-merge": "^1.13.2",
     "theme-change": "^2.5.0",
