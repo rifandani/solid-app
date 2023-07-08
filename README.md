@@ -1,5 +1,7 @@
 # Intro
 
+[![DeepScan grade](https://deepscan.io/api/teams/13942/projects/24678/branches/761600/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=13942&pid=24678&bid=761600)
+
 Solid template built with:
 
 - `typescript` + `eslint` + `prettier` -> dev productivity
@@ -13,7 +15,8 @@ Solid template built with:
 - `redaxios` + `@tanstack/solid-query` -> data fetching
 - `zod` -> schema validation
 - `@felte/solid` -> form management
-- `@iconify-icon/solid` -> icon on demand
+- `@iconify-icon/solid` -> icon on demand (based on web-component)
+- `type-fest` -> useful type helpers
 
 ## Development
 
@@ -58,6 +61,7 @@ You can deploy the `dist` folder to any static host provider (netlify, surge, no
 Todos:
 
 - [ ] fix all tests
+- [ ] add `/docs` folder, including all my decisions why or technical considerations.
 - [x] use router routes configuration object, instead of `Routes`. Currently `v0.8.2` not possible. Currently, using router configuration object OR separate the routes in a component breaks the app. `Uncaught Error: Make sure your app is wrapped in a <Router />`
 - [x] integrate `solid-devtools`. Currently `v0.27.3` not possible. Using `"type": "module"` in `package.json` breaks the app. Importing `import 'solid-devtools'` in `index.tsx` also breaks the app.
 - [x] solidjs inside react. Currently `reactjs-solidjs-bridge` library exists, but the DX is so horrible. If we want to run both libraries side-by-side, we need to have separate Vite configs for React and Solid JSX. While both are JSX, they require different pragmas.
