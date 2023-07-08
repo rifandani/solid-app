@@ -67,6 +67,7 @@ export default defineConfig(() => {
           'src/index.tsx',
           'src/mocks/**',
           'src/assets/**',
+          'src/lib/**',
         ],
       },
     },

@@ -7,12 +7,13 @@ Solid template built with:
 - `@solidjs/router` -> routing
 - `vite` + `vitest` + `@solidjs/testing-library` -> unit test, integration test, coverage
 - `msw` -> browser and server mocking
-- `tailwindcss` + `tailwind-merge` + `daisyui` -> styling
+- `tailwindcss` + `tailwindcss-animate` + `tailwind-merge` + `daisyui` -> styling
 - `@formkit/auto-animate` -> automate transition animation when component mount/unmount
+- `@kobalte/core` -> unstyled UI component library (similar to `radix-ui` in React)
 - `redaxios` + `@tanstack/solid-query` -> data fetching
 - `zod` -> schema validation
 - `@felte/solid` -> form management
-- `@kobalte/core` -> unstyled UI component library (similar to `radix-ui` in React)
+- `@iconify-icon/solid` -> icon on demand
 
 ## Development
 
