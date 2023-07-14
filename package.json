@@ -1,7 +1,7 @@
 {
   "name": "solid-template",
   "version": "0.0.0",
-  "description": "Solid template with Vite, Vitest, TailwindCSS, MSW",
+  "description": "Bulletproof Solid SPA Template",
   "license": "MIT",
   "author": "Tri Rizeki Rifandani",
   "packageManager": "pnpm@7.28.0",

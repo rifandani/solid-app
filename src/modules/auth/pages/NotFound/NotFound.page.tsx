@@ -14,8 +14,12 @@ const NotFoundPage: Component = () => {
         {vm.t('gone')}
       </p>
 
-      <Link data-testid="notFound-link" class="link-neutral link hover:skew-x-12" href="/">
-        {vm.app.user ? vm.t('goBackTo', { target: 'home' }) : vm.t('goBackTo', { target: 'login' })}
+      <Link
+        href={vm.app.user ? '/' : '/login'}
+        data-testid="notFound-link"
+        class="link-neutral link hover:skew-x-12"
+      >
+        {vm.t('goBackTo', { target: vm.app.user ? 'home' : 'login' })}
       </Link>
     </main>
   );

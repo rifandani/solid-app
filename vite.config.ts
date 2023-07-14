@@ -4,6 +4,7 @@
 import { defineConfig, PluginOption } from 'vite';
 import eslint from 'vite-plugin-eslint';
 import solid from 'vite-plugin-solid';
+import { configDefaults } from 'vitest/config';
 
 export default defineConfig(() => {
   const plugins: PluginOption[] | undefined = [
@@ -34,6 +35,7 @@ export default defineConfig(() => {
       globals: true, // use APIs globally like jest
       transformMode: { web: [/\.[jt]sx?$/] },
       setupFiles: ['node_modules/@testing-library/jest-dom/extend-expect.js', 'src/setupTests.ts'],
+      exclude: [...configDefaults.exclude, 'e2e/*'],
       // Will call .mockRestore() on all spies before each test. This will clear mock history and reset its implementation to the original one.
       restoreMocks: true,
       // otherwise, solid would be loaded twice:

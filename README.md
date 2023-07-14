@@ -4,10 +4,10 @@
 
 Solid template built with:
 
-- `typescript` + `eslint` + `prettier` -> dev productivity
+- `vite` + `typescript` + `eslint` + `prettier` -> dev productivity
 - `@solid-primitives` -> common primitives (similar to custom hooks or `react-use` in React)
 - `@solidjs/router` -> routing
-- `vite` + `vitest` + `@solidjs/testing-library` -> unit test, integration test, coverage
+- `vitest` + `@solidjs/testing-library` -> unit test, integration test, coverage
 - `msw` -> browser and server mocking
 - `tailwindcss` + `tailwindcss-animate` + `tailwind-merge` + `daisyui` -> styling
 - `@formkit/auto-animate` -> automate transition animation when component mount/unmount
