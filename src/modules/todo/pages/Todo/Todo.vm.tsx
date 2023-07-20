@@ -5,6 +5,7 @@ import { createMutation, createQuery, useQueryClient } from '@tanstack/solid-que
 import { z } from 'zod';
 import { ErrorApiResponseSchema } from '../../../shared/api/api.schema';
 import { Toaster } from '../../../shared/components/molecules';
+import { useAppStorage } from '../../../shared/hooks/useAppStorage/useAppStorage.hook';
 import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
 import { todoApi, todoKeys } from '../../api/todo.api';
 import {
@@ -60,6 +61,7 @@ const useTodoPageVM = () => {
   const params = useParams();
   // will throw error if `params.id` is not a number
   const id = z.coerce.number().parse(params.id);
+  const [appStorage] = useAppStorage();
   const todoQuery = useInitialTodo(id);
   const todoUpdateMutation = useTodoUpdate();
 
@@ -75,7 +77,7 @@ const useTodoPageVM = () => {
     },
   });
 
-  return { t, todoQuery, todoUpdateMutation, ...felte };
+  return { t, appStorage, todoQuery, todoUpdateMutation, ...felte };
 };
 
 export default useTodoPageVM;

@@ -48,13 +48,13 @@ const MyCounter: ComponentType<MyCounterProps> = (props) => {
 
   return (
     <div part="containerPart" class="flex items-center space-x-2">
-      <button part="btnPart" class="btn-secondary btn-xs btn" onClick={onDecrement}>
+      <button part="btnPart" class="btn btn-secondary btn-xs" onClick={onDecrement}>
         Decrement
       </button>
       <p part="countPart" class="text-primary-content">
         {count()}
       </p>
-      <button part="btnPart" class="btn-secondary btn-xs btn" onClick={onIncrement}>
+      <button part="btnPart" class="btn btn-secondary btn-xs" onClick={onIncrement}>
         Increment
       </button>
     </div>

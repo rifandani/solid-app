@@ -14,7 +14,7 @@ const Directive: Component = () => {
       <Show
         when={show()}
         fallback={
-          <button class="btn-sm btn" onClick={() => setShow(true)}>
+          <button class="btn btn-sm" onClick={() => setShow(true)}>
             Open Modal
           </button>
         }

@@ -18,17 +18,17 @@ const NavbarMenuContent: Component = () => {
           Todos
         </NavLink>
       </li>
-      <li class="dropdown-top dropdown mb-3 mt-auto lg:dropdown-bottom lg:dropdown-end lg:my-0">
+      <li class="dropdown-top dropdown mb-3 mt-auto lg:dropdown-end lg:dropdown-bottom lg:my-0">
         <button
           tabIndex={0}
-          class="btn-secondary btn-block btn-sm btn normal-case text-secondary-content"
+          class="btn btn-secondary btn-sm btn-block normal-case text-secondary-content"
         >
           {t('theme')}
         </button>
 
         <ul
           tabIndex={0}
-          class="dropdown-content menu rounded-box z-10 block max-h-60 w-72 overflow-y-auto bg-secondary p-2 text-secondary-content shadow lg:w-52"
+          class="menu dropdown-content rounded-box z-10 block max-h-60 w-72 overflow-y-auto bg-secondary p-2 text-secondary-content shadow lg:w-52"
         >
           <For each={themes}>
             {(theme) => (
@@ -45,7 +45,7 @@ const NavbarMenuContent: Component = () => {
       <Show when={!!appStorage.user}>
         <li class="ml-0 lg:ml-3 lg:mt-0">
           <button
-            class="btn-primary btn-sm btn normal-case tracking-wide text-primary-content"
+            class="btn btn-primary btn-sm normal-case tracking-wide text-primary-content"
             onClick={handleClickLogout}
           >
             {t('logout')} ({appStorage.user?.username})

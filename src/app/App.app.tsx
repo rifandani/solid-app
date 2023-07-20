@@ -1,7 +1,8 @@
 import { Toast } from '@kobalte/core';
 import { Route, Router, Routes } from '@solidjs/router';
-import { Component, lazy } from 'solid-js';
+import { Component, lazy, onMount } from 'solid-js';
 import { Portal } from 'solid-js/web';
+import { themeChange } from 'theme-change';
 import LoginPage from '../modules/auth/pages/Login/Login.page';
 import NotFoundPage from '../modules/auth/pages/NotFound/NotFound.page';
 import { SuspenseWithFallbackSpinner } from '../modules/shared/components/molecules';
@@ -15,85 +16,89 @@ export const LazyPlaygroundPage = lazy(() => import('../modules/playground/pages
 export const LazyTodosPage = lazy(() => import('../modules/todo/pages/Todos/Todos.page'));
 export const LazyTodoPage = lazy(() => import('../modules/todo/pages/Todo/Todo.page'));
 
-const App: Component = () => (
-  <AppErrorBoundary>
-    <AppRootProvider>
-      <Router>
-        <Routes>
-          {/* home routes */}
-          <Route path="/" component={PageWrapper}>
+const App: Component = () => {
+  onMount(() => themeChange(false));
+
+  return (
+    <AppErrorBoundary>
+      <AppRootProvider>
+        <Router>
+          <Routes>
+            {/* home routes */}
+            <Route path="/" component={PageWrapper}>
+              <Route
+                path="/"
+                element={
+                  <SuspenseWithFallbackSpinner>
+                    <LazyHomePage />
+                  </SuspenseWithFallbackSpinner>
+                }
+              />
+            </Route>
+
+            {/* login routes */}
             <Route
-              path="/"
+              path="/login"
               element={
                 <SuspenseWithFallbackSpinner>
-                  <LazyHomePage />
-                </SuspenseWithFallbackSpinner>
-              }
-            />
-          </Route>
-
-          {/* login routes */}
-          <Route
-            path="/login"
-            element={
-              <SuspenseWithFallbackSpinner>
-                <LoginPage />
-              </SuspenseWithFallbackSpinner>
-            }
-          />
-
-          {/* playground routes */}
-          <Route
-            path="/playground"
-            element={
-              <SuspenseWithFallbackSpinner>
-                <LazyPlaygroundPage />
-              </SuspenseWithFallbackSpinner>
-            }
-          />
-
-          {/* todos routes */}
-          <Route path="/todos" component={PageWrapper}>
-            <Route
-              path="/"
-              element={
-                <SuspenseWithFallbackSpinner>
-                  <LazyTodosPage />
+                  <LoginPage />
                 </SuspenseWithFallbackSpinner>
               }
             />
 
+            {/* playground routes */}
             <Route
-              path="/:id"
-              data={routeDataTodo(queryClient)}
+              path="/playground"
               element={
                 <SuspenseWithFallbackSpinner>
-                  <LazyTodoPage />
+                  <LazyPlaygroundPage />
                 </SuspenseWithFallbackSpinner>
               }
             />
-          </Route>
 
-          {/* not found routes */}
-          <Route
-            path="*"
-            element={
-              <SuspenseWithFallbackSpinner>
-                <NotFoundPage />
-              </SuspenseWithFallbackSpinner>
-            }
-          />
-        </Routes>
+            {/* todos routes */}
+            <Route path="/todos" component={PageWrapper}>
+              <Route
+                path="/"
+                element={
+                  <SuspenseWithFallbackSpinner>
+                    <LazyTodosPage />
+                  </SuspenseWithFallbackSpinner>
+                }
+              />
 
-        {/* toast with portal */}
-        <Portal>
-          <Toast.Region duration={3_000} pauseOnInteraction swipeDirection="right">
-            <Toast.List class="toast-end toast z-20" />
-          </Toast.Region>
-        </Portal>
-      </Router>
-    </AppRootProvider>
-  </AppErrorBoundary>
-);
+              <Route
+                path="/:id"
+                data={routeDataTodo(queryClient)}
+                element={
+                  <SuspenseWithFallbackSpinner>
+                    <LazyTodoPage />
+                  </SuspenseWithFallbackSpinner>
+                }
+              />
+            </Route>
+
+            {/* not found routes */}
+            <Route
+              path="*"
+              element={
+                <SuspenseWithFallbackSpinner>
+                  <NotFoundPage />
+                </SuspenseWithFallbackSpinner>
+              }
+            />
+          </Routes>
+
+          {/* toast with portal */}
+          <Portal>
+            <Toast.Region duration={3_000} pauseOnInteraction swipeDirection="right">
+              <Toast.List class="toast toast-end z-20" />
+            </Toast.Region>
+          </Portal>
+        </Router>
+      </AppRootProvider>
+    </AppErrorBoundary>
+  );
+};
 
 export default App;

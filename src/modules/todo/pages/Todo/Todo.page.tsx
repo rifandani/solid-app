@@ -4,7 +4,7 @@ import { Component, Match, Show, Switch } from 'solid-js';
 import useTodoPageVM from './Todo.vm';
 
 const TodoPage: Component = () => {
-  const { t, todoQuery, todoUpdateMutation, form } = useTodoPageVM();
+  const { t, appStorage, todoQuery, todoUpdateMutation, form } = useTodoPageVM();
 
   return (
     <section class="flex flex-col justify-center px-10 py-20 md:px-24 lg:px-40 xl:px-52">
@@ -45,25 +45,27 @@ const TodoPage: Component = () => {
           </div>
         </Match>
 
-        <Match when={todoQuery.isSuccess}>
+        <Match when={todoQuery.isSuccess && todoQuery.data}>
           <form use:form data-testid="form" class="join">
             <input
               data-testid="input-todo"
-              class="input-bordered input-accent input join-item w-full text-accent-content"
+              class="input join-item input-bordered input-accent w-full text-accent-content"
               name="todo"
               id="todo"
               type="text"
               required
-              value={todoQuery.data?.todo ?? t('loading')}
+              value={todoQuery.data.todo ?? t('loading')}
             />
 
-            <button
-              data-testid="button-submit"
-              class="btn-accent join-item btn normal-case"
-              type="submit"
-            >
-              {t('update', { icon: '🖋' })}
-            </button>
+            <Show when={appStorage.user?.id === todoQuery.data.userId}>
+              <button
+                data-testid="button-submit"
+                class="btn btn-accent join-item normal-case"
+                type="submit"
+              >
+                {t('update', { icon: '🖋' })}
+              </button>
+            </Show>
           </form>
         </Match>
       </Switch>

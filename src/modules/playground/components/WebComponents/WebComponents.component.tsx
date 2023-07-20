@@ -43,7 +43,7 @@ const WebComponents: Component = () => {
     >
       <h1 class="mb-2.5 text-xl font-medium text-primary-content sm:text-2xl">Web Components</h1>
 
-      <button class="btn-info btn-xs btn" onClick={handleClickTambah}>
+      <button class="btn btn-info btn-xs" onClick={handleClickTambah}>
         Tambah
       </button>
 

@@ -21,12 +21,12 @@ const Toaster: Component<ToasterProps> = (props) => (
     ])}
     toastId={props.toastId}
   >
-    <div class={twMerge(['flex items-center justify-between p-3'])}>
+    <div class="flex items-center justify-between p-3">
       <Toast.Title as="h3" class={twMerge([`font-bold`, `text-${props.type}-content`])}>
         {props.title}
       </Toast.Title>
 
-      <Toast.CloseButton class="btn-ghost btn-xs btn">
+      <Toast.CloseButton class="btn btn-ghost btn-xs">
         <Icon icon="lucide:x" height="1.5em" />
       </Toast.CloseButton>
     </div>
