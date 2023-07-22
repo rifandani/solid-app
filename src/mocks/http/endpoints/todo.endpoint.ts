@@ -128,5 +128,3 @@ export const todoHandlers = [
     );
   }),
 ];
-
-export default { todoHandlers };
