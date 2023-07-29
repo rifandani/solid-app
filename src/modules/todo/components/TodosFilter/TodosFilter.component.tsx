@@ -16,7 +16,7 @@ const TodosFilter: Component = () => {
 
       <select
         data-testid="select-limit"
-        class="select-bordered select-secondary select"
+        class="select select-bordered select-secondary"
         name="limit"
         id="limit"
         value={selectedOption()}

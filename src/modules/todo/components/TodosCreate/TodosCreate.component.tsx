@@ -12,7 +12,7 @@ const TodosCreate: Component = () => {
     >
       <input
         data-testid="create-input-todo"
-        class="input-bordered input-accent input w-full text-accent-content lg:w-10/12"
+        class="input input-bordered input-accent w-full text-accent-content lg:w-10/12"
         placeholder={t('todoPlaceholder')}
         name="todo"
         id="todo"
@@ -22,7 +22,7 @@ const TodosCreate: Component = () => {
 
       <button
         data-testid="create-button-submit"
-        class="btn-accent btn ml-0 mt-2 w-full normal-case lg:ml-2 lg:mt-0 lg:w-2/12"
+        class="btn btn-accent ml-0 mt-2 w-full normal-case lg:ml-2 lg:mt-0 lg:w-2/12"
         type="submit"
       >
         {t('add', { icon: '✔' })}

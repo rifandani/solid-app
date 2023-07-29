@@ -36,7 +36,7 @@ const ToasterPromise = <T, U>(props: ToasterPromiseProps<T, U>): JSX.Element => 
     </div>
 
     <div class="flex-none">
-      <Toast.CloseButton class="btn-sm btn">
+      <Toast.CloseButton class="btn btn-sm">
         <Icon icon="lucide:x" height="1.5em" />
       </Toast.CloseButton>
     </div>

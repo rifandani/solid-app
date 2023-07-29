@@ -15,7 +15,7 @@ const TodosItem: Component<TodosItemProps> = (props) => {
   return (
     <form
       data-testid="item-form"
-      class="mb-2 flex items-center justify-between animate-in slide-in-from-left-5 duration-300 ease-in-out"
+      class="mb-2 flex items-center justify-between duration-300 ease-in-out animate-in slide-in-from-left-5"
       onSubmit={(e) => {
         e.preventDefault();
         if (props.todo.userId === appStorage.user?.id) handleDeleteTodo(props.todo);
@@ -51,7 +51,7 @@ const TodosItem: Component<TodosItemProps> = (props) => {
       <Show when={props.todo.userId === appStorage.user?.id}>
         <button
           data-testid="item-button-remove"
-          class="btn-accent btn-sm btn normal-case"
+          class="btn btn-accent btn-sm normal-case"
           type="submit"
         >
           {t('remove', { icon: '💥' })}

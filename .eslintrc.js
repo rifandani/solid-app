@@ -26,7 +26,7 @@ module.exports = {
     'testing-library/no-node-access': ['error', { allowContainerFirstChild: true }],
     '@tanstack/query/exhaustive-deps': 'off',
     'tailwindcss/no-custom-classname': 'off',
-    'tailwindcss/classnames-order': 'error',
+    'tailwindcss/classnames-order': 'warn',
   },
   settings: {
     tailwindcss: {

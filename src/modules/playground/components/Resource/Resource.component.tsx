@@ -107,7 +107,7 @@ const Resource: Component = () => {
       <TodosFilter />
 
       <button
-        class="btn-secondary btn-outline btn mb-2.5 text-lg"
+        class="btn btn-secondary btn-outline mb-2.5 text-lg"
         disabled={todosResource.state === 'pending' || todosResource.state === 'refreshing'}
         onClick={onClickRefetch}
       >

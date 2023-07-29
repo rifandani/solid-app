@@ -41,7 +41,7 @@ const LoginForm: Component = () => {
 
         <input
           class={twMerge(
-            'input-primary input mt-1 shadow-md',
+            'input input-primary mt-1 shadow-md',
             errors()?.password?.length ? 'input-error' : 'input-primary',
           )}
           placeholder={t('passwordPlaceholder')}
@@ -67,7 +67,7 @@ const LoginForm: Component = () => {
 
       <button
         data-testid="button-submit"
-        class="btn-primary btn mt-8 normal-case"
+        class="btn btn-primary mt-8 normal-case"
         type="submit"
         disabled={loginMutation.isLoading}
       >
