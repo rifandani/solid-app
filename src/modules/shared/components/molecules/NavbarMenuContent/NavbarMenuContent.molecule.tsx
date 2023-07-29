@@ -4,7 +4,7 @@ import { themes } from '../../../constants/global.constant';
 import useNavbarMenuContent from './useNavbarMenuContent.hook';
 
 const NavbarMenuContent: Component = () => {
-  const { t, appStorage, handleClickLogout } = useNavbarMenuContent();
+  const { t, appStorage, setTheme, handleClickLogout } = useNavbarMenuContent();
 
   return (
     <>
@@ -33,7 +33,11 @@ const NavbarMenuContent: Component = () => {
           <For each={themes}>
             {(theme) => (
               <li>
-                <button class="capitalize tracking-wide" data-set-theme={theme}>
+                <button
+                  type="button"
+                  class="capitalize tracking-wide"
+                  onClick={() => setTheme(theme)}
+                >
                   {theme}
                 </button>
               </li>

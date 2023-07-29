@@ -31,3 +31,12 @@ export const themes: Theme[] = [
   'coffee',
   'winter',
 ];
+
+// object version of `themes`
+export const modes = themes.reduce(
+  (acc, item) => {
+    acc[item] = item;
+    return acc;
+  },
+  {} as Record<Theme, Theme>,
+);
