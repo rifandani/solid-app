@@ -1,6 +1,7 @@
 import { Theme } from '../types/store.type';
 
 export const themes: Theme[] = [
+  'auto',
   'light',
   'dark',
   'cupcake',

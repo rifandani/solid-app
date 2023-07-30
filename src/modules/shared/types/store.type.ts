@@ -11,6 +11,7 @@ export type AppAction = Readonly<{
 }>;
 
 export type Theme =
+  | 'auto'
   | 'light'
   | 'dark'
   | 'cupcake'
