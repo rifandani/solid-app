@@ -1,5 +1,8 @@
+import matchers from '@testing-library/jest-dom/matchers';
 import { server } from './mocks/http/server.http';
 import './mocks/module.mock';
+
+expect.extend(matchers);
 
 // Establish API mocking before all tests with MSW
 beforeAll(() => {
@@ -17,4 +20,6 @@ afterEach(() => {
 });
 
 // Clean up after the tests are finished.
-afterAll(() => server.close());
+afterAll(() => {
+  server.close();
+});

@@ -7,7 +7,7 @@ export const login = async (creds: LoginSchema) => {
   // `parse` will throw if `resp.data` is not correct
   const loginApiResponse = loginApiResponseSchema.parse(resp.data);
   // set 'Authorization' headers to
-  http.defaults.auth = `Bearer ${loginApiResponse.token}`;
+  http.defaults.headers.common.Authorization = `Bearer ${loginApiResponse.token}`;
 
   return loginApiResponse;
 };

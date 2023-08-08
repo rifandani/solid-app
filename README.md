@@ -12,7 +12,7 @@ Solid template built with:
 - `tailwindcss` + `tailwindcss-animate` + `tailwind-merge` + `daisyui` -> styling
 - `@formkit/auto-animate` -> automate transition animation when component mount/unmount
 - `@kobalte/core` -> unstyled UI component library (similar to `radix-ui` in React)
-- `redaxios` + `@tanstack/solid-query` -> data fetching
+- `axios` + `@tanstack/solid-query` -> data fetching
 - `zod` -> schema validation
 - `@felte/solid` -> form management
 - `@iconify-icon/solid` -> icon on demand (based on web-component)
@@ -24,7 +24,7 @@ Solid template built with:
 # install deps
 $ pnpm install
 
-# init msw
+# init msw for browser mocking
 $ pnpm msw:init
 
 # Runs the app
@@ -35,8 +35,8 @@ $ pnpm start
 # run test
 $ pnpm test
 
-# coverage with c8
-$ pnpm coverage
+# coverage with instanbul
+$ pnpm test:coverage
 ```
 
 ## Build
@@ -69,14 +69,11 @@ Todos:
 Debugging:
 
 ```tsx
-const [searchParams] = useSearchParams();
-const params = () => ({ ...searchParams, limit: Number(searchParams?.limit ?? defaultLimit) });
-
 createEffect(() =>
   console.log('🚀 ~ useTodosCreate', {
     todosQuery: { ...todosQuery },
     todoListsQueryData: queryClient.getQueryData(todoKeys.lists()),
-    todoListQueryData: queryClient.getQueryData(todoKeys.list(params())), // TodoListApiResponseSchema
+    todoListQueryData: queryClient.getQueryData(todoKeys.list(params())),
     todoDetailsQueryData: queryClient.getQueryData(todoKeys.details()),
     todoDetail1QueryData: queryClient.getQueryData(todoKeys.detail(1)),
     queryCache: queryClient.getQueryCache(),
