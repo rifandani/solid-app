@@ -82,9 +82,6 @@ devDependencies:
   '@tanstack/eslint-plugin-query':
     specifier: ^4.32.5
     version: 4.32.5
-  '@testing-library/dom':
-    specifier: ^9.3.1
-    version: 9.3.1
   '@testing-library/jest-dom':
     specifier: ^5.17.0
     version: 5.17.0
@@ -145,9 +142,6 @@ devDependencies:
   jsdom:
     specifier: ^22.1.0
     version: 22.1.0
-  mq-polyfill:
-    specifier: ^1.1.8
-    version: 1.1.8
   msw:
     specifier: ^1.2.3
     version: 1.2.3(typescript@5.1.6)
@@ -4620,11 +4614,6 @@ packages:
       pathe: 1.1.1
       pkg-types: 1.0.3
       ufo: 1.1.2
-    dev: true
-
-  /mq-polyfill@1.1.8:
-    resolution: {integrity: sha512-7FolPfVZMGhkOSY4VKdHCowas+j4quxU/z43lmaK4pXCPtTllSKVb5w6mIB1CSzX0kY7x9KcYsLIkmFxpEdtIg==}
-    engines: {node: '>=6.*'}
     dev: true
 
   /mrmime@1.0.1:
