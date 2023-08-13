@@ -5,7 +5,14 @@ module.exports = {
     sourceType: 'module',
     project: ['./tsconfig.json'],
   },
-  plugins: ['@typescript-eslint', 'solid', '@tanstack/query', 'testing-library', 'jest-dom'],
+  plugins: [
+    '@typescript-eslint',
+    'solid',
+    'jsx-a11y',
+    '@tanstack/query',
+    'testing-library',
+    'jest-dom',
+  ],
   extends: [
     'airbnb-base',
     'airbnb-typescript/base',
@@ -13,6 +20,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:solid/typescript',
+    'plugin:jsx-a11y/recommended',
     'plugin:@tanstack/eslint-plugin-query/recommended',
     'plugin:jest-dom/recommended',
     'plugin:tailwindcss/recommended',

@@ -7,7 +7,7 @@ const HomeClock: Component = () => {
   return (
     <>
       <Show when={vm.toggle()}>
-        <div class="stats mt-8 shadow">
+        <div data-testid="home-clock-show" class="stats mt-8 shadow">
           <div class="stat">
             <div class="stat-title">{vm.t('clock')}:</div>
             <div class="stat-value">
@@ -23,9 +23,13 @@ const HomeClock: Component = () => {
         class="mt-8 grid grid-cols-1 gap-2 duration-300 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <For each={vm.buttons}>
-          {(value) => (
-            <button class={value.class} onClick={value.onClick}>
-              {vm.t(value.text)}
+          {(btn) => (
+            <button
+              data-testid={`home-clock-button-${btn.id}`}
+              class={btn.class}
+              onClick={btn.onClick}
+            >
+              {vm.t(btn.text)}
             </button>
           )}
         </For>

@@ -1,16 +1,24 @@
 import { Route } from '@solidjs/router';
-import { screen, waitFor } from '@solidjs/testing-library';
+import { screen } from '@solidjs/testing-library';
 import { renderProviders } from '../../../shared/utils/test.util';
 import NotFoundPage from './NotFound.page';
 
 describe('NotFoundPage', () => {
-  it('should render correctly', async () => {
+  it('should render properly', () => {
+    const result = renderProviders(() => <Route path="/" component={NotFoundPage} />);
+    expect(() => result).not.toThrow();
+  });
+
+  it('should render contents correctly', () => {
     // ARRANGE
     renderProviders(() => <Route path="/" component={NotFoundPage} />);
+    const heading: HTMLHeadingElement = screen.getByText(/404: not found/i);
+    const paragraph: HTMLParagraphElement = screen.getByText(/It's gone/i);
+    const anchor: HTMLAnchorElement = screen.getByRole('link');
 
     // ASSERT
-    await waitFor(() => {
-      expect(screen.getByRole('heading', { name: /404: not found/i }));
-    });
+    expect(heading).toBeInTheDocument();
+    expect(paragraph).toBeInTheDocument();
+    expect(anchor).toBeInTheDocument();
   });
 });

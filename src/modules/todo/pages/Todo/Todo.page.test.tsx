@@ -1,23 +1,32 @@
 import { Route } from '@solidjs/router';
-import { screen, waitFor } from '@solidjs/testing-library';
-import { mockedParams, mockedRouteData } from '../../../../mocks/module.mock';
+import { screen } from '@solidjs/testing-library';
 import { renderProviders } from '../../../shared/utils/test.util';
 import TodoPage from './Todo.page';
 
-/**
- * TypeError: mutate is not a function
- */
 describe('TodoPage', () => {
-  it.skip('TODO: should render correctly', async () => {
+  const Component = (
+    <Route
+      path="/todos/1"
+      data={() => [{ name: 'Name', body: 'Body', email: 'Email' }]}
+      component={TodoPage}
+    />
+  );
+
+  // FIXME: TypeError: mutate is not a function
+  it.todo('should render correctly', () => {
+    const result = renderProviders(() => Component);
+    expect(() => result).not.toThrow();
+  });
+
+  // FIXME: TypeError: mutate is not a function
+  it.todo('should render role contents correctly', () => {
     // ARRANGE
-    mockedParams.mockReturnValueOnce({ id: 1 });
-    mockedRouteData.mockImplementationOnce(() => [{ name: 'Name', body: 'Body', email: 'Email' }]);
-    renderProviders(() => <Route path="/" component={TodoPage} />);
+    renderProviders(() => Component);
+    const link: HTMLAnchorElement = screen.getByRole('link', { name: /go-back/i });
+    const title: HTMLHeadingElement = screen.getByRole('heading', { level: 1 });
 
     // ASSERT
-    await waitFor(() => {
-      expect(mockedRouteData).toHaveBeenCalled();
-      expect(screen.getByText(/Todo Detail/)).toBeInTheDocument();
-    });
+    expect(link).toBeInTheDocument();
+    expect(title).toBeInTheDocument();
   });
 });

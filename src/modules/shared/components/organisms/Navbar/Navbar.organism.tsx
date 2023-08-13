@@ -10,18 +10,19 @@ const Navbar: ParentComponent = (props) => {
 
   return (
     <nav class="drawer min-h-screen text-primary-content">
-      <input id="my-nav-drawer" type="checkbox" class="drawer-toggle" />
+      <input id="my-nav-drawer" type="checkbox" aria-label="drawer" class="drawer-toggle" />
 
       <section class="drawer-content flex flex-col">
         {/* <!-- Navbar --> */}
         <div class="navbar w-full bg-base-300">
           <div class="flex-none lg:hidden">
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label for="my-nav-drawer" class="btn btn-square btn-ghost">
               <Icon icon="lucide:menu" height="2em" class="text-primary-content" />
             </label>
           </div>
 
-          <Link href="/" class="link-primary link mx-2 flex-1 px-2">
+          <Link href="/" aria-label="logo" class="link-primary link mx-2 flex-1 px-2">
             <span class="flex items-center space-x-2 pl-2 text-2xl">
               <SvgIcon id="icon-solidjs" class="h-6 w-6" />
               <p class="font-semibold tracking-wider text-primary">{t('appName')}</p>
@@ -41,6 +42,7 @@ const Navbar: ParentComponent = (props) => {
       </section>
 
       <section class="drawer-side">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label for="my-nav-drawer" class="drawer-overlay" />
 
         <ul class="menu h-full w-80 bg-base-200 p-4">

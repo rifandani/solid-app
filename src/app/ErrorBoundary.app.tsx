@@ -6,7 +6,6 @@ const Fallback: Component<{ err: unknown; reset: () => void }> = (props) => {
   });
 
   return (
-    // TODO: Update styling based on UI/UX design
     <main class="flex min-h-screen flex-col items-center justify-center">
       <h1 class="mb-3">Something went wrong.</h1>
 

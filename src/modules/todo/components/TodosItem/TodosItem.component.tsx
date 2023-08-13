@@ -14,15 +14,17 @@ const TodosItem: Component<TodosItemProps> = (props) => {
 
   return (
     <form
-      data-testid="item-form"
+      aria-label="form-todo"
+      data-testid={`form-${props.todo.id}`}
       class="mb-2 flex items-center justify-between duration-300 ease-in-out animate-in slide-in-from-left-5"
       onSubmit={(e) => {
         e.preventDefault();
+        // only allow for the correct auth user
         if (props.todo.userId === appStorage.user?.id) handleDeleteTodo(props.todo);
       }}
     >
       <input
-        data-testid="item-input-todoId"
+        data-testid="input-todoId"
         type="hidden"
         name="todoId"
         id="todoId"
@@ -30,7 +32,7 @@ const TodosItem: Component<TodosItemProps> = (props) => {
       />
 
       <input
-        data-testid="item-input-todo"
+        aria-label="checkbox-todo"
         class="checkbox-accent checkbox"
         type="checkbox"
         id={`todo-${props.todo.id}`}
@@ -40,7 +42,7 @@ const TodosItem: Component<TodosItemProps> = (props) => {
       />
 
       <Link
-        data-testid="item-p-todo"
+        aria-label="todo"
         class="ml-5 w-full text-left text-lg text-secondary-content hover:font-bold"
         classList={{ 'line-through': props.todo.completed }}
         href={props.todo.id.toString()}
@@ -49,11 +51,7 @@ const TodosItem: Component<TodosItemProps> = (props) => {
       </Link>
 
       <Show when={props.todo.userId === appStorage.user?.id}>
-        <button
-          data-testid="item-button-remove"
-          class="btn btn-accent btn-sm normal-case"
-          type="submit"
-        >
+        <button aria-label="button-submit" class="btn btn-accent btn-sm normal-case" type="submit">
           {t('remove', { icon: '💥' })}
         </button>
       </Show>

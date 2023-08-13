@@ -1,9 +1,6 @@
 import router from '@solidjs/router';
 import solid from 'solid-js';
 import { vi } from 'vitest';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import matchMediaPolyfill from 'mq-polyfill';
 
 // mock ResizeObserver
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
@@ -12,9 +9,19 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
   disconnect: vi.fn(),
 }));
 
-// mock matchMedia
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-matchMediaPolyfill(window);
+// mock window matchMedia
+window.matchMedia = function matchMedia(query) {
+  return {
+    media: query,
+    matches: false,
+    onchange: null,
+    addListener: vi.fn(), // Deprecated
+    removeListener: vi.fn(), // Deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  };
+};
 
 // implementation of window.resizeTo for dispatching event
 window.resizeTo = function resizeTo(width, height) {
@@ -28,14 +35,12 @@ window.resizeTo = function resizeTo(width, height) {
 
 export const mockedNavigator = vi.fn(() => (path: string) => path);
 export const mockedLocation = vi.fn(() => ({ pathname: '/login' }));
-export const mockedRouteData = vi.fn();
 export const mockedCreateResource = vi.fn(() => [
   () => ({
     id: 1,
   }),
   { refetch: () => {} },
 ]);
-export const mockedParams = vi.fn();
 
 vi.mock('@solidjs/router', async () => {
   const actual = await vi.importActual<typeof router>('@solidjs/router');
@@ -44,8 +49,6 @@ vi.mock('@solidjs/router', async () => {
     ...actual,
     useNavigate: mockedNavigator,
     useLocation: mockedLocation,
-    useRouteData: mockedRouteData,
-    useParams: mockedParams,
   };
 });
 
@@ -57,3 +60,5 @@ vi.mock('solid-js', async () => {
     createResource: mockedCreateResource,
   };
 });
+
+vi.mock('@solid-primitives/event-listener');

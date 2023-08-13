@@ -7,25 +7,22 @@ const TodosFilter: Component = () => {
 
   return (
     <form
-      data-testid="form"
+      aria-label="form-filter"
       class="mb-3 flex w-full flex-col duration-300 md:flex-row md:space-x-2"
     >
-      <label data-testid="label-limit" for="limit" class="label">
+      <label for="limit" class="label">
         <span class="label-text text-primary-content">{t('limit')}</span>
       </label>
 
       <select
-        data-testid="select-limit"
+        aria-label="combobox-filter"
         class="select select-bordered select-secondary"
         name="limit"
         id="limit"
         value={selectedOption()}
-        onChange={handleChangeLimit}
+        onBlur={handleChangeLimit}
       >
-        <For
-          each={limits}
-          fallback={<div class="flex w-full items-center justify-center py-5">{t('empty')}</div>}
-        >
+        <For each={limits}>
           {(limit) => (
             <option
               data-testid={`option-limit-${limit}`}

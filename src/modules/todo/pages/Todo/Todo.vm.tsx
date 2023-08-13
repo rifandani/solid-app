@@ -2,7 +2,6 @@ import { createForm } from '@felte/solid';
 import { toaster } from '@kobalte/core';
 import { useNavigate, useParams, useRouteData } from '@solidjs/router';
 import { createMutation, createQuery, useQueryClient } from '@tanstack/solid-query';
-import { z } from 'zod';
 import { ErrorApiResponseSchema } from '../../../shared/api/api.schema';
 import { Toaster } from '../../../shared/components/molecules';
 import { useAppStorage } from '../../../shared/hooks/useAppStorage/useAppStorage.hook';
@@ -59,10 +58,8 @@ const useTodoUpdate = () => {
 const useTodoPageVM = () => {
   const [t] = useI18n();
   const params = useParams();
-  // will throw error if `params.id` is not a number
-  const id = z.coerce.number().parse(params.id);
   const [appStorage] = useAppStorage();
-  const todoQuery = useInitialTodo(id);
+  const todoQuery = useInitialTodo(Number(params?.id));
   const todoUpdateMutation = useTodoUpdate();
 
   const felte = createForm<Pick<UpdateTodoSchema, 'todo'>>({

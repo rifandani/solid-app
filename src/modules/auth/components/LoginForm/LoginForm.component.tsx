@@ -6,7 +6,7 @@ const LoginForm: Component = () => {
   const { t, loginMutation, form, errors } = useLoginForm();
 
   return (
-    <form use:form data-testid="form" class="form-control pt-3 md:pt-8">
+    <form use:form aria-label="form-login" class="form-control pt-3 md:pt-8">
       {/* username */}
       <div class="form-control pt-4">
         <label class="label" for="username">
@@ -14,16 +14,17 @@ const LoginForm: Component = () => {
         </label>
 
         <input
-          data-testid="input-username"
+          id="username"
+          name="username"
+          type="text"
+          aria-label="textbox-username"
+          aria-labelledby="#username"
+          required
+          placeholder={t('usernamePlaceholder')}
           class={twMerge(
             'input mt-1 shadow-md',
             errors()?.username?.length ? 'input-error' : 'input-primary',
           )}
-          placeholder={t('usernamePlaceholder')}
-          id="username"
-          name="username"
-          type="text"
-          required
         />
 
         <Show when={errors()?.username?.length}>
@@ -40,14 +41,17 @@ const LoginForm: Component = () => {
         </label>
 
         <input
+          id="password"
+          name="password"
+          type="password"
+          aria-label="textbox-password"
+          aria-labelledby="#password"
+          required
+          placeholder={t('passwordPlaceholder')}
           class={twMerge(
             'input input-primary mt-1 shadow-md',
             errors()?.password?.length ? 'input-error' : 'input-primary',
           )}
-          placeholder={t('passwordPlaceholder')}
-          type="password"
-          name="password"
-          required
         />
 
         <Show when={errors()?.password?.length}>
@@ -66,9 +70,8 @@ const LoginForm: Component = () => {
       </Show>
 
       <button
-        data-testid="button-submit"
-        class="btn btn-primary mt-8 normal-case"
         type="submit"
+        class="btn btn-primary mt-8 normal-case"
         disabled={loginMutation.isLoading}
       >
         {loginMutation.isLoading ? t('loginLoading') : t('login')}

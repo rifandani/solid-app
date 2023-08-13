@@ -9,7 +9,12 @@ const TodoPage: Component = () => {
   return (
     <section class="flex flex-col justify-center px-10 py-20 md:px-24 lg:px-40 xl:px-52">
       <div class="mb-10 flex w-full flex-col space-y-2">
-        <Link href="/todos" class="btn-link w-fit normal-case text-primary-content ">
+        <Link
+          role="link"
+          aria-label="go-back"
+          href="/todos"
+          class="btn-link w-fit normal-case text-primary-content "
+        >
           ⬅ {t('goBackTo', { target: 'Todos' })}
         </Link>
 
@@ -19,7 +24,7 @@ const TodoPage: Component = () => {
       </div>
 
       <Show when={todoUpdateMutation.isError}>
-        <div class="alert alert-error mt-2 shadow-lg">
+        <div data-testid="todo-mutationError" class="alert alert-error mt-2 shadow-lg">
           <div class="flex items-center">
             <span>
               {t('error', { module: 'Todo Mutation' })}:{' '}
@@ -31,13 +36,13 @@ const TodoPage: Component = () => {
 
       <Switch>
         <Match when={todoQuery.isLoading}>
-          <div class="flex items-center justify-center py-5">
+          <div data-testid="todo-loading" class="flex items-center justify-center py-5">
             <Icon icon="svg-spinners:3-dots-fade" height="5em" class="text-secondary-content" />
           </div>
         </Match>
 
         <Match when={todoQuery.isError}>
-          <div class="alert alert-error mt-2 shadow-lg">
+          <div data-testid="todo-error" class="alert alert-error mt-2 shadow-lg">
             <div class="flex items-center">
               <span>{t('error', { module: 'Todos' })}:</span>
               <pre>{JSON.stringify(todoQuery.error, null, 2)}</pre>
@@ -46,9 +51,9 @@ const TodoPage: Component = () => {
         </Match>
 
         <Match when={todoQuery.isSuccess && todoQuery.data}>
-          <form use:form data-testid="form" class="join">
+          <form use:form aria-label="form-todo" class="join">
             <input
-              data-testid="input-todo"
+              aria-label="textbox-todo"
               class="input join-item input-bordered input-accent w-full text-accent-content"
               name="todo"
               id="todo"
@@ -59,7 +64,7 @@ const TodoPage: Component = () => {
 
             <Show when={appStorage.user?.id === todoQuery.data.userId}>
               <button
-                data-testid="button-submit"
+                aria-label="button-submit"
                 class="btn btn-accent join-item normal-case"
                 type="submit"
               >

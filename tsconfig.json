@@ -22,9 +22,9 @@
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "types": ["vite/client", "@testing-library/jest-dom"]
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["**/*.ts", "**/*.tsx", "index.d.ts", "tailwind.config.ts"],
+  "include": ["index.d.ts", "tailwind.config.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "postcss.config.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

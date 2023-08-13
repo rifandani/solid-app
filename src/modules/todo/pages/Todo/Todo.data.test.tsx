@@ -6,10 +6,8 @@ describe('routeDataTodo', () => {
     // ARRANGE
     mockedCreateResource.mockReturnValue([]);
 
-    // ACT
+    // ACT & ASSERT
     mockedCreateResource();
-
-    // ASSERT
     expect(routeDataTodo).toBeDefined();
     expect(mockedCreateResource).toHaveBeenCalled();
     expect(mockedCreateResource()).toEqual([]);
