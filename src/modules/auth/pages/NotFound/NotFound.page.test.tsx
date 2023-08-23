@@ -5,8 +5,8 @@ import NotFoundPage from './NotFound.page';
 
 describe('NotFoundPage', () => {
   it('should render properly', () => {
-    const result = renderProviders(() => <Route path="/" component={NotFoundPage} />);
-    expect(() => result).not.toThrow();
+    const view = renderProviders(() => <Route path="/" component={NotFoundPage} />);
+    expect(() => view).not.toThrow();
   });
 
   it('should render contents correctly', () => {

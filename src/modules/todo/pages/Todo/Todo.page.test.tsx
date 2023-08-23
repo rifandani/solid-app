@@ -14,8 +14,8 @@ describe('TodoPage', () => {
 
   // FIXME: TypeError: mutate is not a function
   it.todo('should render correctly', () => {
-    const result = renderProviders(() => Component);
-    expect(() => result).not.toThrow();
+    const view = renderProviders(() => Component);
+    expect(() => view).not.toThrow();
   });
 
   // FIXME: TypeError: mutate is not a function

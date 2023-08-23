@@ -8,8 +8,8 @@ describe('HomeClock', () => {
   const mockButtonFn = vi.fn();
 
   it('should render properly', () => {
-    const result = renderProviders(() => <Route path="/" component={HomeClock} />);
-    expect(() => result).not.toThrow();
+    const view = renderProviders(() => <Route path="/" component={HomeClock} />);
+    expect(() => view).not.toThrow();
   });
 
   // FIXME: TestingLibraryElementError: Unable to find an element by: [data-testid="home-clock-show"]

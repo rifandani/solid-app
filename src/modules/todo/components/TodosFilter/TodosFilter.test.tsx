@@ -9,8 +9,8 @@ describe('TodosFilter', () => {
   const mockChangeFn = vi.fn();
 
   it('should render properly', () => {
-    const result = renderProviders(() => <Route path="/" component={TodosFilter} />);
-    expect(() => result).not.toThrow();
+    const view = renderProviders(() => <Route path="/" component={TodosFilter} />);
+    expect(() => view).not.toThrow();
   });
 
   it('should render and change limit correctly', () => {

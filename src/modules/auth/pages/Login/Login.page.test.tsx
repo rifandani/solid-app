@@ -5,8 +5,8 @@ import LoginPage from './Login.page';
 
 describe('LoginPage', () => {
   it('should render properly', () => {
-    const result = renderProviders(() => <Route path="/" component={LoginPage} />);
-    expect(() => result).not.toThrow();
+    const view = renderProviders(() => <Route path="/" component={LoginPage} />);
+    expect(() => view).not.toThrow();
   });
 
   it('should render content roles correctly', () => {

@@ -5,8 +5,8 @@ import Navbar from './Navbar.organism';
 
 describe('Navbar', () => {
   it('should render properly', () => {
-    const result = renderProviders(() => <Route path="/" component={Navbar} />);
-    expect(() => result).not.toThrow();
+    const view = renderProviders(() => <Route path="/" component={Navbar} />);
+    expect(() => view).not.toThrow();
   });
 
   it('should be able to type the inputs and submit the login form', () => {

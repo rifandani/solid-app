@@ -10,8 +10,8 @@ describe('TodosList', () => {
 
   // FIXME: TypeError: mutate is not a function
   it.todo('should render properly', () => {
-    const result = renderProviders(() => <Route path="/" component={TodosList} />);
-    expect(() => result).not.toThrow();
+    const view = renderProviders(() => <Route path="/" component={TodosList} />);
+    expect(() => view).not.toThrow();
   });
 
   // FIXME: TypeError: mutate is not a function

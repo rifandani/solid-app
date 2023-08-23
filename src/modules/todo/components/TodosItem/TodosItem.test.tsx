@@ -19,10 +19,10 @@ describe('TodosItem', () => {
   });
 
   it('should render properly', () => {
-    const result = renderProviders(() => (
+    const view = renderProviders(() => (
       <Route path="/" component={() => <TodosItem todo={todo} />} />
     ));
-    expect(() => result).not.toThrow();
+    expect(() => view).not.toThrow();
   });
 
   it('should render, check, and remove todo correctly', async () => {

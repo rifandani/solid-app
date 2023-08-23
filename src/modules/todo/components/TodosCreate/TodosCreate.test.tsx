@@ -9,8 +9,8 @@ describe('TodosCreate', () => {
   const mockCreateSubmitFn = vi.fn();
 
   it('should render properly', () => {
-    const result = renderProviders(() => <Route path="/" component={TodosCreate} />);
-    expect(() => result).not.toThrow();
+    const view = renderProviders(() => <Route path="/" component={TodosCreate} />);
+    expect(() => view).not.toThrow();
   });
 
   it('should be able to type the inputs and submit the create todo form', () => {

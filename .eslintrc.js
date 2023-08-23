@@ -1,5 +1,6 @@
 module.exports = {
   root: true,
+  env: { browser: true, node: true, es2020: true },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     sourceType: 'module',
@@ -17,13 +18,15 @@ module.exports = {
     'airbnb-base',
     'airbnb-typescript/base',
     'prettier',
+    'eslint:recommended',
+    'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:solid/typescript',
-    'plugin:jsx-a11y/recommended',
     'plugin:@tanstack/eslint-plugin-query/recommended',
     'plugin:jest-dom/recommended',
     'plugin:tailwindcss/recommended',
+    'plugin:testing-library/react',
   ],
   rules: {
     'import/no-cycle': 'off',

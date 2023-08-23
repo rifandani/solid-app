@@ -7,8 +7,8 @@ import TodosPage from './Todos.page';
 describe('TodosPage', () => {
   // FIXME: TypeError: mutate is not a function
   it.todo('should render correctly', () => {
-    const result = renderProviders(() => <Route path="/" component={TodosPage} />);
-    expect(() => result).not.toThrow();
+    const view = renderProviders(() => <Route path="/" component={TodosPage} />);
+    expect(() => view).not.toThrow();
   });
 
   // FIXME: TypeError: mutate is not a function

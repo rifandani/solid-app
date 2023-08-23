@@ -20,7 +20,7 @@ const NavbarMenuContent: Component = () => {
         </NavLink>
       </li>
 
-      <li class="dropdown-top dropdown mb-3 mt-auto lg:dropdown-end lg:dropdown-bottom lg:my-0">
+      <li class="dropdown dropdown-top mb-3 mt-auto lg:dropdown-end lg:dropdown-bottom lg:my-0">
         <button
           tabIndex={0}
           aria-label="themes-opener"

@@ -5,8 +5,8 @@ import HomePage from './Home.page';
 
 describe('HomePage', () => {
   it('should render correctly', () => {
-    const result = renderProviders(() => <Route path="/" component={HomePage} />);
-    expect(() => result).not.toThrow();
+    const view = renderProviders(() => <Route path="/" component={HomePage} />);
+    expect(() => view).not.toThrow();
   });
 
   it('should render text correctly', () => {
