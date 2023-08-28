@@ -28,14 +28,16 @@ const LoginPage: Component = () => {
 
             <LoginForm />
 
-            <div class="py-12 text-center">
-              <p>
-                {vm.t('noAccount')}{' '}
-                <Link class="link-primary link" aria-label="link-register" href="/register">
-                  {vm.t('registerHere')}
-                </Link>
-              </p>
-            </div>
+            <p class="py-12 text-center">
+              {vm.t('noAccount')}{' '}
+              <Link
+                class="link-primary link"
+                aria-label="link-register"
+                href="/register"
+              >
+                {vm.t('registerHere')}
+              </Link>
+            </p>
           </div>
         </section>
 

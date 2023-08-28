@@ -19,7 +19,7 @@ if (import.meta.env.DEV) {
       // insert it into global window object, so we can debug the worker in runtime (e.g Chrome DevTools)
       window.msw = { worker };
       // start browser worker
-      return worker.start();
+      return worker.start({ onUnhandledRequest: 'bypass' });
     })
     .then(() => render(() => <App />, root!));
 } else {

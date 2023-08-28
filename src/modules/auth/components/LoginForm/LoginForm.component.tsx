@@ -1,5 +1,5 @@
 import { Component, Show } from 'solid-js';
-import { twMerge } from 'tailwind-merge';
+import { twJoin } from 'tailwind-merge';
 import useLoginForm from './useLoginForm.hook';
 
 const LoginForm: Component = () => {
@@ -8,7 +8,7 @@ const LoginForm: Component = () => {
   return (
     <form use:form aria-label="form-login" class="form-control pt-3 md:pt-8">
       {/* username */}
-      <div class="form-control pt-4">
+      <fieldset class="form-control pt-4">
         <label class="label" for="username">
           <span class="label-text">{t('username')}</span>
         </label>
@@ -19,9 +19,10 @@ const LoginForm: Component = () => {
           type="text"
           aria-label="textbox-username"
           aria-labelledby="#username"
+          aria-invalid={errors()?.username?.length ? 'true' : 'false'}
           required
           placeholder={t('usernamePlaceholder')}
-          class={twMerge(
+          class={twJoin(
             'input mt-1 shadow-md',
             errors()?.username?.length ? 'input-error' : 'input-primary',
           )}
@@ -32,10 +33,10 @@ const LoginForm: Component = () => {
             {t('errorMinLength', { field: 'username', length: '3' })}
           </p>
         </Show>
-      </div>
+      </fieldset>
 
       {/* password */}
-      <div class="form-control pt-4">
+      <fieldset class="form-control pt-4">
         <label class="label" for="password">
           <span class="label-text">{t('password')}</span>
         </label>
@@ -46,32 +47,31 @@ const LoginForm: Component = () => {
           type="password"
           aria-label="textbox-password"
           aria-labelledby="#password"
+          aria-invalid={errors()?.password?.length ? 'true' : 'false'}
           required
           placeholder={t('passwordPlaceholder')}
-          class={twMerge(
+          class={twJoin(
             'input input-primary mt-1 shadow-md',
             errors()?.password?.length ? 'input-error' : 'input-primary',
           )}
         />
 
         <Show when={errors()?.password?.length}>
-          <p class="pl-5 pt-1 text-error">
+          <p role="alert" class="pl-5 pt-1 text-error">
             {t('errorMinLength', { field: 'password', length: '3' })}
           </p>
         </Show>
-      </div>
+      </fieldset>
 
       <Show when={loginMutation.isError}>
         <div class="alert alert-error mt-3 shadow-lg">
-          <div class="flex flex-col items-start">
-            <span>❌ {(loginMutation.error as Error).message} </span>
-          </div>
+          <p>❌ {(loginMutation.error as Error).message} </p>
         </div>
       </Show>
 
       <button
         type="submit"
-        class="btn btn-primary mt-8 normal-case"
+        class="btn btn-primary mt-8 normal-case disabled:btn-disabled"
         disabled={loginMutation.isLoading}
       >
         {loginMutation.isLoading ? t('loginLoading') : t('login')}

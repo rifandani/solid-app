@@ -22,6 +22,7 @@ const NavbarMenuContent: Component = () => {
 
       <li class="dropdown dropdown-top mb-3 mt-auto lg:dropdown-end lg:dropdown-bottom lg:my-0">
         <button
+          type="button"
           tabIndex={0}
           aria-label="themes-opener"
           class="btn btn-secondary btn-sm btn-block normal-case text-secondary-content"
@@ -51,6 +52,7 @@ const NavbarMenuContent: Component = () => {
         {(user) => (
           <li class="ml-0 lg:ml-3 lg:mt-0">
             <button
+              type="button"
               class="btn btn-primary btn-sm normal-case tracking-wide text-primary-content"
               onClick={handleClickLogout}
             >

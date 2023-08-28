@@ -3,11 +3,9 @@ import { Component } from 'solid-js';
 import { Navbar } from '../../organisms';
 
 const PageWrapper: Component = () => (
-  <>
-    <Navbar>
-      <Outlet />
-    </Navbar>
-  </>
+  <Navbar>
+    <Outlet />
+  </Navbar>
 );
 
 export default PageWrapper;
