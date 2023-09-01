@@ -26,6 +26,7 @@ const HomeClock: Component = () => {
           {(btn) => (
             <button
               data-testid={`home-clock-button-${btn.id}`}
+              type="button"
               class={btn.class}
               onClick={btn.onClick}
             >

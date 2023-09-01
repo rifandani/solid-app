@@ -73,7 +73,6 @@ const useHomeClock = () => {
     minutes,
     hours,
     toggle,
-    toggleClock,
     buttons,
     setButtons,
     setParent,
