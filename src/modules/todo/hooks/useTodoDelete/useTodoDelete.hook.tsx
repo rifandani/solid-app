@@ -11,10 +11,14 @@ import {
 } from '../../api/todo.schema';
 import { useTodosParams } from '../useTodos/useTodos.hook';
 
+/**
+ * delete todo mutation based on `useTodosParams` and show toast
+ */
 const useTodoDelete = () => {
   const queryClient = useQueryClient();
   const params = useTodosParams();
   const [t] = useI18n();
+  const queryKey = () => todoKeys.list(params());
 
   return createMutation<
     DeleteTodoApiResponseSchema,
@@ -25,16 +29,19 @@ const useTodoDelete = () => {
     // Called before `mutationFn`:
     onMutate: async (id) => {
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
-      await queryClient.cancelQueries({ queryKey: todoKeys.list(params()) });
+      await queryClient.cancelQueries({ queryKey: queryKey() });
 
       // Snapshot the previous value
-      const previousTodosQueryResponse = (queryClient.getQueryData(todoKeys.list(params())) ??
-        []) as TodoListApiResponseSchema;
+      const previousTodosQueryResponse = (queryClient.getQueryData(
+        queryKey(),
+      ) ?? []) as TodoListApiResponseSchema;
 
       // Optimistically update to the new value
-      queryClient.setQueryData(todoKeys.list(params()), {
+      queryClient.setQueryData(queryKey(), {
         ...previousTodosQueryResponse,
-        todos: previousTodosQueryResponse.todos?.filter((_todo) => _todo.id !== id),
+        todos: previousTodosQueryResponse.todos?.filter(
+          (_todo) => _todo.id !== id,
+        ),
       });
 
       // Return a context object with the snapshotted value
@@ -56,10 +63,13 @@ const useTodoDelete = () => {
 
       // If the mutation fails, use the context returned from `onMutate` to roll back
       if (error)
-        queryClient.setQueryData(todoKeys.list(params()), context?.previousTodosQueryResponse);
+        queryClient.setQueryData(
+          queryKey(),
+          context?.previousTodosQueryResponse,
+        );
 
       // if we want to refetch after error or success:
-      // await queryClient.invalidateQueries({ queryKey: todoKeys.list(params()) });
+      // await queryClient.invalidateQueries({ queryKey: queryKey() });
     },
   });
 };

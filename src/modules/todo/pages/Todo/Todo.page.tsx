@@ -4,7 +4,8 @@ import { Component, Match, Show, Switch } from 'solid-js';
 import useTodoPageVM from './Todo.vm';
 
 const TodoPage: Component = () => {
-  const { t, appStorage, todoQuery, todoUpdateMutation, form } = useTodoPageVM();
+  const { t, appStorage, todoQuery, todoUpdateMutation, form } =
+    useTodoPageVM();
 
   return (
     <section class="flex flex-col justify-center px-10 py-20 md:px-24 lg:px-40 xl:px-52">
@@ -24,7 +25,10 @@ const TodoPage: Component = () => {
       </div>
 
       <Show when={todoUpdateMutation.isError}>
-        <div data-testid="todo-mutationError" class="alert alert-error mt-2 shadow-lg">
+        <div
+          data-testid="todo-mutationError"
+          class="alert alert-error mt-2 shadow-lg"
+        >
           <div class="flex items-center">
             <span>
               {t('error', { module: 'Todo Mutation' })}:{' '}
@@ -36,13 +40,23 @@ const TodoPage: Component = () => {
 
       <Switch>
         <Match when={todoQuery.isLoading}>
-          <div data-testid="todo-loading" class="flex items-center justify-center py-5">
-            <Icon icon="svg-spinners:3-dots-fade" height="5em" class="text-secondary-content" />
+          <div
+            data-testid="todo-loading"
+            class="flex items-center justify-center py-5"
+          >
+            <Icon
+              icon="svg-spinners:3-dots-fade"
+              height="5em"
+              class="text-secondary-content"
+            />
           </div>
         </Match>
 
         <Match when={todoQuery.isError}>
-          <div data-testid="todo-error" class="alert alert-error mt-2 shadow-lg">
+          <div
+            data-testid="todo-error"
+            class="alert alert-error mt-2 shadow-lg"
+          >
             <div class="flex items-center">
               <span>{t('error', { module: 'Todos' })}:</span>
               <pre>{JSON.stringify(todoQuery.error, null, 2)}</pre>
@@ -59,10 +73,10 @@ const TodoPage: Component = () => {
               id="todo"
               type="text"
               required
-              value={todoQuery.data.todo ?? t('loading')}
+              value={todoQuery.data?.todo ?? t('loading')}
             />
 
-            <Show when={appStorage.user?.id === todoQuery.data.userId}>
+            <Show when={appStorage.user?.id === todoQuery.data?.userId}>
               <button
                 aria-label="button-submit"
                 class="btn btn-accent join-item normal-case"

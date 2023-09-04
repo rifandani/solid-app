@@ -9,6 +9,9 @@ import {
 } from '../../api/todo.schema';
 import { useTodosParams } from '../useTodos/useTodos.hook';
 
+/**
+ * create todo mutation (optimistic update) based on `useTodosParams`
+ */
 const useTodoCreate = () => {
   const params = useTodosParams();
 
@@ -20,17 +23,25 @@ const useTodoCreate = () => {
   >({
     // Called before `mutationFn`:
     onMutate: async (newTodo) => {
+      const queryKey = todoKeys.list(params());
+
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
-      await queryClient.cancelQueries({ queryKey: todoKeys.list(params()) });
+      await queryClient.cancelQueries({ queryKey });
 
       // Snapshot the previous value
-      const previousTodosQueryResponse = (queryClient.getQueryData(todoKeys.list(params())) ??
+      const previousTodosQueryResponse = (queryClient.getQueryData(queryKey) ??
         []) as TodoListApiResponseSchema;
 
       // Optimistically update to the new value & delete the last value
-      queryClient.setQueryData(todoKeys.list(params()), {
+      queryClient.setQueryData(queryKey, {
         ...previousTodosQueryResponse,
-        todos: [newTodo, ...previousTodosQueryResponse.todos.slice(0, Number(params().limit - 1))],
+        todos: [
+          newTodo,
+          ...previousTodosQueryResponse.todos.slice(
+            0,
+            Number(params().limit - 1),
+          ),
+        ],
       });
 
       // Return a context object with the snapshotted value

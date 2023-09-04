@@ -11,10 +11,14 @@ import {
 } from '../../api/todo.schema';
 import { useTodosParams } from '../useTodos/useTodos.hook';
 
+/**
+ * update todo mutation based on `useTodosParams` and show toast
+ */
 const useTodoUpdate = () => {
   const queryClient = useQueryClient();
   const params = useTodosParams();
   const [t] = useI18n();
+  const queryKey = () => todoKeys.list(params());
 
   return createMutation<
     UpdateTodoApiResponseSchema,
@@ -25,14 +29,15 @@ const useTodoUpdate = () => {
     // Called before `mutationFn`:
     onMutate: async ({ id, ...body }) => {
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
-      await queryClient.cancelQueries({ queryKey: todoKeys.list(params()) });
+      await queryClient.cancelQueries({ queryKey: queryKey() });
 
       // Snapshot the previous value
-      const previousTodosQueryResponse = (queryClient.getQueryData(todoKeys.list(params())) ??
-        []) as TodoListApiResponseSchema;
+      const previousTodosQueryResponse = (queryClient.getQueryData(
+        queryKey(),
+      ) ?? []) as TodoListApiResponseSchema;
 
       // Optimistically update to the new value
-      queryClient.setQueryData(todoKeys.list(params()), {
+      queryClient.setQueryData(queryKey(), {
         ...previousTodosQueryResponse,
         todos: previousTodosQueryResponse.todos?.map((_todo) =>
           _todo.id === id ? { ..._todo, ...body } : _todo,
@@ -58,10 +63,13 @@ const useTodoUpdate = () => {
 
       // If the mutation fails, use the context returned from `onMutate` to roll back
       if (error)
-        queryClient.setQueryData(todoKeys.list(params()), context?.previousTodosQueryResponse);
+        queryClient.setQueryData(
+          queryKey(),
+          context?.previousTodosQueryResponse,
+        );
 
       // if we want to refetch after error or success:
-      // await queryClient.invalidateQueries({ queryKey: todoKeys.list(params()) });
+      // await queryClient.invalidateQueries({ queryKey: queryKey() });
     },
   });
 };

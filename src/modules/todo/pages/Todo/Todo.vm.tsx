@@ -1,7 +1,7 @@
 import { createForm } from '@felte/solid';
 import { toaster } from '@kobalte/core';
 import { useNavigate, useParams, useRouteData } from '@solidjs/router';
-import { createMutation, createQuery, useQueryClient } from '@tanstack/solid-query';
+import { createMutation, useQueryClient } from '@tanstack/solid-query';
 import { ErrorApiResponseSchema } from '../../../shared/api/api.schema';
 import { Toaster } from '../../../shared/components/molecules';
 import { useAppStorage } from '../../../shared/hooks/useAppStorage/useAppStorage.hook';
@@ -12,26 +12,18 @@ import {
   UpdateTodoApiResponseSchema,
   UpdateTodoSchema,
 } from '../../api/todo.schema';
-
-const useInitialTodo = (id: number) => {
-  const initialData = useRouteData<TodoDetailApiResponseSchema>();
-  const queryKey = () => todoKeys.detail(id);
-  const queryFn = () => todoApi.detail(id);
-
-  // pass `initialData` that we get from route data
-  return createQuery({
-    initialData,
-    queryKey,
-    queryFn,
-  });
-};
+import useTodo from '../../hooks/useTodo/useTodo.hook';
 
 const useTodoUpdate = () => {
   const [t] = useI18n();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  return createMutation<UpdateTodoApiResponseSchema, ErrorApiResponseSchema, UpdateTodoSchema>({
+  return createMutation<
+    UpdateTodoApiResponseSchema,
+    ErrorApiResponseSchema,
+    UpdateTodoSchema
+  >({
     mutationFn: (updateTodo) => todoApi.update(updateTodo),
     onSuccess: async (updatedTodo) => {
       // NOTE: the order of function call MATTERS
@@ -59,15 +51,16 @@ const useTodoPageVM = () => {
   const [t] = useI18n();
   const params = useParams();
   const [appStorage] = useAppStorage();
-  const todoQuery = useInitialTodo(Number(params?.id));
+  const initialData = useRouteData<TodoDetailApiResponseSchema>();
+  const todoQuery = useTodo(Number(params?.id), { initialData });
   const todoUpdateMutation = useTodoUpdate();
 
   const felte = createForm<Pick<UpdateTodoSchema, 'todo'>>({
     onSubmit: (values) => {
       const payload: UpdateTodoSchema = {
         ...values,
-        id: todoQuery.data?.id,
-        completed: todoQuery.data?.completed,
+        id: todoQuery.data?.id ?? 1,
+        completed: todoQuery.data?.completed ?? false,
       };
 
       todoUpdateMutation.mutate(payload);

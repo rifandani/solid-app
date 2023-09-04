@@ -11,13 +11,15 @@ const routeDataTodo =
     const id = z.coerce.number().parse(params.id);
     const queryKey = todoKeys.detail(id);
     const queryFn = () => todoApi.detail(id);
+    const staleTime = 1_000 * 60 * 1; // 1 min
 
     // or we can use `_queryClient.ensureQueryData`
-    const todoInitialData = _queryClient.getQueryData<TodoDetailApiResponseSchema>(queryKey);
+    const todoInitialData =
+      _queryClient.getQueryData<TodoDetailApiResponseSchema>(queryKey);
     const todoFetchedData = await _queryClient.fetchQuery({
       queryKey,
       queryFn,
-      staleTime: 1000 * 60 * 1, // 1 min
+      staleTime
     });
 
     return todoInitialData ?? todoFetchedData;

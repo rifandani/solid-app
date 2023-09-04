@@ -24,11 +24,7 @@ const TodosFilter: Component = () => {
       >
         <For each={limits}>
           {(limit) => (
-            <option
-              data-testid={`option-limit-${limit}`}
-              value={limit}
-              selected={limit === selectedOption()}
-            >
+            <option data-testid={`option-limit-${limit}`} value={limit}>
               {limit}
             </option>
           )}

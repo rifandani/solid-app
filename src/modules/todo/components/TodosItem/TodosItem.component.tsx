@@ -17,11 +17,7 @@ const TodosItem: Component<TodosItemProps> = (props) => {
       aria-label="form-todo"
       data-testid={`form-${props.todo.id}`}
       class="mb-2 flex items-center justify-between duration-300 ease-in-out animate-in slide-in-from-left-5"
-      onSubmit={(e) => {
-        e.preventDefault();
-        // only allow for the correct auth user
-        if (props.todo.userId === appStorage.user?.id) handleDeleteTodo(props.todo);
-      }}
+      onSubmit={handleDeleteTodo(props.todo)}
     >
       <input
         data-testid="input-todoId"
@@ -51,7 +47,11 @@ const TodosItem: Component<TodosItemProps> = (props) => {
       </Link>
 
       <Show when={props.todo.userId === appStorage.user?.id}>
-        <button aria-label="button-submit" class="btn btn-accent btn-sm normal-case" type="submit">
+        <button
+          aria-label="button-submit"
+          class="btn btn-accent btn-sm normal-case"
+          type="submit"
+        >
           {t('remove', { icon: '💥' })}
         </button>
       </Show>
