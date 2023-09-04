@@ -4,20 +4,20 @@ import { TodoSchema } from '../../api/todo.schema';
 import useTodosItem from './useTodosItem.hook';
 
 // #region INTERFACES
-type TodosItemProps = {
+export type TodosItemProps = {
   todo: TodoSchema;
 };
 // #endregion
 
 const TodosItem: Component<TodosItemProps> = (props) => {
-  const { t, appStorage, handleUpdateTodo, handleDeleteTodo } = useTodosItem();
+  const { t, appStorage, handleUpdateTodo, handleDeleteTodo } = useTodosItem(props);
 
   return (
     <form
       aria-label="form-todo"
       data-testid={`form-${props.todo.id}`}
       class="mb-2 flex items-center justify-between duration-300 ease-in-out animate-in slide-in-from-left-5"
-      onSubmit={handleDeleteTodo(props.todo)}
+      onSubmit={handleDeleteTodo}
     >
       <input
         data-testid="input-todoId"
@@ -47,11 +47,7 @@ const TodosItem: Component<TodosItemProps> = (props) => {
       </Link>
 
       <Show when={props.todo.userId === appStorage.user?.id}>
-        <button
-          aria-label="button-submit"
-          class="btn btn-accent btn-sm normal-case"
-          type="submit"
-        >
+        <button aria-label="button-submit" class="btn btn-accent btn-sm normal-case" type="submit">
           {t('remove', { icon: '💥' })}
         </button>
       </Show>

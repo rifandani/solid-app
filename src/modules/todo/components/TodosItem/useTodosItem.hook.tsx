@@ -4,8 +4,9 @@ import { FormOnSubmitEvent } from '../../../shared/types/form.type';
 import { TodoSchema } from '../../api/todo.schema';
 import useTodoDelete from '../../hooks/useTodoDelete/useTodoDelete.hook';
 import useTodoUpdate from '../../hooks/useTodoUpdate/useTodoUpdate.hook';
+import { TodosItemProps } from './TodosItem.component';
 
-export default function useTodosItem() {
+export default function useTodosItem(props: TodosItemProps) {
   const [t] = useI18n();
   const [appStorage] = useAppStorage();
   const updateTodoMutation = useTodoUpdate();
@@ -15,10 +16,10 @@ export default function useTodosItem() {
   const handleUpdateTodo = (todo: TodoSchema) => {
     updateTodoMutation.mutate({ ...todo, completed: !todo.completed });
   };
-  const handleDeleteTodo = (todo: TodoSchema) => (evt: FormOnSubmitEvent) => {
+  const handleDeleteTodo = (evt: FormOnSubmitEvent) => {
     evt.preventDefault();
     // only allow for the correct auth user
-    if (todo.userId === appStorage.user?.id) deleteTodoMutation.mutate(todo.id);
+    if (props.todo.userId === appStorage.user?.id) deleteTodoMutation.mutate(props.todo.id);
   };
   // #endregion
 
