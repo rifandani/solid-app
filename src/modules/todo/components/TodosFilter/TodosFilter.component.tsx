@@ -20,7 +20,7 @@ const TodosFilter: Component = () => {
         name="limit"
         id="limit"
         value={selectedOption()}
-        onBlur={handleChangeLimit}
+        onChange={handleChangeLimit}
       >
         <For each={limits}>
           {(limit) => (
