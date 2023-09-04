@@ -20,8 +20,7 @@ const routeDataTodos =
     const staleTime = 1_000 * 60 * 1; // 1 min
 
     // or we can use `_queryClient.ensureQueryData`
-    const todosInitialData =
-      _queryClient.getQueryData<TodoListApiResponseSchema>(queryKey);
+    const todosInitialData = _queryClient.getQueryData<TodoListApiResponseSchema>(queryKey);
     const todosFetchedData = await _queryClient.fetchQuery({
       queryKey,
       queryFn,
