@@ -1,10 +1,7 @@
 import { useSearchParams } from '@solidjs/router';
 import { QueryOptions, createQuery } from '@tanstack/solid-query';
 import { Except, SetRequired } from 'type-fest';
-import {
-  ErrorApiResponseSchema,
-  ResourceParamsSchema,
-} from '../../../shared/api/api.schema';
+import { ErrorApiResponseSchema, ResourceParamsSchema } from '../../../shared/api/api.schema';
 import { todoApi, todoKeys } from '../../api/todo.api';
 import { TodoListApiResponseSchema } from '../../api/todo.schema';
 import { defaultLimit } from '../../constants/todos.constant';
@@ -18,9 +15,11 @@ export const useTodosParams = () => {
     ({
       ...searchParams,
       limit: Number(searchParams?.limit ?? defaultLimit),
-    } as SetRequired<ResourceParamsSchema, 'limit'>);
+    }) as SetRequired<ResourceParamsSchema, 'limit'>;
+  const queryKey = () => todoKeys.list(params());
+  const queryFn = () => todoApi.list(params());
 
-  return params;
+  return { params, queryKey, queryFn };
 };
 
 /**
@@ -32,9 +31,7 @@ const useTodos = (
     'queryKey' | 'queryFn'
   >,
 ) => {
-  const params = useTodosParams();
-  const queryKey = () => todoKeys.list(params());
-  const queryFn = () => todoApi.list(params());
+  const { queryKey, queryFn } = useTodosParams();
 
   return createQuery({
     ...options,

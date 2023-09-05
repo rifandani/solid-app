@@ -28,7 +28,7 @@ const HomeClock: Component = () => {
               data-testid={`home-clock-button-${btn.id}`}
               type="button"
               class={btn.class}
-              onClick={btn.onClick}
+              onClick={() => vm.onClickMapper(btn.id)}
             >
               {vm.t(btn.text)}
             </button>

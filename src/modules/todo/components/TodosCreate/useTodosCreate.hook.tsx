@@ -8,7 +8,6 @@ import { onCleanup } from 'solid-js';
 import { Toaster } from '../../../shared/components/molecules';
 import { useAppStorage } from '../../../shared/hooks/useAppStorage/useAppStorage.hook';
 import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
-import { todoKeys } from '../../api/todo.api';
 import { TodoSchema, todoSchema } from '../../api/todo.schema';
 import useTodoCreate from '../../hooks/useTodoCreate/useTodoCreate.hook';
 import { useTodosParams } from '../../hooks/useTodos/useTodos.hook';
@@ -17,7 +16,7 @@ export default function useTodosCreate() {
   const [t] = useI18n();
   const queryClient = useQueryClient();
   const [appStorage] = useAppStorage();
-  const params = useTodosParams();
+  const { queryKey } = useTodosParams();
   const todoCreateMutation = useTodoCreate();
 
   let timeoutId: NodeJS.Timeout;
@@ -50,8 +49,7 @@ export default function useTodosCreate() {
           ));
 
           // If the mutation fails, use the context returned from `onMutate` to roll back
-          if (error)
-            queryClient.setQueryData(todoKeys.list(params()), context?.previousTodosQueryResponse);
+          if (error) queryClient.setQueryData(queryKey(), context?.previousTodosQueryResponse);
         },
       });
     },

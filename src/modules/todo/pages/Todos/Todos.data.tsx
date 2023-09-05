@@ -21,6 +21,7 @@ const routeDataTodos =
 
     // or we can use `_queryClient.ensureQueryData`
     const todosInitialData = _queryClient.getQueryData<TodoListApiResponseSchema>(queryKey);
+    // NOTE: somehow returned promise, and app will malfunction if we pass this value to `initialData`
     const todosFetchedData = await _queryClient.fetchQuery({
       queryKey,
       queryFn,

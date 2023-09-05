@@ -16,27 +16,23 @@ const useHomeClock = () => {
   const toggleClock = () => setToggle((prev) => !prev);
   const [buttons, setButtons] = createStore([
     {
-      id: 'sort',
+      id: 'sort' as const,
       class: 'btn-neutral btn',
-      onClick: () => setButtons((prev) => shuffle(prev)),
       text: 'sortButtons' as const,
     },
     {
-      id: 'clock',
+      id: 'clock' as const,
       class: 'btn-active btn',
-      onClick: () => toggleClock(),
       text: 'toggleClock' as const,
     },
     {
-      id: 'language',
+      id: 'language' as const,
       class: 'btn-accent btn',
-      onClick: () => locale(locale() === 'en' ? 'id' : 'en'),
       text: 'changeLanguage' as const,
     },
     {
-      id: 'start',
+      id: 'start' as const,
       class: 'btn-secondary btn',
-      onClick: () => navigate('/todos'),
       text: 'getStarted' as const,
     },
   ]);
@@ -49,6 +45,17 @@ const useHomeClock = () => {
     (prev: number) => (minutes() > 0 ? (minutes() % 2 === 0 ? prev + 1 : prev) : 0),
     0,
   );
+
+  const onClickMapper = (btnId: 'sort' | 'clock' | 'language' | 'start') => {
+    const mapper: Record<typeof btnId, () => void> = {
+      sort: () => setButtons((prev) => shuffle(prev)),
+      clock: () => toggleClock(),
+      language: () => locale(locale() === 'en' ? 'id' : 'en'),
+      start: () => navigate('/todos'),
+    };
+
+    mapper[btnId]();
+  };
 
   // The first execution of the effect function is not immediate; it's scheduled to run after the current rendering phase
   createEffect(() => {
@@ -76,6 +83,7 @@ const useHomeClock = () => {
     buttons,
     setButtons,
     setParent,
+    onClickMapper,
   };
 };
 

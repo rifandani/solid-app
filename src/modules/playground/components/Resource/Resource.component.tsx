@@ -62,7 +62,7 @@ const resourceMap: Record<'unresolved' | 'pending' | 'ready' | 'refreshing' | 'e
 // #endregion
 
 const Resource: Component = () => {
-  const params = useTodosParams();
+  const { params } = useTodosParams();
   const isOnline = createConnectivitySignal();
   // refetch when back online
   const source = () => isOnline() && params();

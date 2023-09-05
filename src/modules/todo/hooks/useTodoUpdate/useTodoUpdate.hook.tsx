@@ -3,7 +3,7 @@ import { createMutation, useQueryClient } from '@tanstack/solid-query';
 import { ErrorApiResponseSchema } from '../../../shared/api/api.schema';
 import { Toaster } from '../../../shared/components/molecules';
 import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
-import { todoApi, todoKeys } from '../../api/todo.api';
+import { todoApi } from '../../api/todo.api';
 import {
   TodoListApiResponseSchema,
   UpdateTodoApiResponseSchema,
@@ -16,9 +16,8 @@ import { useTodosParams } from '../useTodos/useTodos.hook';
  */
 const useTodoUpdate = () => {
   const queryClient = useQueryClient();
-  const params = useTodosParams();
+  const { queryKey } = useTodosParams();
   const [t] = useI18n();
-  const queryKey = () => todoKeys.list(params());
 
   return createMutation<
     UpdateTodoApiResponseSchema,
@@ -32,9 +31,8 @@ const useTodoUpdate = () => {
       await queryClient.cancelQueries({ queryKey: queryKey() });
 
       // Snapshot the previous value
-      const previousTodosQueryResponse = (queryClient.getQueryData(
-        queryKey(),
-      ) ?? []) as TodoListApiResponseSchema;
+      const previousTodosQueryResponse = (queryClient.getQueryData(queryKey()) ??
+        []) as TodoListApiResponseSchema;
 
       // Optimistically update to the new value
       queryClient.setQueryData(queryKey(), {
@@ -62,11 +60,7 @@ const useTodoUpdate = () => {
       ));
 
       // If the mutation fails, use the context returned from `onMutate` to roll back
-      if (error)
-        queryClient.setQueryData(
-          queryKey(),
-          context?.previousTodosQueryResponse,
-        );
+      if (error) queryClient.setQueryData(queryKey(), context?.previousTodosQueryResponse);
 
       // if we want to refetch after error or success:
       // await queryClient.invalidateQueries({ queryKey: queryKey() });

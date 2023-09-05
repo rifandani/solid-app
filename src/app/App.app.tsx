@@ -7,7 +7,6 @@ import NotFoundPage from '../modules/auth/pages/NotFound/NotFound.page';
 import { SuspenseWithFallbackSpinner } from '../modules/shared/components/molecules';
 import { PageWrapper } from '../modules/shared/components/templates';
 import routeDataTodo from '../modules/todo/pages/Todo/Todo.data';
-import routeDataTodos from '../modules/todo/pages/Todos/Todos.data';
 import AppErrorBoundary from './ErrorBoundary.app';
 import { AppRootProvider, queryClient } from './Store.app';
 
@@ -57,7 +56,6 @@ const App: Component = () => (
           <Route path="/todos" component={PageWrapper}>
             <Route
               path="/"
-              data={routeDataTodos(queryClient)}
               element={
                 <SuspenseWithFallbackSpinner>
                   <LazyTodosPage />
