@@ -1,8 +1,8 @@
 import { Icon } from '@iconify-icon/solid';
+import { SvgIcon } from '@shared/components/atoms';
+import { NavbarMenuContent } from '@shared/components/molecules';
 import { Link } from '@solidjs/router';
 import { ParentComponent } from 'solid-js';
-import { SvgIcon } from '../../atoms';
-import { NavbarMenuContent } from '../../molecules';
 import useNavbar from './useNavbar.hook';
 
 const Navbar: ParentComponent = (props) => {

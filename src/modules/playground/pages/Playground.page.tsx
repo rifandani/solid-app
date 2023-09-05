@@ -1,8 +1,8 @@
+import Directive from '@playground/components/Directive/Directive.component';
+import Resource from '@playground/components/Resource/Resource.component';
+import WebComponents from '@playground/components/WebComponents/WebComponents.component';
+import { useI18n } from '@shared/hooks/usei18n/usei18n.hook';
 import { Component } from 'solid-js';
-import { useI18n } from '../../shared/hooks/usei18n/usei18n.hook';
-import Directive from '../components/Directive/Directive.component';
-import Resource from '../components/Resource/Resource.component';
-import WebComponents from '../components/WebComponents/WebComponents.component';
 
 const PlaygroundPage: Component = () => {
   const [t] = useI18n();

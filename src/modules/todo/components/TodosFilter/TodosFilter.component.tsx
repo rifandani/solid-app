@@ -1,5 +1,5 @@
+import { limits } from '@todo/constants/todos.constant';
 import { Component, For } from 'solid-js';
-import { limits } from '../../constants/todos.constant';
 import useTodosFilter from './useTodosFilter.hook';
 
 const TodosFilter: Component = () => {

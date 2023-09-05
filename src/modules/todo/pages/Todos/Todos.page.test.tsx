@@ -1,7 +1,7 @@
+import { mockedCreateResource } from '@mocks/module.mock';
+import { renderProviders } from '@shared/utils/test.util';
 import { Route } from '@solidjs/router';
 import { screen } from '@solidjs/testing-library';
-import { mockedCreateResource } from '../../../../mocks/module.mock';
-import { renderProviders } from '../../../shared/utils/test.util';
 import TodosPage from './Todos.page';
 
 describe('TodosPage', () => {

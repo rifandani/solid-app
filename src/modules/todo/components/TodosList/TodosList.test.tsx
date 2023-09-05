@@ -1,8 +1,8 @@
+import { rest, server } from '@mocks/http/server.http';
+import { getBaseUrl } from '@mocks/util.mock';
+import { renderProviders } from '@shared/utils/test.util';
 import { Route } from '@solidjs/router';
 import { screen, waitFor } from '@solidjs/testing-library';
-import { rest, server } from '../../../../mocks/http/server.http';
-import { getBaseUrl } from '../../../../mocks/util.mock';
-import { renderProviders } from '../../../shared/utils/test.util';
 import TodosList from './TodosList.component';
 
 describe('TodosList', () => {

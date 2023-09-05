@@ -1,8 +1,8 @@
+import { themes } from '@shared/constants/global.constant';
+import { renderProviders } from '@shared/utils/test.util';
 import { Route } from '@solidjs/router';
 import { fireEvent, screen } from '@solidjs/testing-library';
 import { vi } from 'vitest';
-import { themes } from '../../../constants/global.constant';
-import { renderProviders } from '../../../utils/test.util';
 import NavbarMenuContent from './NavbarMenuContent.molecule';
 
 describe('NavBarMenuContent', () => {

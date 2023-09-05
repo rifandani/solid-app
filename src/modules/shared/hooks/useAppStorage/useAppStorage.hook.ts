@@ -1,6 +1,6 @@
+import { loginApiResponseSchema } from '@auth/api/auth.schema';
 import { createStorage } from '@solid-primitives/storage';
 import { z } from 'zod';
-import { loginApiResponseSchema } from '../../../auth/api/auth.schema';
 
 export type AppStorageSchema = z.infer<typeof appStorageSchema>;
 export type AppStorageInterface = ReturnType<typeof useAppStorage>;

@@ -1,10 +1,10 @@
+import { queryClient } from '@app/Store.app';
+import { ResourceParamsSchema } from '@shared/api/api.schema';
 import { RouteDataFuncArgs } from '@solidjs/router';
+import { todoApi, todoKeys } from '@todo/api/todo.api';
+import { TodoListApiResponseSchema } from '@todo/api/todo.schema';
+import { defaultLimit } from '@todo/constants/todos.constant';
 import { SetRequired } from 'type-fest';
-import { queryClient } from '../../../../app/Store.app';
-import { ResourceParamsSchema } from '../../../shared/api/api.schema';
-import { todoApi, todoKeys } from '../../api/todo.api';
-import { TodoListApiResponseSchema } from '../../api/todo.schema';
-import { defaultLimit } from '../../constants/todos.constant';
 
 const routeDataTodos =
   (_queryClient: typeof queryClient) =>

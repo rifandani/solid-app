@@ -1,9 +1,9 @@
 import { createAutoAnimate } from '@formkit/auto-animate/solid';
 import { shuffle } from '@rifandani/nxact-yutiriti';
+import { useI18n } from '@shared/hooks/usei18n/usei18n.hook';
 import { useNavigate } from '@solidjs/router';
 import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
 
 const useHomeClock = () => {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ const useHomeClock = () => {
 
   // The first execution of the effect function is not immediate; it's scheduled to run after the current rendering phase
   createEffect(() => {
-    let id: NodeJS.Timer;
+    let id: ReturnType<typeof setInterval>;
 
     if (toggle()) {
       // if the clock is shown, increment the seconds

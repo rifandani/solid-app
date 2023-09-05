@@ -24,6 +24,7 @@
     "esModuleInterop": true,
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },
+  "extends": "./tsconfig.paths.json",
   "include": ["index.d.ts", "tailwind.config.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "postcss.config.js"],
   "references": [{ "path": "./tsconfig.node.json" }]

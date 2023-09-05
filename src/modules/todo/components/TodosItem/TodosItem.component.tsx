@@ -1,6 +1,6 @@
 import { Link } from '@solidjs/router';
+import { TodoSchema } from '@todo/api/todo.schema';
 import { Component, Show } from 'solid-js';
-import { TodoSchema } from '../../api/todo.schema';
 import useTodosItem from './useTodosItem.hook';
 
 // #region INTERFACES

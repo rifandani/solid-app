@@ -34,13 +34,14 @@
     "@tailwindcss/typography": "^0.5.9",
     "@tanstack/eslint-plugin-query": "^4.34.1",
     "@testing-library/jest-dom": "^5.17.0",
+    "@types/node": "^20.5.9",
     "@types/testing-library__jest-dom": "^5.14.9",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "@vitest/coverage-istanbul": "^0.33.0",
     "@vitest/ui": "^0.33.0",
     "autoprefixer": "^10.4.15",
-    "daisyui": "^3.6.4",
+    "daisyui": "^3.6.5",
     "eslint": "^8.48.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.1.0",
@@ -61,6 +62,7 @@
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-solid": "^2.7.0",
+    "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.33.0"
   },
   "dependencies": {

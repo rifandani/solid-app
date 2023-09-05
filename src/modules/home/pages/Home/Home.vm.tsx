@@ -1,6 +1,6 @@
 import { createAutoAnimate } from '@formkit/auto-animate/solid';
+import { useI18n } from '@shared/hooks/usei18n/usei18n.hook';
 import { useNavigate } from '@solidjs/router';
-import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
 
 const useHomePageVM = () => {
   const navigate = useNavigate();

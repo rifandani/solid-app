@@ -1,11 +1,11 @@
-import { Component, createSignal, onCleanup, onMount } from 'solid-js';
 import {
   myCounterEventDecrement,
   myCounterEventIncrement,
   type MyCounterEventDetail,
-} from '../../../../lib/wc/MyCounter.constant';
-import '../../../../lib/wc/MyCounter.wc';
-import { ButtonOnClick } from '../../../shared/types/form.type';
+} from '@lib/wc/MyCounter.constant';
+import '@lib/wc/MyCounter.wc';
+import { ButtonOnClick } from '@shared/types/form.type';
+import { Component, createSignal, onCleanup, onMount } from 'solid-js';
 
 const WebComponents: Component = () => {
   let sectionRef: HTMLElement;

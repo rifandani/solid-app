@@ -1,4 +1,4 @@
-import { SettingSchema } from '../../setting/api/setting.schema';
+import { SettingSchema } from '@setting/api/setting.schema';
 
 export type AppStore = {
   setting: SettingSchema;

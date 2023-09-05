@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
+import { AppRootProvider } from '@app/Store.app';
 import { Router, Routes } from '@solidjs/router';
 import { render } from '@solidjs/testing-library';
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
-import { AppRootProvider } from '../../../app/Store.app';
 
 const queryClient = new QueryClient({
   defaultOptions: {

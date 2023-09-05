@@ -1,6 +1,6 @@
+import { themes } from '@shared/constants/global.constant';
 import { NavLink } from '@solidjs/router';
 import { Component, For, Show } from 'solid-js';
-import { themes } from '../../../constants/global.constant';
 import useNavbarMenuContent from './useNavbarMenuContent.hook';
 
 const NavbarMenuContent: Component = () => {

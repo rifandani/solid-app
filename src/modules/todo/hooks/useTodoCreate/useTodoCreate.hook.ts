@@ -1,12 +1,12 @@
+import { queryClient } from '@app/Store.app';
+import { ErrorApiResponseSchema } from '@shared/api/api.schema';
 import { createMutation } from '@tanstack/solid-query';
-import { queryClient } from '../../../../app/Store.app';
-import { ErrorApiResponseSchema } from '../../../shared/api/api.schema';
-import { todoApi } from '../../api/todo.api';
+import { todoApi } from '@todo/api/todo.api';
 import {
   CreateTodoApiResponseSchema,
   CreateTodoSchema,
   TodoListApiResponseSchema,
-} from '../../api/todo.schema';
+} from '@todo/api/todo.schema';
 import { useTodosParams } from '../useTodos/useTodos.hook';
 
 /**

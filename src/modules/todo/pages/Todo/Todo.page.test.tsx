@@ -1,6 +1,6 @@
+import { renderProviders } from '@shared/utils/test.util';
 import { Route } from '@solidjs/router';
 import { screen } from '@solidjs/testing-library';
-import { renderProviders } from '../../../shared/utils/test.util';
 import TodoPage from './Todo.page';
 
 describe('TodoPage', () => {

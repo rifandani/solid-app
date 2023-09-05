@@ -1,8 +1,8 @@
+import { modes } from '@shared/constants/global.constant';
+import { createColorMode } from '@shared/hooks/createColorMode/createColorMode.hook';
+import { useAppStorage } from '@shared/hooks/useAppStorage/useAppStorage.hook';
+import { useI18n } from '@shared/hooks/usei18n/usei18n.hook';
 import { useNavigate } from '@solidjs/router';
-import { modes } from '../../../constants/global.constant';
-import { createColorMode } from '../../../hooks/createColorMode/createColorMode.hook';
-import { useAppStorage } from '../../../hooks/useAppStorage/useAppStorage.hook';
-import { useI18n } from '../../../hooks/usei18n/usei18n.hook';
 
 export default function useNavbarMenuContent() {
   const [t] = useI18n();

@@ -1,5 +1,5 @@
+import HomeClock from '@home/components/HomeClock/HomeClock.component';
 import { Component } from 'solid-js';
-import HomeClock from '../../components/HomeClock/HomeClock.component';
 import useHomePageVM from './Home.vm';
 
 const HomePage: Component = () => {

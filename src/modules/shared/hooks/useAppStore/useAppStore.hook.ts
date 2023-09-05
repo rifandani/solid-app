@@ -1,6 +1,6 @@
+import { AppAction, AppStore } from '@shared/types/store.type';
 import { createContext, useContext } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import { AppAction, AppStore } from '../../types/store.type';
 
 const appStoreInitialState = {
   setting: {

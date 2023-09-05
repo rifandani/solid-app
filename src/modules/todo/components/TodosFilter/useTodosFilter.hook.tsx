@@ -1,7 +1,7 @@
+import { useI18n } from '@shared/hooks/usei18n/usei18n.hook';
+import { SelectOnChange } from '@shared/types/form.type';
 import { useSearchParams } from '@solidjs/router';
-import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
-import { SelectOnChange } from '../../../shared/types/form.type';
-import { defaultLimit } from '../../constants/todos.constant';
+import { defaultLimit } from '@todo/constants/todos.constant';
 
 export default function useTodosFilter() {
   const [searchParams, setSearchParams] = useSearchParams();

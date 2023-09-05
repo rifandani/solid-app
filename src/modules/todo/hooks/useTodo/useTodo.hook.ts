@@ -1,8 +1,8 @@
+import { ErrorApiResponseSchema } from '@shared/api/api.schema';
 import { QueryOptions, createQuery } from '@tanstack/solid-query';
+import { todoApi, todoKeys } from '@todo/api/todo.api';
+import { TodoDetailApiResponseSchema, TodoSchema } from '@todo/api/todo.schema';
 import { Except } from 'type-fest';
-import { ErrorApiResponseSchema } from '../../../shared/api/api.schema';
-import { todoApi, todoKeys } from '../../api/todo.api';
-import { TodoDetailApiResponseSchema, TodoSchema } from '../../api/todo.schema';
 
 /**
  * fetch todo

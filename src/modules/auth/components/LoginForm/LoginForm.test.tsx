@@ -1,7 +1,7 @@
+import { renderProviders } from '@shared/utils/test.util';
 import { Route } from '@solidjs/router';
 import { fireEvent, screen } from '@solidjs/testing-library';
 import { vi } from 'vitest';
-import { renderProviders } from '../../../shared/utils/test.util';
 import LoginForm from './LoginForm.component';
 
 describe('LoginForm', () => {

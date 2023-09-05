@@ -1,8 +1,8 @@
+import solidjs from '@assets/solidjs.webp';
+import LoginForm from '@auth/components/LoginForm/LoginForm.component';
 import { Icon } from '@iconify-icon/solid';
 import { Link } from '@solidjs/router';
 import { Component } from 'solid-js';
-import solidjs from '../../../../assets/solidjs.webp';
-import LoginForm from '../../components/LoginForm/LoginForm.component';
 import useLoginPageVM from './Login.vm';
 
 const LoginPage: Component = () => {
@@ -30,11 +30,7 @@ const LoginPage: Component = () => {
 
             <p class="py-12 text-center">
               {vm.t('noAccount')}{' '}
-              <Link
-                class="link-primary link"
-                aria-label="link-register"
-                href="/register"
-              >
+              <Link class="link-primary link" aria-label="link-register" href="/register">
                 {vm.t('registerHere')}
               </Link>
             </p>

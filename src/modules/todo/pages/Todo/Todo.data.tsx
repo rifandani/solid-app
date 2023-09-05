@@ -1,8 +1,8 @@
+import { queryClient } from '@app/Store.app';
 import { RouteDataFuncArgs } from '@solidjs/router';
+import { todoApi, todoKeys } from '@todo/api/todo.api';
+import { TodoDetailApiResponseSchema } from '@todo/api/todo.schema';
 import { z } from 'zod';
-import { queryClient } from '../../../../app/Store.app';
-import { todoApi, todoKeys } from '../../api/todo.api';
-import { TodoDetailApiResponseSchema } from '../../api/todo.schema';
 
 const routeDataTodo =
   (_queryClient: typeof queryClient) =>
@@ -14,12 +14,11 @@ const routeDataTodo =
     const staleTime = 1_000 * 60 * 1; // 1 min
 
     // or we can use `_queryClient.ensureQueryData`
-    const todoInitialData =
-      _queryClient.getQueryData<TodoDetailApiResponseSchema>(queryKey);
+    const todoInitialData = _queryClient.getQueryData<TodoDetailApiResponseSchema>(queryKey);
     const todoFetchedData = await _queryClient.fetchQuery({
       queryKey,
       queryFn,
-      staleTime
+      staleTime,
     });
 
     return todoInitialData ?? todoFetchedData;

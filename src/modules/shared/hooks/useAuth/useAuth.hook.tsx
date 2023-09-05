@@ -1,7 +1,7 @@
 import { toaster } from '@kobalte/core';
+import { Toaster } from '@shared/components/molecules';
 import { useLocation, useNavigate } from '@solidjs/router';
 import { onMount } from 'solid-js';
-import { Toaster } from '../../components/molecules';
 import { useAppStorage } from '../useAppStorage/useAppStorage.hook';
 import { useI18n } from '../usei18n/usei18n.hook';
 

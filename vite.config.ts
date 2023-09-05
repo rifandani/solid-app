@@ -1,17 +1,12 @@
 import { defineConfig } from 'vite';
 import solid from 'vite-plugin-solid';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import { configDefaults } from 'vitest/config';
 
-export default defineConfig(() => ({
-  plugins: [solid()],
+export default defineConfig({
+  plugins: [tsconfigPaths(), solid()],
   server: {
     port: 5000,
-  },
-  build: {
-    target: 'esnext',
-  },
-  resolve: {
-    conditions: ['development', 'browser'],
   },
   test: {
     // to see how your tests are running in real time in the terminal, add "default"
@@ -59,4 +54,4 @@ export default defineConfig(() => ({
       ],
     },
   },
-}));
+});

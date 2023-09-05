@@ -1,7 +1,7 @@
 import { Icon } from '@iconify-icon/solid';
+import { TodoListApiResponseSchema } from '@todo/api/todo.schema';
 import { Component, For, Match, Switch } from 'solid-js';
-import { TodoListApiResponseSchema } from '../../api/todo.schema';
-import TodosItem from '../../components/TodosItem/TodosItem.component';
+import TodosItem from '../TodosItem/TodosItem.component';
 import useTodosList from './useTodosList.hook';
 
 const TodosList: Component = () => {

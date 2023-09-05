@@ -1,14 +1,14 @@
 import { toaster } from '@kobalte/core';
+import { ErrorApiResponseSchema } from '@shared/api/api.schema';
+import { Toaster } from '@shared/components/molecules';
+import { useI18n } from '@shared/hooks/usei18n/usei18n.hook';
 import { createMutation, useQueryClient } from '@tanstack/solid-query';
-import { ErrorApiResponseSchema } from '../../../shared/api/api.schema';
-import { Toaster } from '../../../shared/components/molecules';
-import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
-import { todoApi } from '../../api/todo.api';
+import { todoApi } from '@todo/api/todo.api';
 import {
   TodoListApiResponseSchema,
   UpdateTodoApiResponseSchema,
   UpdateTodoSchema,
-} from '../../api/todo.schema';
+} from '@todo/api/todo.schema';
 import { useTodosParams } from '../useTodos/useTodos.hook';
 
 /**

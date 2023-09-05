@@ -1,7 +1,7 @@
+import { renderProviders } from '@shared/utils/test.util';
 import { Route } from '@solidjs/router';
 import { ByRoleOptions, fireEvent, screen } from '@solidjs/testing-library';
 import { vi } from 'vitest';
-import { renderProviders } from '../../../shared/utils/test.util';
 import TodosCreate from './TodosCreate.component';
 
 describe('TodosCreate', () => {

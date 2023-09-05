@@ -1,4 +1,4 @@
-import { Theme } from '../types/store.type';
+import { Theme } from '@shared/types/store.type';
 
 export const themes: Theme[] = [
   'auto',

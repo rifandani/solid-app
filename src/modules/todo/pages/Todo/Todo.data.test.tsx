@@ -1,4 +1,4 @@
-import { mockedCreateResource } from '../../../../mocks/module.mock';
+import { mockedCreateResource } from '@mocks/module.mock';
 import routeDataTodo from './Todo.data';
 
 describe('routeDataTodo', () => {

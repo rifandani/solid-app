@@ -2,12 +2,12 @@ import { Icon } from '@iconify-icon/solid';
 import { createConnectivitySignal } from '@solid-primitives/connectivity';
 import { createEventListener } from '@solid-primitives/event-listener';
 import { createTimer } from '@solid-primitives/timer';
+import { todoApi } from '@todo/api/todo.api';
+import { TodoListApiResponseSchema, TodoSchema } from '@todo/api/todo.schema';
+import TodosFilter from '@todo/components/TodosFilter/TodosFilter.component';
+import { useTodosParams } from '@todo/hooks/useTodos/useTodos.hook';
 import { Component, For, createEffect, createResource } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
-import { todoApi } from '../../../todo/api/todo.api';
-import { TodoListApiResponseSchema, TodoSchema } from '../../../todo/api/todo.schema';
-import TodosFilter from '../../../todo/components/TodosFilter/TodosFilter.component';
-import { useTodosParams } from '../../../todo/hooks/useTodos/useTodos.hook';
 
 // #region DYNAMIC RENDERING
 const Pending: Component = () => (

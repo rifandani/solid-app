@@ -1,8 +1,8 @@
+import { useI18n } from '@shared/hooks/usei18n/usei18n.hook';
+import TodosCreate from '@todo/components/TodosCreate/TodosCreate.component';
+import TodosFilter from '@todo/components/TodosFilter/TodosFilter.component';
+import TodosList from '@todo/components/TodosList/TodosList.component';
 import { Component } from 'solid-js';
-import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
-import TodosCreate from '../../components/TodosCreate/TodosCreate.component';
-import TodosFilter from '../../components/TodosFilter/TodosFilter.component';
-import TodosList from '../../components/TodosList/TodosList.component';
 
 const TodosPage: Component = () => {
   const [t] = useI18n();

@@ -1,9 +1,9 @@
-import { useAppStorage } from '../../../shared/hooks/useAppStorage/useAppStorage.hook';
-import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
-import { FormOnSubmitEvent } from '../../../shared/types/form.type';
-import { TodoSchema } from '../../api/todo.schema';
-import useTodoDelete from '../../hooks/useTodoDelete/useTodoDelete.hook';
-import useTodoUpdate from '../../hooks/useTodoUpdate/useTodoUpdate.hook';
+import { useAppStorage } from '@shared/hooks/useAppStorage/useAppStorage.hook';
+import { useI18n } from '@shared/hooks/usei18n/usei18n.hook';
+import { FormOnSubmitEvent } from '@shared/types/form.type';
+import { TodoSchema } from '@todo/api/todo.schema';
+import useTodoDelete from '@todo/hooks/useTodoDelete/useTodoDelete.hook';
+import useTodoUpdate from '@todo/hooks/useTodoUpdate/useTodoUpdate.hook';
 import { TodosItemProps } from './TodosItem.component';
 
 export default function useTodosItem(props: TodosItemProps) {

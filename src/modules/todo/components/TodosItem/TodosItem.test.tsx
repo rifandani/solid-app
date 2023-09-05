@@ -1,8 +1,8 @@
+import { mockTodo } from '@mocks/http/entities.http';
+import { renderProviders } from '@shared/utils/test.util';
 import { Route } from '@solidjs/router';
 import { fireEvent, screen } from '@solidjs/testing-library';
-import { mockTodo } from '../../../../mocks/http/entities.http';
-import { renderProviders } from '../../../shared/utils/test.util';
-import { TodoSchema } from '../../api/todo.schema';
+import { TodoSchema } from '@todo/api/todo.schema';
 import TodosItem from './TodosItem.component';
 
 describe('TodosItem', () => {

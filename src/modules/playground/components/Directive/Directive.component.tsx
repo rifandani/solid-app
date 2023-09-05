@@ -1,5 +1,5 @@
+import clickOutside from '@shared/directives/clickOutside.directive';
 import { Component, Show, createSignal } from 'solid-js';
-import clickOutside from '../../../shared/directives/clickOutside.directive';
 
 const Directive: Component = () => {
   const [show, setShow] = createSignal(false);

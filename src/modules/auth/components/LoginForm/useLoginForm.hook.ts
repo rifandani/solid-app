@@ -1,12 +1,12 @@
+import { login } from '@auth/api/auth.api';
+import { LoginApiResponseSchema, LoginSchema, loginSchema } from '@auth/api/auth.schema';
 import { createForm } from '@felte/solid';
 import { validator } from '@felte/validator-zod';
+import { ErrorApiResponseSchema } from '@shared/api/api.schema';
+import { useAppStorage } from '@shared/hooks/useAppStorage/useAppStorage.hook';
+import { useI18n } from '@shared/hooks/usei18n/usei18n.hook';
 import { useNavigate } from '@solidjs/router';
 import { createMutation } from '@tanstack/solid-query';
-import { ErrorApiResponseSchema } from '../../../shared/api/api.schema';
-import { useAppStorage } from '../../../shared/hooks/useAppStorage/useAppStorage.hook';
-import { useI18n } from '../../../shared/hooks/usei18n/usei18n.hook';
-import { login } from '../../api/auth.api';
-import { LoginApiResponseSchema, LoginSchema, loginSchema } from '../../api/auth.schema';
 
 export default function useLoginForm() {
   const navigate = useNavigate();
