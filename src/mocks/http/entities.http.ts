@@ -1,5 +1,5 @@
-import type { LoginApiResponseSchema } from '../../modules/auth/api/auth.schema';
-import type { TodoListApiResponseSchema, TodoSchema } from '../../modules/todo/api/todo.schema';
+import type { LoginApiResponseSchema } from '@auth/api/auth.schema';
+import type { TodoListApiResponseSchema, TodoSchema } from '@todo/api/todo.schema';
 
 export function mockLogin(initialValue?: Partial<LoginApiResponseSchema>): LoginApiResponseSchema {
   return {

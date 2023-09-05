@@ -1,7 +1,7 @@
-import { rest } from 'msw';
-import { getBaseUrl } from '../../util.mock';
+import { getBaseUrl } from '@mocks/util.mock';
+import { RestHandler, rest } from 'msw';
 
-export const authHandlers = [
+export const authHandlers: RestHandler[] = [
   rest.post(getBaseUrl('auth/login'), async (req, res, ctx) => {
     const { email, password } = await req.json<{
       email: string;

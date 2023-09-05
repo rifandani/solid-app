@@ -1,12 +1,12 @@
-import { rest } from 'msw';
-import { ResourceParamsSchema, resourceParamsSchema } from '../../../modules/shared/api/api.schema';
-import type {
+import { getBaseUrl } from '@mocks/util.mock';
+import { ResourceParamsSchema, resourceParamsSchema } from '@shared/api/api.schema';
+import {
   CreateTodoSchema,
   DeleteTodoApiResponseSchema,
   TodoSchema,
   UpdateTodoSchema,
-} from '../../../modules/todo/api/todo.schema';
-import { getBaseUrl } from '../../util.mock';
+} from '@todo/api/todo.schema';
+import { RestHandler, rest } from 'msw';
 import { mockTodo } from '../entities.http';
 
 function getTodos(length: number) {
@@ -30,7 +30,7 @@ let todos = Array.from({ length: 10 }, (_, idx) =>
   }),
 );
 
-export const todoHandlers = [
+export const todoHandlers: RestHandler[] = [
   rest.get(getBaseUrl('todos'), async (req, res, ctx) => {
     const searchParamsObject = Object.fromEntries(req.url.searchParams) as ResourceParamsSchema;
     const hasSearchParams = !!Object.keys(searchParamsObject).length;
