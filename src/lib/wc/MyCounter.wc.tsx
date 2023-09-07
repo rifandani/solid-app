@@ -1,6 +1,6 @@
+import { ButtonOnClick } from '@shared/types/form.type';
 import { ComponentType, customElement, noShadowDOM } from 'solid-element';
 import { createEffect, createSignal } from 'solid-js';
-import { ButtonOnClick } from '../../modules/shared/types/form.type';
 import {
   MyCounterProps,
   myCounterEventDecrement,

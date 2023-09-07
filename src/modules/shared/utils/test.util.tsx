@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { AppRootProvider } from '@app/Store.app';
 import { Router, Routes } from '@solidjs/router';
 import { render } from '@solidjs/testing-library';
@@ -8,12 +7,8 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: false,
+      cacheTime: 0,
     },
-  },
-  logger: {
-    log: console.log,
-    warn: console.warn,
-    error: () => {},
   },
 });
 

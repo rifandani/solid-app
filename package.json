@@ -4,7 +4,7 @@
   "description": "Bulletproof Solid SPA Template",
   "license": "MIT",
   "author": "Tri Rizeki Rifandani",
-  "packageManager": "pnpm@8.6.9",
+  "packageManager": "pnpm@8.7.4",
   "msw": {
     "workerDirectory": "public"
   },

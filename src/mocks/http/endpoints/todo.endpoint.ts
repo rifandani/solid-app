@@ -1,3 +1,4 @@
+import { mockTodo } from '@mocks/http/entities.http';
 import { getBaseUrl } from '@mocks/util.mock';
 import { ResourceParamsSchema, resourceParamsSchema } from '@shared/api/api.schema';
 import {
@@ -7,7 +8,6 @@ import {
   UpdateTodoSchema,
 } from '@todo/api/todo.schema';
 import { RestHandler, rest } from 'msw';
-import { mockTodo } from '../entities.http';
 
 function getTodos(length: number) {
   return Array.from({ length }, (_, idx) =>

@@ -1,12 +1,12 @@
+import LoginPage from '@auth/pages/Login/Login.page';
+import NotFoundPage from '@auth/pages/NotFound/NotFound.page';
 import { Toast } from '@kobalte/core';
+import { SuspenseWithFallbackSpinner } from '@shared/components/molecules';
+import { PageWrapper } from '@shared/components/templates';
 import { Route, Router, Routes } from '@solidjs/router';
+import routeDataTodo from '@todo/pages/Todo/Todo.data';
 import { Component, lazy } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import LoginPage from '../modules/auth/pages/Login/Login.page';
-import NotFoundPage from '../modules/auth/pages/NotFound/NotFound.page';
-import { SuspenseWithFallbackSpinner } from '../modules/shared/components/molecules';
-import { PageWrapper } from '../modules/shared/components/templates';
-import routeDataTodo from '../modules/todo/pages/Todo/Todo.data';
 import AppErrorBoundary from './ErrorBoundary.app';
 import { AppRootProvider, queryClient } from './Store.app';
 

@@ -7,7 +7,7 @@ import {
   CreateTodoSchema,
   TodoListApiResponseSchema,
 } from '@todo/api/todo.schema';
-import { useTodosParams } from '../useTodos/useTodos.hook';
+import { useTodosParams } from '@todo/hooks/useTodos/useTodos.hook';
 
 /**
  * create todo mutation (optimistic update) based on `useTodosParams`

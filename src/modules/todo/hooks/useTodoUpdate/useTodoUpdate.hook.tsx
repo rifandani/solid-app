@@ -9,7 +9,7 @@ import {
   UpdateTodoApiResponseSchema,
   UpdateTodoSchema,
 } from '@todo/api/todo.schema';
-import { useTodosParams } from '../useTodos/useTodos.hook';
+import { useTodosParams } from '@todo/hooks/useTodos/useTodos.hook';
 
 /**
  * update todo mutation based on `useTodosParams` and show toast
