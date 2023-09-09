@@ -11,9 +11,8 @@ const NavbarMenuContent: Component = () => {
       <li>
         <NavLink
           href="/todos"
-          class="link-hover link mx-0 px-3 tracking-wide text-primary lg:mx-3"
-          activeClass="link-secondary"
-          inactiveClass="link-neutral"
+          class="link mx-0 px-3 tracking-wide lg:mx-3"
+          activeClass="link-hover"
           aria-label="todos"
         >
           Todos
@@ -25,12 +24,12 @@ const NavbarMenuContent: Component = () => {
           type="button"
           tabIndex={0}
           aria-label="themes-opener"
-          class="btn btn-secondary btn-sm btn-block normal-case text-secondary-content"
+          class="btn btn-outline btn-sm btn-block normal-case"
         >
           {t('theme')}
         </button>
 
-        <ul class="menu dropdown-content rounded-box z-10 block max-h-60 w-72 overflow-y-auto bg-secondary p-2 text-secondary-content shadow lg:w-52">
+        <ul class="menu dropdown-content rounded-box z-10 block max-h-60 w-72 overflow-y-auto bg-base-200 p-2 shadow lg:w-52">
           <For each={themes}>
             {(theme) => (
               <li>
@@ -53,7 +52,7 @@ const NavbarMenuContent: Component = () => {
           <li class="ml-0 lg:ml-3 lg:mt-0">
             <button
               type="button"
-              class="btn btn-primary btn-sm normal-case tracking-wide text-primary-content"
+              class="btn btn-error btn-sm normal-case tracking-wide text-error-content"
               onClick={handleClickLogout}
             >
               {t('logout')} ({user().username})

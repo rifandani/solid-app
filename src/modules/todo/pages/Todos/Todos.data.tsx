@@ -1,4 +1,4 @@
-import { queryClient } from '@app/Store.app';
+import { queryClient } from '@app/RootProvider.app';
 import { ResourceParamsSchema } from '@shared/api/api.schema';
 import { RouteDataFuncArgs } from '@solidjs/router';
 import { todoApi, todoKeys } from '@todo/api/todo.api';

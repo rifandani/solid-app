@@ -29,7 +29,7 @@ const TodosItem: Component<TodosItemProps> = (props) => {
 
       <input
         aria-label="checkbox-todo"
-        class="checkbox-accent checkbox"
+        class="checkbox-primary checkbox"
         type="checkbox"
         id={`todo-${props.todo.id}`}
         name={`todo-${props.todo.id}`}
@@ -39,7 +39,7 @@ const TodosItem: Component<TodosItemProps> = (props) => {
 
       <Link
         aria-label="todo"
-        class="ml-5 w-full text-left text-lg text-secondary-content hover:font-bold"
+        class="ml-5 w-full text-left text-lg hover:font-bold"
         classList={{ 'line-through': props.todo.completed }}
         href={props.todo.id.toString()}
       >
@@ -47,7 +47,7 @@ const TodosItem: Component<TodosItemProps> = (props) => {
       </Link>
 
       <Show when={props.todo.userId === appStorage.user?.id}>
-        <button aria-label="button-submit" class="btn btn-accent btn-sm normal-case" type="submit">
+        <button aria-label="button-submit" class="btn btn-primary btn-sm normal-case" type="submit">
           {t('remove', { icon: '💥' })}
         </button>
       </Show>

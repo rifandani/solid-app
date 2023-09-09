@@ -9,7 +9,7 @@ const Directive: Component = () => {
 
   return (
     <section class="mt-5 rounded-md border-2 border-secondary p-5 md:mx-0">
-      <h1 class="mb-2.5 text-xl font-medium text-primary-content sm:text-2xl">Directive</h1>
+      <h1 class="mb-2.5 text-xl font-medium sm:text-2xl">Directive</h1>
 
       <Show
         when={show()}
@@ -19,9 +19,9 @@ const Directive: Component = () => {
           </button>
         }
       >
-        <div class="card w-96 bg-base-100 shadow-xl" use:clickOutside={() => setShow(false)}>
+        <div class="card w-96 bg-base-200 shadow-xl" use:clickOutside={() => setShow(false)}>
           <div class="card-body">
-            <h2 class="card-title ">Modal Showed!</h2>
+            <h2 class="card-title">Modal Showed!</h2>
           </div>
         </div>
       </Show>

@@ -6,8 +6,8 @@ const HomeClock: Component = () => {
 
   return (
     <>
-      <Show when={vm.toggle()}>
-        <div data-testid="home-clock-show" class="stats mt-8 shadow">
+      <Show when={vm.showClock()}>
+        <div data-testid="home-clock-show" class="stats mt-8 bg-base-200 shadow">
           <div class="stat">
             <div class="stat-title">{vm.t('clock')}:</div>
             <div class="stat-value">

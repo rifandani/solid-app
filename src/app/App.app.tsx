@@ -1,14 +1,12 @@
 import LoginPage from '@auth/pages/Login/Login.page';
 import NotFoundPage from '@auth/pages/NotFound/NotFound.page';
-import { Toast } from '@kobalte/core';
 import { SuspenseWithFallbackSpinner } from '@shared/components/molecules';
 import { PageWrapper } from '@shared/components/templates';
 import { Route, Router, Routes } from '@solidjs/router';
 import routeDataTodo from '@todo/pages/Todo/Todo.data';
 import { Component, lazy } from 'solid-js';
-import { Portal } from 'solid-js/web';
 import AppErrorBoundary from './ErrorBoundary.app';
-import { AppRootProvider, queryClient } from './Store.app';
+import { RootProvider, queryClient } from './RootProvider.app';
 
 export const LazyHomePage = lazy(() => import('../modules/home/pages/Home/Home.page'));
 export const LazyPlaygroundPage = lazy(() => import('../modules/playground/pages/Playground.page'));
@@ -17,7 +15,7 @@ export const LazyTodoPage = lazy(() => import('../modules/todo/pages/Todo/Todo.p
 
 const App: Component = () => (
   <AppErrorBoundary>
-    <AppRootProvider>
+    <RootProvider>
       <Router>
         <Routes>
           {/* home routes */}
@@ -84,15 +82,8 @@ const App: Component = () => (
             }
           />
         </Routes>
-
-        {/* toast with portal */}
-        <Portal>
-          <Toast.Region duration={3_000} pauseOnInteraction swipeDirection="right">
-            <Toast.List class="toast toast-end z-20" />
-          </Toast.Region>
-        </Portal>
       </Router>
-    </AppRootProvider>
+    </RootProvider>
   </AppErrorBoundary>
 );
 

@@ -1,3 +1,4 @@
+import { Toast } from '@kobalte/core';
 import { localeDict } from '@shared/configs/locale/locale.config';
 import { LocaleDictLanguage } from '@shared/configs/locale/locale.type';
 import { AppStoreContext, createAppStoreContext } from '@shared/hooks/useAppStore/useAppStore.hook';
@@ -5,6 +6,7 @@ import { I18nContext, createI18nContext } from '@shared/hooks/usei18n/usei18n.ho
 import { AppStore } from '@shared/types/store.type';
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
 import { ParentComponent } from 'solid-js';
+import { Portal } from 'solid-js/web';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,10 +40,19 @@ export const QueryProvider: ParentComponent = (props) => (
   <QueryClientProvider client={queryClient}>{props.children}</QueryClientProvider>
 );
 
-export const AppRootProvider: ParentComponent = (props) => (
+export const RootProvider: ParentComponent = (props) => (
   <AppStoreProvider>
     <I18nProvider dict={localeDict}>
-      <QueryProvider>{props.children}</QueryProvider>
+      <QueryProvider>
+        {/* toast with portal */}
+        <Portal>
+          <Toast.Region duration={3_000} pauseOnInteraction swipeDirection="right">
+            <Toast.List class="toast toast-end z-20" />
+          </Toast.Region>
+        </Portal>
+
+        {props.children}
+      </QueryProvider>
     </I18nProvider>
   </AppStoreProvider>
 );

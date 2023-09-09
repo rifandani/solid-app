@@ -5,7 +5,6 @@ import { useNavigate } from '@solidjs/router';
 const useHomePageVM = () => {
   const navigate = useNavigate();
   const [t] = useI18n();
-
   // refer to this issues: https://github.com/formkit/auto-animate/issues/121
   const [setParent] = createAutoAnimate();
 

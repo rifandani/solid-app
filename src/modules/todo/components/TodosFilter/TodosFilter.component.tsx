@@ -11,12 +11,12 @@ const TodosFilter: Component = () => {
       class="mb-3 flex w-full flex-col duration-300 md:flex-row md:space-x-2"
     >
       <label for="limit" class="label">
-        <span class="label-text text-primary-content">{t('limit')}</span>
+        <span class="label-text">{t('limit')}</span>
       </label>
 
       <select
         aria-label="combobox-filter"
-        class="select select-bordered select-secondary"
+        class="select select-bordered select-primary"
         name="limit"
         id="limit"
         value={selectedOption()}

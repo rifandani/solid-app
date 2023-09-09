@@ -68,7 +68,7 @@
   "dependencies": {
     "@felte/solid": "^1.2.11",
     "@felte/validator-zod": "^1.0.17",
-    "@formkit/auto-animate": "1.0.0-beta.6",
+    "@formkit/auto-animate": "^0.8.0",
     "@kobalte/core": "^0.9.8",
     "@rifandani/nxact-yutiriti": "^1.2.2",
     "@solid-primitives/connectivity": "^0.3.17",

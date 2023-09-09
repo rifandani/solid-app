@@ -1,4 +1,4 @@
-import { queryClient } from '@app/Store.app';
+import { queryClient } from '@app/RootProvider.app';
 import { RouteDataFuncArgs } from '@solidjs/router';
 import { todoApi, todoKeys } from '@todo/api/todo.api';
 import { TodoDetailApiResponseSchema } from '@todo/api/todo.schema';

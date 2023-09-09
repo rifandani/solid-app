@@ -14,7 +14,7 @@ import { useI18n } from '../usei18n/usei18n.hook';
  * useAuth()
  * ```
  */
-function useAuth() {
+export default function useAuth() {
   const [t] = useI18n();
   const navigate = useNavigate();
   const location = useLocation();
@@ -39,5 +39,3 @@ function useAuth() {
     }
   });
 }
-
-export default useAuth;

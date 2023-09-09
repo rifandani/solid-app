@@ -1,4 +1,4 @@
-import { queryClient } from '@app/Store.app';
+import { queryClient } from '@app/RootProvider.app';
 import { ErrorApiResponseSchema } from '@shared/api/api.schema';
 import { createMutation } from '@tanstack/solid-query';
 import { todoApi } from '@todo/api/todo.api';
@@ -23,12 +23,18 @@ const useTodoCreate = () => {
   >({
     // Called before `mutationFn`:
     onMutate: async (newTodo) => {
+      const emptyResponse: TodoListApiResponseSchema = {
+        todos: [],
+        limit: params().limit,
+        skip: 0,
+        total: 0,
+      };
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries({ queryKey: queryKey() });
 
       // Snapshot the previous value
-      const previousTodosQueryResponse = (queryClient.getQueryData(queryKey()) ??
-        []) as TodoListApiResponseSchema;
+      const previousTodosQueryResponse =
+        (queryClient.getQueryData(queryKey()) as TodoListApiResponseSchema) ?? emptyResponse;
 
       // Optimistically update to the new value & delete the last value
       queryClient.setQueryData(queryKey(), {

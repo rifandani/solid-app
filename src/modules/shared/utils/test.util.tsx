@@ -1,4 +1,5 @@
-import { AppRootProvider } from '@app/Store.app';
+import { AppStoreProvider, I18nProvider } from '@app/RootProvider.app';
+import { localeDict } from '@shared/configs/locale/locale.config';
 import { Router, Routes } from '@solidjs/router';
 import { render } from '@solidjs/testing-library';
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
@@ -18,13 +19,15 @@ export const renderProviders = (
 ) =>
   render(ui, {
     wrapper: (props) => (
-      <AppRootProvider>
-        <QueryClientProvider client={queryClient}>
-          <Router>
-            <Routes>{props.children}</Routes>
-          </Router>
-        </QueryClientProvider>
-      </AppRootProvider>
+      <AppStoreProvider>
+        <I18nProvider dict={localeDict}>
+          <QueryClientProvider client={queryClient}>
+            <Router>
+              <Routes>{props.children}</Routes>
+            </Router>
+          </QueryClientProvider>
+        </I18nProvider>
+      </AppStoreProvider>
     ),
     ...options,
   });

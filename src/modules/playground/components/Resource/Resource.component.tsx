@@ -12,7 +12,7 @@ import { Dynamic } from 'solid-js/web';
 // #region DYNAMIC RENDERING
 const Pending: Component = () => (
   <div class="flex items-center justify-center py-5">
-    <Icon icon="svg-spinners:3-dots-fade" height="5em" class="text-secondary-content" />
+    <Icon icon="svg-spinners:3-dots-fade" height="5em" />
   </div>
 );
 const Errored: Component<{ error: unknown }> = (props) => (
@@ -30,7 +30,7 @@ const Success: Component<{ todos: TodoSchema[]; onChange: (_todo: TodoSchema) =>
       <form data-testid="playground-resource-form" class="mb-2 flex items-center justify-between">
         <input
           data-testid="playground-resource-input-checkbox"
-          class="checkbox-accent checkbox"
+          class="checkbox-secondary checkbox"
           type="checkbox"
           id={`todo-${todo.id}`}
           name={`todo-${todo.id}`}
@@ -40,7 +40,7 @@ const Success: Component<{ todos: TodoSchema[]; onChange: (_todo: TodoSchema) =>
 
         <p
           data-testid="playground-resource-p"
-          class="ml-5 w-full text-left text-lg text-secondary-content hover:font-bold"
+          class="ml-5 w-full text-left text-lg hover:font-bold"
           classList={{ 'line-through': todo.completed }}
         >
           {todo.todo}
@@ -102,7 +102,7 @@ const Resource: Component = () => {
 
   return (
     <section class="mx-4 mt-5 rounded-md border-2 border-secondary p-5 md:mx-0">
-      <h1 class="mb-2.5 text-xl font-medium text-primary-content sm:text-2xl">Resource</h1>
+      <h1 class="mb-2.5 text-xl font-medium sm:text-2xl">Resource</h1>
 
       <TodosFilter />
 

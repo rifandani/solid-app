@@ -10,10 +10,10 @@ const useHomeClock = () => {
   const [t, { locale }] = useI18n();
 
   const [setParent] = createAutoAnimate();
-  const [toggle, setToggle] = createSignal(true);
+  const [showClock, setShowClock] = createSignal(true);
   const [seconds, setSeconds] = createSignal(0);
 
-  const toggleClock = () => setToggle((prev) => !prev);
+  const toggleClock = () => setShowClock((prev) => !prev);
   const [buttons, setButtons] = createStore([
     {
       id: 'sort' as const,
@@ -61,7 +61,7 @@ const useHomeClock = () => {
   createEffect(() => {
     let id: ReturnType<typeof setInterval>;
 
-    if (toggle()) {
+    if (showClock()) {
       // if the clock is shown, increment the seconds
       id = setInterval(() => {
         setSeconds((prev) => +(prev + 0.1).toFixed(2));
@@ -79,7 +79,7 @@ const useHomeClock = () => {
     seconds,
     minutes,
     hours,
-    toggle,
+    showClock,
     buttons,
     setButtons,
     setParent,

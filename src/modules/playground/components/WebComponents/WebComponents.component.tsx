@@ -41,9 +41,9 @@ const WebComponents: Component = () => {
         sectionRef = ref;
       }}
     >
-      <h1 class="mb-2.5 text-xl font-medium text-primary-content sm:text-2xl">Web Components</h1>
+      <h1 class="mb-2.5 text-xl font-medium sm:text-2xl">Web Components</h1>
 
-      <button class="btn btn-info btn-xs" onClick={handleClickTambah}>
+      <button class="btn btn-secondary btn-xs" onClick={handleClickTambah}>
         Tambah
       </button>
 

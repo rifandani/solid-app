@@ -9,7 +9,7 @@ const LoginPage: Component = () => {
   const vm = useLoginPageVM();
 
   return (
-    <main class="h-screen bg-white">
+    <main class="h-screen">
       <div class="flex w-full flex-wrap">
         {/* <!-- Login Section --> */}
         <section class="flex w-full flex-col md:w-1/2">
