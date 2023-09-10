@@ -1,4 +1,4 @@
-import { login } from '@auth/api/auth.api';
+import { authApi } from '@auth/api/auth.api';
 import { LoginApiResponseSchema, LoginSchema, loginSchema } from '@auth/api/auth.schema';
 import { createForm } from '@felte/solid';
 import { validator } from '@felte/validator-zod';
@@ -15,7 +15,7 @@ export default function useLoginForm() {
 
   const loginMutation = createMutation<LoginApiResponseSchema, ErrorApiResponseSchema, LoginSchema>(
     {
-      mutationFn: (creds) => login(creds),
+      mutationFn: (creds) => authApi.login(creds),
       onSuccess: (resp) => {
         // set user data to local storage and global store
         setApp('user', resp);

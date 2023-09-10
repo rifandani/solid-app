@@ -1,6 +1,11 @@
-import { ResourceParamsSchema } from '@shared/api/api.schema';
+import { ErrorApiResponseSchema, ResourceParamsSchema } from '@shared/api/api.schema';
 import { http } from '@shared/services/api/http.api';
 import {
+  CreateTodoApiResponseSchema,
+  DeleteTodoApiResponseSchema,
+  TodoDetailApiResponseSchema,
+  TodoListApiResponseSchema,
+  UpdateTodoApiResponseSchema,
   createTodoApiResponseSchema,
   deleteTodoApiResponseSchema,
   todoDetailApiResponseSchema,
@@ -22,33 +27,41 @@ export const todoKeys = {
 
 export const todoApi = {
   list: async (params: ResourceParamsSchema) => {
-    const resp = await http.get('todos', { params });
+    const resp = await http.get<TodoListApiResponseSchema | ErrorApiResponseSchema>('todos', {
+      params,
+    });
 
     // `parse` will throw if `resp.data` is not correct
     return todoListApiResponseSchema.parse(resp.data);
   },
   detail: async (id: TodoSchema['id']) => {
-    const resp = await http.get(`todos/${id}`);
+    const resp = await http.get<TodoDetailApiResponseSchema | ErrorApiResponseSchema>(
+      `todos/${id}`,
+    );
 
-    // `parse` will throw if `resp.data` is not correct
     return todoDetailApiResponseSchema.parse(resp.data);
   },
   create: async (todo: CreateTodoSchema) => {
-    const resp = await http.post(`todos/add`, todo);
+    const resp = await http.post<CreateTodoApiResponseSchema | ErrorApiResponseSchema>(
+      `todos/add`,
+      todo,
+    );
 
-    // `parse` will throw if `resp.data` is not correct
     return createTodoApiResponseSchema.parse(resp.data);
   },
   update: async ({ id, ...body }: UpdateTodoSchema) => {
-    const resp = await http.put(`todos/${id}`, body);
+    const resp = await http.put<UpdateTodoApiResponseSchema | ErrorApiResponseSchema>(
+      `todos/${id}`,
+      body,
+    );
 
-    // `parse` will throw if `resp.data` is not correct
     return updateTodoApiResponseSchema.parse(resp.data);
   },
   delete: async (id: DeleteTodoSchema['id']) => {
-    const resp = await http.delete(`todos/${id}`);
+    const resp = await http.delete<DeleteTodoApiResponseSchema | ErrorApiResponseSchema>(
+      `todos/${id}`,
+    );
 
-    // `parse` will throw if `resp.data` is not correct
     return deleteTodoApiResponseSchema.parse(resp.data);
   },
 } as const;

@@ -8,9 +8,10 @@ export const todoSchema = z.object({
   completed: z.boolean(),
   userId: z.number().positive(),
 });
+export const detailTodoSchema = todoSchema.pick({ id: true });
 export const createTodoSchema = todoSchema;
 export const updateTodoSchema = todoSchema.omit({ userId: true });
-export const deleteTodoSchema = todoSchema.pick({ id: true });
+export const deleteTodoSchema = detailTodoSchema;
 // #endregion
 
 // #region API SCHEMA
@@ -28,6 +29,7 @@ export const deleteTodoApiResponseSchema = todoSchema.extend({
 
 // #region SCHEMA TYPES
 export type TodoSchema = z.infer<typeof todoSchema>;
+export type DetailTodoSchema = z.infer<typeof detailTodoSchema>;
 export type CreateTodoSchema = z.infer<typeof createTodoSchema>;
 export type UpdateTodoSchema = z.infer<typeof updateTodoSchema>;
 export type DeleteTodoSchema = z.infer<typeof deleteTodoSchema>;

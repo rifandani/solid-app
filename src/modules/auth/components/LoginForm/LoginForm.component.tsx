@@ -19,7 +19,7 @@ const LoginForm: Component = () => {
           type="text"
           aria-label="textbox-username"
           aria-labelledby="#username"
-          aria-invalid={errors()?.username?.length ? 'true' : 'false'}
+          aria-invalid={!!errors()?.username?.length}
           required
           placeholder={t('usernamePlaceholder')}
           class={twJoin(
@@ -47,7 +47,7 @@ const LoginForm: Component = () => {
           type="password"
           aria-label="textbox-password"
           aria-labelledby="#password"
-          aria-invalid={errors()?.password?.length ? 'true' : 'false'}
+          aria-invalid={!!errors()?.password?.length}
           required
           placeholder={t('passwordPlaceholder')}
           class={twJoin(
